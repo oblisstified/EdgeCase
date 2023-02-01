@@ -26,35 +26,37 @@ const LogInScreen = ({navigation}) => {
         let validPassword = password.match("^(?=.*[A-Za-z])(?=.*\d).{8,}$");
         setValidPassword(!!validPassword)
 
-        return (validEmail & validPassword);
+        return (validEmail && validPassword);
     }
     
     const handleSignUp = () => {
-        let user;
 
         // Returns if validation finds an error
         if(!runValidators()) return;
+
+        console.log("passed validators")
 
         createUserWithEmailAndPassword(auth, email, password)
         .then(userCredentials => {
             user = userCredentials.user;
             console.log(user.email)
 
-            navigation.replace("HomeScreen", {"user": user})
+            navigation.replace("HomeScreen")
         })
         .catch(error => alert(error.message))
         
     }
 
     const handleLogIn = () => {
-        let user;
+        console.log("passed validators not")
         if(!runValidators()) return;
+
+        console.log("passed validators")
         
         // does not allow sign up attempt with invalid credentials
         signInWithEmailAndPassword(auth, email, password)
         .then(userCredentials => {
-            user = userCredentials.user;
-            navigation.replace("HomeScreen", {"user": user})
+            navigation.replace("HomeScreen")
         })
         .catch(error => alert(error.message))
     }
