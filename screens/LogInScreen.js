@@ -4,17 +4,35 @@ import { StyleSheet, Text, View, TextInput, Button, KeyboardAvoidingView } from 
 import HomeScreen from "./HomeScreen";
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { Platform } from "react-native";
 
 const LogInScreen = ({navigation}) => {
 
     let [email, setEmail] = useState('password');
     let [password, setPassword] = useState('password');
+    let [inputErrors, setInputErrors] = useState('');
+    
+
+
+    const runValidators = () => {
+        // TODO: Write validators for email and password
+        let validEmail = email.toLowerCase().match(
+            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+        if(!validEmail) setInputErrors(inputErrors + "Email is invalid. ")
+        
+        let validPassword = password.match("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$");
+        if(!validPassword) setInputErrors(inputErrors + "Password must be 8 characters long, contain a letter, number and special character")
+    }
     
     const handleSignUp = () => {
         let user;
 
-        const validators = () => {
-            // TODO: Write validators for email and password
+        runValidators();
+        if(inputErrors.length != 0){
+            alert(inputErrors);
+            setInputErrors('');
+            return;
         }
 
         createUserWithEmailAndPassword(auth, email, password)
@@ -25,10 +43,20 @@ const LogInScreen = ({navigation}) => {
             navigation.replace("HomeScreen", {"user": user})
         })
         .catch(error => alert(error.message))
+        
     }
 
     const handleLogIn = () => {
         let user;
+
+        runValidators();
+        if(inputErrors.length != 0){
+            alert(inputErrors);
+            setInputErrors('');
+            return;
+        }
+
+
         signInWithEmailAndPassword(auth, email, password)
         .then(userCredentials => {
             user = userCredentials.user;
@@ -38,7 +66,9 @@ const LogInScreen = ({navigation}) => {
     }
 
     return(
-        <KeyboardAvoidingView style={{flex: 1}} behaviour="padding">
+        <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}>
             <View style={styles.container}>
                 <TextInput style={styles.textinput} placeholder="email" onChangeText={(text) => setEmail(text)}/>
                 <TextInput style={styles.textinput} placeholder="password" onChangeText={(text) => setPassword(text)}/>
