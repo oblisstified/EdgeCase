@@ -26,7 +26,7 @@ const LogInScreen = ({navigation}) => {
         let validPassword = password.match("^(?=.*[A-Za-z])(?=.*\d).{8,}$");
         setValidPassword(!!validPassword)
 
-        return (validEmail & validPassword);
+        return (validEmail && validPassword);
     }
     
     const handleSignUp = () => {
