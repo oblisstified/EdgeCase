@@ -8,32 +8,32 @@ import { Platform } from "react-native";
 
 const LogInScreen = ({navigation}) => {
 
-    let [email, setEmail] = useState('password');
-    let [password, setPassword] = useState('password');
-    let [inputErrors, setInputErrors] = useState('');
+    let[validEmail, setValidEmail] = useState(true);
+    let[validPassword, setValidPassword] = useState(true)
+
+    let [email, setEmail] = useState('');
+    let [password, setPassword] = useState('');
     
 
 
     const runValidators = () => {
-        // TODO: Write validators for email and password
         let validEmail = email.toLowerCase().match(
             /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         );
-        if(!validEmail) setInputErrors(inputErrors + "Email is invalid. ")
+        setValidEmail(!!validEmail)
         
-        let validPassword = password.match("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$");
-        if(!validPassword) setInputErrors(inputErrors + "Password must be 8 characters long, contain a letter, number and special character")
+        // regex for: minimum 8 characters, one letter and one number
+        let validPassword = password.match("^(?=.*[A-Za-z])(?=.*\d).{8,}$");
+        setValidPassword(!!validPassword)
+
+        return (validEmail & validPassword);
     }
     
     const handleSignUp = () => {
         let user;
 
-        runValidators();
-        if(inputErrors.length != 0){
-            alert(inputErrors);
-            setInputErrors('');
-            return;
-        }
+        // Returns if validation finds an error
+        if(!runValidators()) return;
 
         createUserWithEmailAndPassword(auth, email, password)
         .then(userCredentials => {
@@ -48,15 +48,9 @@ const LogInScreen = ({navigation}) => {
 
     const handleLogIn = () => {
         let user;
-
-        runValidators();
-        if(inputErrors.length != 0){
-            alert(inputErrors);
-            setInputErrors('');
-            return;
-        }
-
-
+        if(!runValidators()) return;
+        
+        // does not allow sign up attempt with invalid credentials
         signInWithEmailAndPassword(auth, email, password)
         .then(userCredentials => {
             user = userCredentials.user;
@@ -70,8 +64,12 @@ const LogInScreen = ({navigation}) => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}>
             <View style={styles.container}>
-                <TextInput style={styles.textinput} placeholder="email" onChangeText={(text) => setEmail(text)}/>
-                <TextInput style={styles.textinput} placeholder="password" onChangeText={(text) => setPassword(text)}/>
+                <TextInput style={styles.textinput} placeholder="email" inputMode="email" onChangeText={(text) => setEmail(text)}/>
+                <Text testID="invalidEmail">{!validEmail && <Text style={styles.showisvalid}>Email is invalid</Text>}</Text>
+
+                <TextInput style={styles.textinput} placeholder="password" secureTextEntry onChangeText={(text) => setPassword(text)}/>
+                <Text testID="invalidPassword">{!validPassword && <Text style={styles.showisvalid}>Password is invalid</Text>}</Text>
+
                 <Button title="Sign Up" onPress={handleSignUp}/>
                 <Button title="Log In" onPress={handleLogIn}/>
             </View>
@@ -79,7 +77,7 @@ const LogInScreen = ({navigation}) => {
     )
 }
 
-export default LogInScreen
+export default LogInScreen;
 
 
 const styles = StyleSheet.create({
@@ -93,6 +91,12 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         paddingVertical: 5,
         marginTop: 5,
+    },
+    showisvalid: {
+        color: 'red',
+        opacity: '0.9',
+        alignSelf: "flex-start",
+        fontSize: 9,
     },
     }
 );
