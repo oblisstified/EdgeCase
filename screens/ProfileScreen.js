@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import 'react-native-gesture-handler';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 import BottomBar from "./components/BottomBar";
 import { TextInput } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -8,31 +8,56 @@ import { getAuth } from 'firebase/auth'
 
 
 const ProfileScreen = ({route, navigation}) => {
-    let [profileLoaded, setProfileLoaded] = useState(false)
     let [profile, setProfile] = useState(null)
 
     const user = getAuth()
 
     const renderProfile = (result) => {
-       const prof = JSON.parse(result);
-       setProfile(prof);
+       setProfile(JSON.parse(result));
     }
 
     AsyncStorage.getItem(user.currentUser.email).then((result) => renderProfile(result));
 
-    const values =  (err, result) => {
-        if(result) email = result;
-    }
 
     return(
         <View>
-            <Text>Profile Screen</Text>
+            <ScrollView style={{maxHeight: "90%"}}>
+                <View style={styles.displayInfo}>
+                    <Text>Name:</Text>
+                    <Text> { profile && profile.name } </Text>
+                </View>
+                <View style={styles.displayInfo}>
+                    <Text>Age:</Text>
+                    <Text> { profile && profile.age }</Text>
+                </View>
+                <View style={styles.displayInfo}>
+                    <Text>Gender:</Text>
+                    <Text> { profile && profile.gender }</Text>
+                </View>
+                <View style={styles.displayInfo}>
+                    <Text>Height:</Text>
+                    <Text> { profile && profile.height }</Text>
+                </View>
+                <View style={styles.displayInfo}>
+                    <Text>PlaceHolder:</Text>
+                    <Text> {  }</Text>
+                </View>
+                <View style={styles.displayInfo}>
+                    <Text>PlaceHolder:</Text>
+                    <Text> {  }</Text>
+                </View>
+                <View style={styles.displayInfo}>
+                    <Text>PlaceHolder:</Text>
+                    <Text> {  }</Text>
+                </View>
+                <View style={styles.displayInfo}>
+                    <Text>PlaceHolder:</Text>
+                    <Text> {  }</Text>
+                </View>
+            </ScrollView>
             <Button title="Edit Profile" onPress={() => navigation.replace("EditProfileScreen")} />
-            <Text> { profile && profile.name } </Text>
-            <Text> { profile && profile.age }</Text>
-            <Text> { profile && profile.gender }</Text>
-            <Text> { profile && profile.height }</Text>
-            <BottomBar />       
+            <View style={{flex:0.5}} />
+            <BottomBar />
         </View>
     )
 }
@@ -41,4 +66,16 @@ export default ProfileScreen
 
 
 const styles = StyleSheet.create({
+    displayInfo : {
+        flex:1,
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        marginHorizontal: 30,
+        marginVertical: 30,
+        minHeight: 50,
+        borderWidth: 2,
+        borderRadius: 15,
+        borderColor: "purple"
+    }
 })
