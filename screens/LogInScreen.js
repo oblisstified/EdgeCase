@@ -8,8 +8,8 @@ import { Platform } from "react-native";
 
 const LogInScreen = ({navigation}) => {
 
-    let[validEmail, setValidEmail] = useState(true);
-    let[validPassword, setValidPassword] = useState(true)
+    let [validEmail, setValidEmail] = useState(true);
+    let [validPassword, setValidPassword] = useState(true)
 
     let [email, setEmail] = useState('');
     let [password, setPassword] = useState('');
