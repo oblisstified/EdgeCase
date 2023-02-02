@@ -1,7 +1,10 @@
 import React from "react";
 import 'react-native-gesture-handler';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, Dimensions, StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
+const WINDOW_HEIGHT = Dimensions.get('window').height;
+const WINDOW_WIDTH = Dimensions.get('window').width;
 
 
 const BottomBar = () =>{
@@ -9,8 +12,10 @@ const BottomBar = () =>{
 
     return(
         <View style={styles.bottombar}>
-            <Button title="Log food" onPress={() => navigation.replace("LogFoodScreen")} />
-            <Button title="View Profile" onPress={() => navigation.replace("ProfileScreen")} />
+               {/* these widgets should be changed in order to look nicer */}
+                <Button title="Log food" onPress={() => navigation.replace("LogFoodScreen")} />
+                <Button title="View Profile" onPress={() => navigation.replace("ProfileScreen")} />
+                <Button title="Home" onPress={() => navigation.replace("HomeScreen")} />
         </View>
     );
 }
@@ -18,11 +23,14 @@ const BottomBar = () =>{
 export default BottomBar
 
 const styles = StyleSheet.create({
+
     bottombar: {
-        flexGrow: 1,
-        alignSelf: "flex-start",
+        flexDirection: "row",
+        justifyContent: "space-around",
+        position: 'absolute',
+        height: 40,
+        left: 0, 
+        top: WINDOW_HEIGHT - 120, 
         width: "100%",
-        height: 10,
-        borderTopWidth: 5,
     }
 })
