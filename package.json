@@ -35,8 +35,8 @@
     "react-native-screens": "~3.18.0",
     "react-navigation": "^4.4.4",
     "react-navigation-drawer": "^2.7.2",
-    "react-test-renderer": "^18.1.0",
-    "testing-library/react-native": "11.5.1"
+    "react-test-renderer": "^18.1.0"
+    
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

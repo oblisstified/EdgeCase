@@ -4,7 +4,14 @@ import { StyleSheet, Text, View, TextInput, Button, KeyboardAvoidingView } from 
 import HomeScreen from "./HomeScreen";
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { Platform } from "react-native";
+import { Platform,TouchableOpacity } from "react-native";
+import Entypo from 'react-native-vector-icons/Entypo';
+import { Dimensions } from "react-native";
+
+const {width,height} = Dimensions.get('window'); 
+
+
+
 
 const LogInScreen = ({navigation}) => {
 
@@ -13,7 +20,17 @@ const LogInScreen = ({navigation}) => {
 
     let [email, setEmail] = useState('');
     let [password, setPassword] = useState('');
-    
+    const [isHidden, setHidden] = useState(true);
+    const [eye,setEye] = useState("eye");
+  
+    function changeHidden(){
+        setHidden(!isHidden); 
+  }
+    function changeEye(){
+        let eyeArray = ["eye", "eye-with-line"];
+        setEye(eyeArray[(eyeArray.indexOf(eye)+1)%2]);
+
+    }
 
 
     const runValidators = () => {
@@ -66,14 +83,32 @@ const LogInScreen = ({navigation}) => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}>
             <View style={styles.container}>
-                <TextInput style={styles.textinput} placeholder="email" inputMode="email" onChangeText={(text) => setEmail(text)}/>
-                <Text testID="invalidEmail">{!validEmail && <Text style={styles.showisvalid}>Email is invalid</Text>}</Text>
+                <View style={{justifyContent: "center",alignItems: "center",}}>
+                    <TextInput style={styles.textinput} placeholder="email" inputMode="email" onChangeText={(text) => setEmail(text)}/>
+                    <Text testID="invalidEmail">{!validEmail && <Text style={styles.showisvalid}>Email is invalid</Text>}</Text>
+                </View>
+                <View style={{justifyContent: "center",alignItems: "center",}}>
+                    <TextInput style={styles.textinput} placeholder="password" secureTextEntry={isHidden} onChangeText={(text) => setPassword(text)}/>
+                    <Text testID="invalidPassword">{!validPassword && <Text style={styles.showisvalid}>Password is invalid</Text>}</Text>
+                    <TouchableOpacity style={styles.eye} onPress={changeHidden} onPressIn={changeEye}>
+                        <Entypo name= {eye} />
+                    </TouchableOpacity>
+                    
+                </View>
+                
+                
 
-                <TextInput style={styles.textinput} placeholder="password" secureTextEntry onChangeText={(text) => setPassword(text)}/>
-                <Text testID="invalidPassword">{!validPassword && <Text style={styles.showisvalid}>Password is invalid</Text>}</Text>
-
-                <Button title="Sign Up" onPress={handleSignUp}/>
-                <Button title="Log In" onPress={handleLogIn}/>
+                
+                <TouchableOpacity onPress={handleSignUp} style= {styles.button}>
+                    <View>
+                        <Text style={styles.customText}> Sign Up</Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleLogIn} style= {styles.button}>
+                    <View>
+                        <Text style={styles.customText}> Log In</Text>
+                    </View>
+                </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
     )
@@ -86,19 +121,46 @@ const styles = StyleSheet.create({
     container : {
         flex: 1,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
     },
     textinput: {
         fontSize: 20,
-        borderColor: 'black',
         paddingVertical: 5,
         marginTop: 5,
+        borderWidth:1,
+        width: width,
+        padding:10,
+        margin:15,
+        borderRadius:20,
+        paddingVertical:10,
     },
+
     showisvalid: {
         color: 'red',
         opacity: '0.9',
         alignSelf: "flex-start",
         fontSize: 9,
     },
+    button:{
+        backgroundColor:"#8cc5fa",
+        alignItems: "center",
+        justifyContent: "space-between",
+        borderRadius:20,
+        padding:15,
+        marginVertical:15,
+        borderWidth:1,
+
+    },
+        customText:{
+            color:"white",   
+        },
+    eye:{
+        margin:10,
+        height:35,
+        width:45,
+        position:"absolute",
+        right:0,
+    }
+
     }
 );
