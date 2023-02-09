@@ -31,9 +31,9 @@ const EditProfileScreen = ({route, navigation}) => {
         }`;
 
         AsyncStorage.setItem(
-            user.currentUser.email,
-            jsonProfile,
-            setChangeSaved(true)
+            user.currentUser.email, //key
+            jsonProfile, //value
+            setChangeSaved(true) //callback
         )
     }
 

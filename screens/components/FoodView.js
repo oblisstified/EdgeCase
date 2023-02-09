@@ -1,0 +1,50 @@
+import {React, useState} from "react";
+import 'react-native-gesture-handler';
+import { Button, Dimensions, StyleSheet, Text, View, KeyboardAvoidingView, SafeAreaView, Modal } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import FoodLogModal from './FoodLogModal'
+
+const FoodView = props => {
+    const firstWord = props.foodDetails["Description"];
+    const calories = props.foodDetails["Calories"];
+    const protein = props.foodDetails["Protein"];
+
+    return (
+        <View style={styles.displayInfo}>
+            <View style={{flex: 3, alignSelf: "flex-start"}}>
+                <View><Text style={styles.header}>{ firstWord }</Text></View>
+                <View><Text style={styles.details}>Calories: { calories }kcal, 
+                                                    Protein: { protein }g
+                                                    
+                                                    
+                </Text></View>
+                { props.button }
+            </View>
+        </View>
+    )
+}
+
+export default FoodView
+
+const styles = StyleSheet.create({
+    header: {
+        paddingTop:5,
+        marginHorizontal: 5
+    },
+    details: {
+        fontSize: 8,
+        opacity: "80%",
+        marginHorizontal: 5,
+        paddingBottom: 5
+    },
+    displayInfo : {
+        flex:1,
+        flexDirection: "row",
+        marginHorizontal: 2,
+        marginVertical: 2,
+        borderWidth: 2,
+        borderRadius: 15,
+    }
+
+})
+
