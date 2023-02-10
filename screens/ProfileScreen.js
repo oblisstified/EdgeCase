@@ -39,12 +39,12 @@ const ProfileScreen = ({route, navigation}) => {
                     <Text> { profile && profile.height }</Text>
                 </View>
                 <View style={styles.displayInfo}>
-                    <Text>PlaceHolder:</Text>
-                    <Text> {  }</Text>
+                    <Text>Weight:</Text>
+                    <Text> { profile && profile.weight }</Text>
                 </View>
                 <View style={styles.displayInfo}>
-                    <Text>PlaceHolder:</Text>
-                    <Text> {  }</Text>
+                    <Text>Activity:</Text>
+                    <Text> { profile && profile.weight }</Text>
                 </View>
                 <View style={styles.displayInfo}>
                     <Text>PlaceHolder:</Text>
