@@ -9,6 +9,8 @@ import LogInScreen from './screens/LogInScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import LogFoodScreen from './screens/LogFoodScreen';
 import EditProfileScreen from './screens/EditProfileScreen';
+import AllUsersScreen from './screens/AllUsersScreen';
+
 
 
 const Stack = createStackNavigator();
@@ -22,6 +24,7 @@ export default function App() {
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
         <Stack.Screen name="LogFoodScreen" component={LogFoodScreen} />
         <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
+        <Stack.Screen name="AllUsersScreen" component={AllUsersScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

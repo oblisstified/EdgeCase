@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import 'react-native-gesture-handler';
 import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 import BottomBar from "./components/BottomBar";
-import { TextInput } from "react-native-gesture-handler";
+import {TextInput } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAuth } from 'firebase/auth'
 
@@ -16,6 +16,14 @@ const ProfileScreen = ({route, navigation}) => {
        setProfile(JSON.parse(result));
     }
 
+    function CustomText(props){
+        return (
+            <Text style = {styles.textStyle}>
+                {props.children}
+            </Text>
+        );
+    }
+
     AsyncStorage.getItem(user.currentUser.email).then((result) => renderProfile(result));
 
 
@@ -23,36 +31,36 @@ const ProfileScreen = ({route, navigation}) => {
         <View>
             <ScrollView style={{maxHeight: "90%"}}>
                 <View style={styles.displayInfo}>
-                    <Text>Name:</Text>
-                    <Text> { profile && profile.name } </Text>
+                    <CustomText>Name:</CustomText>
+                    <CustomText> { profile && profile.name } </CustomText>
                 </View>
                 <View style={styles.displayInfo}>
-                    <Text>Age:</Text>
-                    <Text> { profile && profile.age }</Text>
+                    <CustomText>Age:</CustomText>
+                    <CustomText> { profile && profile.age }</CustomText>
                 </View>
                 <View style={styles.displayInfo}>
-                    <Text>Gender:</Text>
-                    <Text> { profile && profile.gender }</Text>
+                    <CustomText>Gender:</CustomText>
+                    <CustomText> { profile && profile.gender }</CustomText>
                 </View>
                 <View style={styles.displayInfo}>
-                    <Text>Height:</Text>
-                    <Text> { profile && profile.height }</Text>
+                    <CustomText>Height:</CustomText>
+                    <CustomText> { profile && profile.height }</CustomText>
                 </View>
                 <View style={styles.displayInfo}>
-                    <Text>PlaceHolder:</Text>
-                    <Text> {  }</Text>
+                    <CustomText>PlaceHolder:</CustomText>
+                    <CustomText> {  }</CustomText>
                 </View>
                 <View style={styles.displayInfo}>
-                    <Text>PlaceHolder:</Text>
-                    <Text> {  }</Text>
+                    <CustomText>PlaceHolder:</CustomText>
+                    <CustomText> {  }</CustomText>
                 </View>
                 <View style={styles.displayInfo}>
-                    <Text>PlaceHolder:</Text>
-                    <Text> {  }</Text>
+                    <CustomText>PlaceHolder:</CustomText>
+                    <CustomText> {  }</CustomText>
                 </View>
                 <View style={styles.displayInfo}>
-                    <Text>PlaceHolder:</Text>
-                    <Text> {  }</Text>
+                    <CustomText>PlaceHolder:</CustomText>
+                    <CustomText> {  }</CustomText>
                 </View>
             </ScrollView>
             <Button title="Edit Profile" onPress={() => navigation.replace("EditProfileScreen")} />
@@ -76,6 +84,11 @@ const styles = StyleSheet.create({
         minHeight: 50,
         borderWidth: 2,
         borderRadius: 15,
-        borderColor: "purple"
+        borderColor: "black",
+        backgroundColor:"#8cc5fa"
+    },
+    textStyle :{
+        color:"white",
+
     }
 })
