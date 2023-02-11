@@ -14,6 +14,8 @@ import Page2 from './screens/build-profile/Page2';
 import Page3 from './screens/build-profile/Page3';
 import Page4 from './screens/build-profile/Page4';
 
+
+
 const Stack = createStackNavigator();
 
 export default function App() {

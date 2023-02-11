@@ -13,7 +13,7 @@ const ProfileScreen = ({route, navigation}) => {
     const user = getAuth()
 
     const renderProfile = (result) => {
-       setProfile(JSON.parse(result));
+        setProfile(JSON.parse(result))
     }
 
     AsyncStorage.getItem(user.currentUser.email).then((result) => renderProfile(result));
@@ -44,15 +44,11 @@ const ProfileScreen = ({route, navigation}) => {
                 </View>
                 <View style={styles.displayInfo}>
                     <Text>Activity:</Text>
-                    <Text> { profile && profile.weight }</Text>
+                    <Text> { profile && profile.activity }</Text>
                 </View>
                 <View style={styles.displayInfo}>
-                    <Text>PlaceHolder:</Text>
-                    <Text> {  }</Text>
-                </View>
-                <View style={styles.displayInfo}>
-                    <Text>PlaceHolder:</Text>
-                    <Text> {  }</Text>
+                    <Text>Goal:</Text>
+                    <Text> { profile && profile.goal }</Text>
                 </View>
             </ScrollView>
             <Button title="Edit Profile" onPress={() => navigation.replace("EditProfileScreen")} />

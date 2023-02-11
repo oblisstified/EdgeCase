@@ -21,20 +21,26 @@ const Page1 = ({navigation}) => {
     `{
         "name": "${name}", 
         "gender": "${gender}", 
-        "age": "${age}", 
+        "age": "${age}"
     }`;
 
     navigation.navigate('Page2',{jsonProfile})
 }
 
   return (
-    <View style={styles.displayInfo}>
+    <View>
       <Text>What is your name:</Text>
+      <View style={styles.displayInfo}>
       <TextInput style={styles.input} placeholder="Name" onChangeText={setName}/>
+      </View>
       <Text>What is your age:</Text>
+      <View style={styles.displayInfo}>
       <TextInput style={styles.input} placeholder="Age" onChangeText={setAge}/>
+      </View>
       <Text>What is your gender:</Text>
+      <View style={styles.displayInfo}>
       <TextInput style={styles.input} placeholder="Gender" onChangeText={setGender}/>
+      </View>
       <Button title="Next" onPress={saveDataandSwitch}/>
     </View>
   );
@@ -43,6 +49,16 @@ const Page1 = ({navigation}) => {
 export default Page1
 
 const styles = StyleSheet.create({
-    displayInfo : {
-    }
+  displayInfo : {
+      flex:1,
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+      marginHorizontal: 30,
+      marginVertical: 30,
+      minHeight: 50,
+      borderWidth: 2,
+      borderRadius: 15,
+      borderColor: "purple"
+  }
 })

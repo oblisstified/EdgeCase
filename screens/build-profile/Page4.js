@@ -12,28 +12,33 @@ const Page4 = ({navigation}) => {
   // state for textinput
   let [goal, setGoal] = useState("")
   const route = useRoute();
-  var responseJson = route.params.jsonProfile;
+  var responseJson = JSON.parse(route.params.json);
 
   const user = getAuth()
 
   const saveDataandSwitch = () => {
         
     let json= 
-    `{ 
+    `{
+      "name": "${responseJson.name}", 
+      "gender": "${responseJson.gender}", 
+      "age": "${responseJson.age}", 
+      "height": "${responseJson.height}",
+      "weight": "${responseJson.weight}",
+      "activity": "${responseJson.activity}",
       "goal": "${goal}"
     }`;
 
-    let myJson = responseJson.concat(json)
-
-    console.log(myJson)
-
     AsyncStorage.setItem(
         user.currentUser.email,
-        myJson
+        json
     )
 
     navigation.replace("HomeScreen")
-    console.log(AsyncStorage.getItem(user.currentUser.email))
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'HomeScreen' }],
+    })
 }
 
   return (
@@ -49,7 +54,7 @@ const Page4 = ({navigation}) => {
         <Text style={styles.customText}> Gain Weight</Text>
       </View>
     </TouchableOpacity>
-    <Button title="Prev" onPress={() => navigation.replace("Page3") }/>
+    <Button title="Prev" onPress={() => navigation.goBack() }/>
     <Button title="Submit" onPress={saveDataandSwitch}/>
     </View>
   );
@@ -69,5 +74,6 @@ const styles = StyleSheet.create({
   },
   customText:{
     color:"white",   
-  }
+  },
+  headerBackTitleVisible: false
 })

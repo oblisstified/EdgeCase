@@ -15,7 +15,7 @@ const Page2 = ({navigation}) => {
   let [weight, setWeight] = useState("")
 
   const route = useRoute();
-  var responseJson = route.params.jsonProfile;
+  var responseJson = JSON.parse(route.params.jsonProfile);
 
   const user = getAuth()
   
@@ -24,24 +24,28 @@ const Page2 = ({navigation}) => {
         
     let json= 
     `{ 
+      "name": "${responseJson.name}", 
+      "gender": "${responseJson.gender}", 
+      "age": "${responseJson.age}", 
       "height": "${height}",
       "weight": "${weight}"
     }`;
-
-    let myJson = responseJson.concat(json)
-    console.log(myJson)
-
-    navigation.navigate("Page3",{myJson})
+    
+    navigation.navigate("Page3",{json})
 }
 
 
   return (
-    <View style={styles.displayInfo}>
+    <View>
       <Text>What is your height:</Text>
+      <View style={styles.displayInfo}>
       <TextInput style={styles.input} placeholder="Height" onChangeText={setHeight}/>
+      </View>
       <Text>What is your weight:</Text>
+      <View style={styles.displayInfo}>
       <TextInput style={styles.input} placeholder="Weight" onChangeText={setWeight}/>
-      <Button title="Prev" onPress={() => navigation.replace("Page1") }/>
+      </View>
+      <Button title="Prev" onPress={() => navigation.goBack() }/>
       <Button title="Next" onPress={saveDataandSwitch}/>
     </View>
   );
@@ -50,6 +54,16 @@ const Page2 = ({navigation}) => {
 export default Page2
 
 const styles = StyleSheet.create({
-    displayInfo : {
-    }
+  displayInfo : {
+      flex:1,
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+      marginHorizontal: 30,
+      marginVertical: 30,
+      minHeight: 50,
+      borderWidth: 2,
+      borderRadius: 15,
+      borderColor: "purple"
+  }
 })

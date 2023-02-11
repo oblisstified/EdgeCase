@@ -14,7 +14,7 @@ const Page3 = ({navigation}) => {
   // state for textinput
   let [activity, setActivity] = useState("")
   const route = useRoute();
-  var responseJson = route.params.myJson;
+  var responseJson = JSON.parse(route.params.json);
 
   const user = getAuth()
 
@@ -22,13 +22,15 @@ const Page3 = ({navigation}) => {
         
     let json= 
     `{ 
+      "name": "${responseJson.name}", 
+      "gender": "${responseJson.gender}", 
+      "age": "${responseJson.age}", 
+      "height": "${responseJson.height}",
+      "weight": "${responseJson.weight}",
       "activity": "${activity}"
     }`;
-
-    let jsonProfile = responseJson.concat(json)
-    console.log(jsonProfile)
-
-    navigation.navigate("Page4",{jsonProfile})
+    
+    navigation.navigate("Page4",{json})
 }
 
   return (
@@ -49,7 +51,7 @@ const Page3 = ({navigation}) => {
         <Text style={styles.customText}> 4+ days a week of exercise</Text>
       </View>
     </TouchableOpacity>
-    <Button title="Prev" onPress={() => navigation.replace("Page2") }/>
+    <Button title="Prev" onPress={() => navigation.goBack() }/>
     <Button title="Next" onPress={saveDataandSwitch}/>
     </View>
   );
@@ -69,5 +71,6 @@ const styles = StyleSheet.create({
   },
   customText:{
     color:"white",   
-  }
+  },
+  headerBackTitleVisible: false
 })
