@@ -35,7 +35,7 @@ const Page1 = ({navigation}) => {
       </View>
       <Text>What is your age:</Text>
       <View style={styles.displayInfo}>
-      <TextInput style={styles.input} placeholder="Age" onChangeText={setAge}/>
+      <TextInput style={styles.input} placeholder="Age" onChangeText={setAge} keyboardType='numeric' maxLength={3}/>
       </View>
       <Text>What is your gender:</Text>
       <View style={styles.displayInfo}>

@@ -13,6 +13,8 @@ const Page4 = ({navigation}) => {
   let [goal, setGoal] = useState("")
   const route = useRoute();
   var responseJson = JSON.parse(route.params.json);
+  let[selected,setSelected] = useState(0)
+
 
   const user = getAuth()
 
@@ -41,15 +43,25 @@ const Page4 = ({navigation}) => {
     })
 }
 
+const select = (id) => {
+  setSelected(id);
+  if(id === 1){
+    setGoal("Lose Weight")
+  }
+  else{
+    setGoal("Gain Weight")
+  }
+}
+
   return (
     <View>
     <Text>What is your fitness goal:</Text>
-    <TouchableOpacity onPress={() => goal = "Lose Weight"} style= {styles.button}>
+    <TouchableOpacity onPress={() => select(1)} style= {selected === 1? styles.selectedBtn : styles.button}>
       <View>
       <Text style={styles.customText}>Lose Weight</Text>
       </View>
     </TouchableOpacity>
-    <TouchableOpacity onPress={() => goal = "Gain Weight"} style= {styles.button}>
+    <TouchableOpacity onPress={() => select(2)} style= {selected === 2? styles.selectedBtn : styles.button}>
       <View>
         <Text style={styles.customText}> Gain Weight</Text>
       </View>
@@ -65,6 +77,15 @@ export default Page4
 const styles = StyleSheet.create({
   button:{
     backgroundColor:"#8cc5fa",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderRadius:20,
+    padding:15,
+    marginVertical:15,
+    borderWidth:1,
+  },
+  selectedBtn:{
+    backgroundColor:"#5591c9",
     alignItems: "center",
     justifyContent: "space-between",
     borderRadius:20,
