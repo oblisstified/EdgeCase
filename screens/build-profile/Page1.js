@@ -3,9 +3,6 @@ import 'react-native-gesture-handler';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { TextInput } from "react-native-gesture-handler";
 import { getAuth } from "firebase/auth"
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import BottomBar from "../components/BottomBar";
-
 
 const Page1 = ({navigation}) => {
   // state for textinput

@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-import 'react-native-gesture-handler';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { TextInput } from "react-native-gesture-handler";
 import { getAuth } from "firebase/auth"
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import BottomBar from "../components/BottomBar";
 import { useRoute } from '@react-navigation/native';
 
 
@@ -30,20 +27,20 @@ const Page2 = ({navigation}) => {
       "height": "${height}",
       "weight": "${weight}"
     }`;
-    
+
     navigation.navigate("Page3",{json})
 }
 
 
   return (
     <View>
-      <Text>What is your height:</Text>
+      <Text>What is your height (in meters):</Text>
       <View style={styles.displayInfo}>
-      <TextInput style={styles.input} placeholder="Height" onChangeText={setHeight}/>
+      <TextInput style={styles.input} placeholder="Height" onChangeText={setHeight} keyboardType='numeric' maxLength={5}/>
       </View>
-      <Text>What is your weight:</Text>
+      <Text>What is your weight (in kilograms):</Text>
       <View style={styles.displayInfo}>
-      <TextInput style={styles.input} placeholder="Weight" onChangeText={setWeight}/>
+      <TextInput style={styles.input} placeholder="Weight" onChangeText={setWeight} keyboardType='numeric' maxLength={5}/>
       </View>
       <Button title="Prev" onPress={() => navigation.goBack() }/>
       <Button title="Next" onPress={saveDataandSwitch}/>
