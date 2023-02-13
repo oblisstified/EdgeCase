@@ -11,6 +11,9 @@ import LogFoodScreen from './screens/LogFoodScreen';
 import EditProfileScreen from './screens/EditProfileScreen';
 import AllUsersScreen from './screens/AllUsersScreen';
 import OtherUserProfileScreen from './screens/OtherUserProfileScreen';
+import FriendRequestsScreen from './screens/FriendRequestsScreen';
+import FriendsScreen from './screens/FriendsScreen';
+
 
 
 
@@ -27,6 +30,9 @@ export default function App() {
         <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
         <Stack.Screen name="AllUsersScreen" component={AllUsersScreen} />
         <Stack.Screen name = "OtherUserProfileScreen" component={OtherUserProfileScreen}/>
+        <Stack.Screen name = "FriendRequestsScreen" component={FriendRequestsScreen}/>
+        <Stack.Screen name = "FriendsScreen" component={FriendsScreen}/>
+
       </Stack.Navigator>
     </NavigationContainer>
   );

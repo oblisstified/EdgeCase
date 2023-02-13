@@ -60,7 +60,7 @@ const LogInScreen = ({navigation}) => {
             user = userCredentials.user;
             console.log(user.email)
             setDoc(doc(db,'users',user.email),{
-                email:user.email,age:null , friends:[""],gender:null, height: null, name: null
+                email:user.email,age:null , friends:[],friendRequests:[],gender:null, height: null, name: null
             });
 
             navigation.replace("HomeScreen")

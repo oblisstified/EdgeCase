@@ -17,15 +17,27 @@ const AllUsersScreen = ({route, navigation}) => {
     const user = getAuth().currentUser;
     const [userList, setUserList] = useState([]);
 
+    useEffect(() => {
+      async function getData () {
+        const usersCol = collection(db, 'users'); //user collection
+        const userSnapshot = await getDocs(usersCol); //gets all docs from the collection
+        const userList = userSnapshot.docs.map(doc => doc.data());
+        setUserList(userList);
+      }
+  
+      getData();
+    }, []);
+  
 
-  async function updateFriendsList(email){
+
+  async function FriendRequestMade(email){
     try {
-        const userRef = doc(db, 'users', user.email);
+        const userRef = doc(db, 'users', email);
         const userSnapshot = await getDoc(userRef);
         const userData = userSnapshot.data();
-        if (!userData.friends.includes(email)){
-            const updatedFriendsList = [...userData.friends, email];
-            await updateDoc(userRef, { friends: updatedFriendsList });
+        if (!userData.friendRequests.includes(user.email)){
+            const updatedFriendRequestsList = [...userData.friendRequests, user.email];
+            await updateDoc(userRef, { friendRequests: updatedFriendRequestsList });
         }
       } 
       catch (error) {
@@ -39,17 +51,7 @@ const AllUsersScreen = ({route, navigation}) => {
   }
 
 
-  useEffect(() => {
-    async function getData () {
-      const usersCol = collection(db, 'users'); //user collection
-      const userSnapshot = await getDocs(usersCol); //gets all docs from the collection
-      const userList = userSnapshot.docs.map(doc => doc.data());
-      setUserList(userList);
-    }
-
-    getData();
-  }, []);
-
+ 
   console.log(userList);
   return (
     <View style = {{flex:1}} >
@@ -58,9 +60,8 @@ const AllUsersScreen = ({route, navigation}) => {
                 <Text>hello {user.email}</Text>
             </View>
           
-            <View style = {{flex:0.5}}>
+            <View style = {{flex:0.7}}>
                 <FlatList
-                       
                         data={userList.filter(item => item.email.trim() != user.email)}
                         keyExtractor={(item) => item.email}
                         renderItem={({ item }) => (
@@ -72,7 +73,7 @@ const AllUsersScreen = ({route, navigation}) => {
                             </TouchableOpacity>
                             <Text>{item.email}</Text>
 
-                            <TouchableOpacity onPress={() => updateFriendsList(item.email)}>
+                            <TouchableOpacity onPress={() => FriendRequestMade(item.email)}>
                                 <View>
                                 <Text style={styles.customText}> Add Friend </Text>
                                 </View>
@@ -81,9 +82,20 @@ const AllUsersScreen = ({route, navigation}) => {
                         )}
                     />
             </View>
+            <View style={styles.ButtonContainer}>
+              <TouchableOpacity onPress={() => navigation.replace("FriendRequestsScreen")}>
+                <View style = {styles.button}>
+                  <Text> View Friend Requests</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.replace("FriendsScreen")}>
+                <View style = {styles.button}>
+                  <Text> View Friends </Text>
+                </View>
+              </TouchableOpacity>
 
-               
-                            
+            </View>
+              
             <BottomBar />     
     </View>
 )
@@ -104,6 +116,20 @@ const styles = StyleSheet.create({
 
     customText:{
         color:"red", //idk
-    }
+    },
+    ButtonContainer:{
+      flex:0.15,
+      flexDirection: "row",
+      justifyContent:"space-between",
+      padding:25,
+    },
+    button:{
+      borderWidth:1,
+      padding:20,
+      borderRadius:30,
+
+    
+      }
+
  
 })
