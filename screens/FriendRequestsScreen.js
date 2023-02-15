@@ -12,12 +12,9 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 
 
 const FriendRequestsScreen = ({route, navigation}) => {
-
-
-
-
     const user = getAuth().currentUser;
     const [friendRequestsList, setFriendRequestList] = useState([]);
+    const [friendsList, setFriendsList] = useState([]);
 
     useEffect(() => {
       async function getData () {
@@ -25,6 +22,7 @@ const FriendRequestsScreen = ({route, navigation}) => {
         const userSnapshot = await getDoc(userRef);
         const userData = userSnapshot.data();
         setFriendRequestList(userData.friendRequests);
+        setFriendsList(userData.friends)
       }
   
       getData();
@@ -34,11 +32,11 @@ const FriendRequestsScreen = ({route, navigation}) => {
         try {
             const userRef = doc(db, 'users', user.email);
             const updatedFriendRequestsList = friendRequestsList.filter(request => request !== email);
-            const updatedFriendsList = [...friendRequestsList, email];
-            console.log(updatedFriendsList[0]);
+            const updatedFriendsList = [...friendsList, email];
             await updateDoc(userRef, { friendRequests: updatedFriendRequestsList});
             await updateDoc(userRef, { friends: updatedFriendsList});
             setFriendRequestList(updatedFriendRequestsList);
+            setFriendsList(updatedFriendsList);
           } 
           catch (error) {
             console.error(error); //code duplication here will fix
@@ -47,15 +45,11 @@ const FriendRequestsScreen = ({route, navigation}) => {
 
 
     async function RejectFriendRequest(email){
-        console.log(email);
-        console.log(friendRequestsList[0]);
         try {
             const userRef = doc(db, 'users', user.email);
             const updatedFriendRequestsList = friendRequestsList.filter(request => request !== email);
             await updateDoc(userRef, { friendRequests: updatedFriendRequestsList });
             setFriendRequestList(updatedFriendRequestsList);
-            
-            
           } 
           catch (error) {
             console.error(error);

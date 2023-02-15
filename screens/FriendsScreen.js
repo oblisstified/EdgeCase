@@ -13,12 +13,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const FriendsScreen = ({route, navigation}) => {
 
-
-
-
     const user = getAuth().currentUser;
     const [friendsList, setFriendsList] = useState([]);
-
     useEffect(() => {
       async function getData () {
         const userRef = doc(db, 'users', user.email);
@@ -26,7 +22,6 @@ const FriendsScreen = ({route, navigation}) => {
         const userData = userSnapshot.data();
         setFriendsList(userData.friends);
       }
-  
       getData();
     }, []);
 
@@ -40,12 +35,8 @@ const FriendsScreen = ({route, navigation}) => {
                 data={friendsList}
                 keyExtractor={(item) => item.email}
                 renderItem={({ item }) => (
-                    <View style = {styles.userItem}>
-                        
+                    <View style = {styles.userItem}>         
                         <Text>{item}</Text>
-                        <View style= {{flexDirection:"row"}}>
-                           
-                        </View>
                     </View>
                 )}
             />
