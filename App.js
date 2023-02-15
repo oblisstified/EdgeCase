@@ -32,9 +32,9 @@ export default function App() {
         <Stack.Screen name="Page3" component={Page3} />
         <Stack.Screen name="Page4" component={Page4} />
       </Stack.Navigator>
-    </NavigationContainer>
+      </NavigationContainer>
   );
-}
+  }
 
 
 const styles = StyleSheet.create({

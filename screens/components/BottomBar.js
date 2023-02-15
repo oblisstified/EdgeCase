@@ -16,7 +16,7 @@ const BottomBar = () =>{
                 <Button title="Log food" onPress={() => navigation.replace("LogFoodScreen")} />
                 <Button title="View Profile" onPress={() => navigation.replace("ProfileScreen")} />
                 <Button title="Home" onPress={() => navigation.replace("HomeScreen")} />
-                <Button title="Build" onPress={() => navigation.replace("Page1")} />
+                
         </View>
     );
 }
