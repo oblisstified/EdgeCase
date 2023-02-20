@@ -16,7 +16,7 @@ const BottomBar = () =>{
                 <Button title="Log food" onPress={() => navigation.replace("LogFoodScreen")} />
                 <Button title="View Profile" onPress={() => navigation.replace("ProfileScreen")} />
                 <Button title="Home" onPress={() => navigation.replace("HomeScreen")} />
-                <Button title="Build" onPress={() => navigation.replace("Page1")} />
+                <Button title="Social" onPress={() => navigation.replace("ChallengesScreen")} />
         </View>
     );
 }
@@ -33,5 +33,6 @@ const styles = StyleSheet.create({
         left: 0, 
         top: WINDOW_HEIGHT - 160, 
         width: "100%",
+        backgroundColor:"#8cc5fa",
     }
 })

@@ -1,14 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
-
 import HomeScreen from './screens/HomeScreen';
 import LogInScreen from './screens/LogInScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import LogFoodScreen from './screens/LogFoodScreen';
 import EditProfileScreen from './screens/EditProfileScreen';
+import ChallengesScreen from './screens/ChallengesScreen';
+import ChallengesViewScreen from './screens/ChallengesViewScreen';
 import Page1 from './screens/build-profile/Page1';
 import Page2 from './screens/build-profile/Page2';
 import Page3 from './screens/build-profile/Page3';
@@ -31,6 +31,8 @@ export default function App() {
         <Stack.Screen name="Page2" component={Page2} />
         <Stack.Screen name="Page3" component={Page3} />
         <Stack.Screen name="Page4" component={Page4} />
+        <Stack.Screen name="ChallengesScreen" component={ChallengesScreen} />
+        <Stack.Screen name="ChallengesViewScreen" component={ChallengesViewScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
