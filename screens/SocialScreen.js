@@ -5,9 +5,10 @@ import { SearchBar } from 'react-native-elements';
 import { getAuth } from 'firebase/auth'
 import BottomBar from './components/BottomBar'
 import { Dimensions } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 const {width} = Dimensions.get('window'); 
 
-const ChallengesScreen = ({navigation}) => {
+const SocialScreen = ({navigation}) => {
 
     const user = getAuth();
     const [communitiesData,setCommunitiesData] = useState(null);
@@ -38,33 +39,36 @@ const ChallengesScreen = ({navigation}) => {
     //     return (<View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>)
     //   };
 
-    const viewChallenges = (index) => {
-        let challenges = `{"id": "${index}"}`
-        navigation.navigate('ChallengesViewScreen',{challenges})
-    }
-
     return(
-        <View >
-            <View>
+        <View style={{flex:1}} >
+            <View style={{flex:1}}>
                 <Text>These are your communities ... </Text>
                 <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
                 {/* {communitiesData && (<FlatList data={communitiesData} ItemSeparatorComponent={separator} renderItem = {renderCommunities}/>)} */}
-                    <TouchableOpacity style={styles.displayInfo} onPress={() => viewChallenges(1)}>
-                    <Image source={{uri: "https://images.pexels.com/photos/1153369/pexels-photo-1153369.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}} style = {{ width: '90%', height: 200 }}/>
-                    <Text>Daily Challenges</Text>
+                <ScrollView style={{marginBottom: '10%',}}>
+                    <TouchableOpacity style={styles.displayInfo} onPress={() => navigation.navigate('ChallengesViewScreen')}>
+                    <Image source={{uri: "https://images.pexels.com/photos/6345328/pexels-photo-6345328.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}} style = {{ width: '90%', height: 200 }}/>
+                    <Text>Challenges & Achievements</Text>
                     </TouchableOpacity>
                     <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
-                    <TouchableOpacity style={styles.displayInfo} onPress={() => viewChallenges(2)}>
+                    <TouchableOpacity style={styles.displayInfo}>
                     <Image source={{uri: "https://images.pexels.com/photos/3822356/pexels-photo-3822356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}}style = {{ width: '90%', height: 200 }}/>
-                    <Text>Social Challenges</Text>
+                    <Text>View Friends</Text>
                     </TouchableOpacity>
+                    <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
+                    <TouchableOpacity style={styles.displayInfo}>
+                    <Image source={{uri: "https://images.pexels.com/photos/1000445/pexels-photo-1000445.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}}style = {{ width: '90%', height: 200 }}/>
+                    <Text>Communities (Coming Soon ...)</Text>
+                    </TouchableOpacity>
+                    <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
+                </ScrollView>
             </View>
             <BottomBar navigation={navigation}/>     
         </View>
     );
 }
 
-export default ChallengesScreen
+export default SocialScreen
 
 
 const styles = StyleSheet.create({
@@ -75,5 +79,5 @@ const styles = StyleSheet.create({
         marginVertical: '5%',
         borderWidth: 2,
         borderColor: "purple"
-    }
+    },
 })

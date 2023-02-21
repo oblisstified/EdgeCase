@@ -1,39 +1,39 @@
 import React, { useState, useEffect } from "react";
 import 'react-native-gesture-handler';
-import { Animated, StyleSheet, Text, View, FlatList } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { Animated, StyleSheet, Text, View, FlatList,TouchableOpacity } from 'react-native';
 import { db } from "../firebase";
-import { collection, getDocs,updateDoc,doc,getDoc} from 'firebase/firestore/lite';
+import { getAuth } from 'firebase/auth'
+import { collection, getDocs } from 'firebase/firestore/lite';
 import BottomBar from './components/BottomBar'
 
-const ChallengesViewScreen = ({navigation}) => {
-    const route = useRoute();
-
-    const challengesIndex = (JSON.parse(route.params.challenges)).id;
-
+const ChallengesViewScreen = ({navigation}) => {    
     const [challenges,setChallenges] = useState(null);
 
     useEffect(() => {
         async function getData () {
-            let col;
-            if(challengesIndex == 1){col = "daily-challenges"}
-            else{col = "social-challenges"}
-            const challengeCol = collection(db, col); //user collection
-            const challengeSnapshot = await getDocs(challengeCol); //gets all docs from the collection
-            const challengeData = challengeSnapshot.docs.map(doc => doc.data());
-            setChallenges(challengeData);
+            const challengesCol = collection(db, "challenges"); //challenges collection
+            const challengesSnapshot = await getDocs(challengesCol); //gets all docs from the collection
+            const challengesData = challengesSnapshot.docs.map(doc => doc.data());
+            setChallenges(challengesData);
         }
         getData();
-      }, []);
+        }, []);
 
-    const Challenge = ({challenge,goal}) => {
+    const renderFriendsProgress = (index) => {
+        console.log(index)
+    };
+
+    const Challenge = ({challenge,goal,index}) => {
         return(
             <View style={styles.displayInfo}>
                 <Text>{challenge}</Text>
                 <View style={styles.progressBar}>
-                    <Animated.View style={([StyleSheet.absoluteFill], {backgroundColor: "#8BED4F", width: "50%"})}/>
+                    <Animated.View style={([StyleSheet.absoluteFill], {backgroundColor: "#8BED4F", width: "33%"})}/>
                 </View>
                 <Text>0/{goal}</Text>
+                <TouchableOpacity onPress={() => renderFriendsProgress(index)} style= {styles.button}>
+                    <Text style={styles.text}>View Friends Progress</Text>
+                </TouchableOpacity>
             </View>
         )
     };
@@ -51,9 +51,7 @@ const ChallengesViewScreen = ({navigation}) => {
             <View style={{alignItems: "center",marginVertical: '5%',}}>
                 <Text>These are your challenges</Text>
             </View>
-            <View>
-                {challenges && (<FlatList data={challenges} ItemSeparatorComponent={separator} renderItem = {renderChallenges}/>)}
-            </View>
+            {challenges && (<FlatList data={challenges} ItemSeparatorComponent={separator} renderItem = {renderChallenges}/>)}
             <BottomBar navigation={navigation}/>        
         </View>
     )
@@ -87,5 +85,21 @@ const styles = StyleSheet.create({
         marginVertical: '5%',
         borderWidth: 2,
         borderColor: "purple"
-    }
+    },
+    button:{
+        backgroundColor:"#8cc5fa",
+        alignItems: "center",
+        justifyContent: "space-between",
+        borderRadius:20,
+        padding:15,
+        marginVertical:5,
+        borderWidth:1,
+      },
+      text: {
+        fontSize: 16,
+        lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: 'white',
+      },
 })
