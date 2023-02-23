@@ -13,6 +13,8 @@ import Page1 from './screens/build-profile/Page1';
 import Page2 from './screens/build-profile/Page2';
 import Page3 from './screens/build-profile/Page3';
 import Page4 from './screens/build-profile/Page4';
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
 
 
 
