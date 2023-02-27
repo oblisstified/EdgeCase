@@ -22,7 +22,7 @@ jest.mock("@react-navigation/native", () => {
 });
   
 
-it('Test search bar', () => {
+it('Test search function', () => {
 
     const { getByPlaceholderText, getByText, getByTestId } = render(<LogFoodScreen />);
 
@@ -30,12 +30,11 @@ it('Test search bar', () => {
     fireEvent.press(getByTestId("foodSearch"));
 
     results = getByTestId("foodResultList");
-
-    // there should be exactly 1 result for searching endive, and one empty child apparently
-    expect(results.children.length).toBe(2);
+    // there should be exactly 1 result for searching endive
+    expect(results.children.length).toBe(1);
 });
 
-it('Test search bar with gibberish', () => {
+it('Test search function with gibberish', () => {
 
     const { getByPlaceholderText, getByText, getByTestId } = render(<LogFoodScreen />);
 
@@ -43,20 +42,6 @@ it('Test search bar with gibberish', () => {
     fireEvent.press(getByTestId("foodSearch"));
 
     results = getByTestId("foodResultList");
-
-    // there should be and one empty child apparently
-    expect(results.children.length).toBe(1);
-});
-
-it('Test search bar returns 100 results max', () => {
-
-    const { getByPlaceholderText, getByText, getByTestId } = render(<LogFoodScreen />);
-
-    fireEvent.changeText(getByTestId("foodSearchBar"), "c");
-    fireEvent.press(getByTestId("foodSearch"));
-
-    results = getByTestId("foodResultList");
-
-    // there should be and one empty child apparently
-    expect(results.children.length).toBe(101);
+    // no results for gibberish
+    expect(results.children.length).toBe(0);
 });

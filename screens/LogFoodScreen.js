@@ -46,8 +46,8 @@ const LogFoodScreen = () => {
             <Button testID="foodSearch" title="search" onPress={ getMatches } />
 
             {/* list of matches */}
-            <ScrollView >
-                <View styles={{width:"100%"}}><Text styles={{width:"100%"}} testID="foodResultList">{ matches } </Text></View>
+            <ScrollView>
+                <View testID="foodResultList">{ matches }</View>
             </ScrollView>
 
             {/* popup allowing foodLogging */}
