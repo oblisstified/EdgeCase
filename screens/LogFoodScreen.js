@@ -47,7 +47,7 @@ const LogFoodScreen = () => {
 
             {/* list of matches */}
             <ScrollView >
-                <View testID="foodResultList">{ matches } </View>
+                <View styles={{width:"100%"}}><Text styles={{width:"100%"}} testID="foodResultList">{ matches } </Text></View>
             </ScrollView>
 
             {/* popup allowing foodLogging */}
