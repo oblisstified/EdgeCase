@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import 'react-native-gesture-handler';
-import { StyleSheet, Text, View, Button, ScrollView, Modal } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView, Modal, Touchable, TouchableOpacity } from 'react-native';
 import BottomBar from "./components/BottomBar";
 import { findFoodObjects } from "../utils/searcher";
 import { TextInput } from "react-native-gesture-handler";
@@ -8,7 +8,7 @@ import { TextInput } from "react-native-gesture-handler";
 import FoodView from "./components/FoodView"
 import FoodLogModal from "./components/FoodLogModal";
 
-const LogFoodScreen = ({route, navigation}) => {
+const LogFoodScreen = () => {
 
     let [searchValue, setSearchValue] = useState("") 
     let [matches, setMatches] = useState([]);
@@ -28,7 +28,7 @@ const LogFoodScreen = ({route, navigation}) => {
             // passes a food object to display, along with a button to show the modal on this screen
             tempMatches.push(<FoodView key={ myFoods[i]["Description"] } foodDetails={ myFoods[i] } 
                                         // these buttons are rendered in the FoodView component
-                                        button= {<View style={{flexDirection:"row", flex:1, alignSelf: "center"}}>
+                                        button= {<View style={{flexDirection:"row", flexGrow:2, alignItems:"space-between", alignSelf: "center"}}>
                                                     <Button title='i' />
                                                     <Button title="Add" onPress={() => {setModalContent(myFoods[i]); setModalVisible(true)}} />
                                                 </View>} />)
@@ -42,12 +42,12 @@ const LogFoodScreen = ({route, navigation}) => {
 
             {/* search bar */}
             <Text>Food Screen</Text>
-            <TextInput onChangeText={ (text) => {setSearchValue(text); getMatches()} } />
-            <Button title="search" onPress={ getMatches } />
+            <TextInput testID="foodSearchBar" onChangeText={ (text) => {setSearchValue(text); getMatches()} } />
+            <Button testID="foodSearch" title="search" onPress={ getMatches } />
 
             {/* list of matches */}
-            <ScrollView>
-                { matches }
+            <ScrollView >
+                <View testID="foodResultList">{ matches } </View>
             </ScrollView>
 
             {/* popup allowing foodLogging */}

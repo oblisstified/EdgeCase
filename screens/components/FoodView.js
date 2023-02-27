@@ -18,8 +18,8 @@ const FoodView = props => {
                                                     
                                                     
                 </Text></View>
-                { props.button }
             </View>
+            <View style={{flex:1}}>{ props.button }</View>
         </View>
     )
 }
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     },
     details: {
         fontSize: 8,
-        opacity: "80%",
+        opacity: 0.8,
         marginHorizontal: 5,
         paddingBottom: 5
     },

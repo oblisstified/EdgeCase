@@ -6,9 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 const FoodLogModal = props => {
 
     return (
-            <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-
+            <View style={styles.slideUpPanel}>
+                <View style={{flex: 1}}>
                 {/* props.foodDetails contains a json object with all the details about the food shown */}
                 <Text style={styles.modalText}>{props.foodDetails["Description"]}</Text>
 
@@ -17,24 +16,20 @@ const FoodLogModal = props => {
 
                 {/* TODO: add functionality to input a amount in grams of a Food and store as a json object */
                 /* probably worth writing a function in utils that handles this */}
-
-            </View>
+                </View>
             </View>
     );
 }
 
 
 const styles = StyleSheet.create({
-    centeredView: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginTop: 22,
+    slideUpPanel: {
+      marginTop: "60%", 
+      flex: 1, 
+      backgroundColor: "white"
     },
     modalView: {
       backgroundColor: 'white',
-      borderRadius: 20,
-      padding: 35,
       alignItems: 'center',
       shadowColor: '#000',
       shadowOffset: {
@@ -45,26 +40,7 @@ const styles = StyleSheet.create({
       shadowRadius: 4,
       elevation: 5,
     },
-    button: {
-      borderRadius: 20,
-      padding: 10,
-      elevation: 2,
-    },
-    buttonOpen: {
-      backgroundColor: '#F194FF',
-    },
-    buttonClose: {
-      backgroundColor: '#2196F3',
-    },
-    textStyle: {
-      color: 'white',
-      fontWeight: 'bold',
-      textAlign: 'center',
-    },
-    modalText: {
-      marginBottom: 15,
-      textAlign: 'center',
-    },
+    
   });
 
 
