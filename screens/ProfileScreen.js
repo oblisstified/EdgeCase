@@ -26,7 +26,7 @@ const ProfileScreen = ({route, navigation}) => {
                     <Text>Name:</Text>
                     <Text> { profile && profile.name } </Text>
                 </View>
-                <View style={styles.displayInfo}>
+                <View style={styles.displayInfo}>goit
                     <Text>Age:</Text>
                     <Text> { profile && profile.age }</Text>
                 </View>

@@ -15,16 +15,29 @@ const LogFoodScreen = () => {
     let [modalVisible, setModalVisible] = useState(false)
     let [modalContent, setModalContent] = useState(null)
 
+    let [basket, setBasket] = useState([]);
+
+
+    function addToBasket(food){
+        let temp = []
+        
+        for(let i = 0; i < basket.length; i++){ 
+            temp.push(basket[i]);
+        }
+        
+        temp.push(food)
+        setBasket(temp)
+        
+    }
+
 
     function getMatches(){
         setMatches([])
 
         let myFoods = findFoodObjects(searchValue)
-        
         let tempMatches = []
 
         for(let i = 0; i < 100 && i < myFoods.length; i++){
-
             // passes a food object to display, along with a button to show the modal on this screen
             tempMatches.push(<FoodView key={ myFoods[i]["Description"] } foodDetails={ myFoods[i] } 
                                         // these buttons are rendered in the FoodView component
@@ -60,7 +73,11 @@ const LogFoodScreen = () => {
                 setModalVisible(!modalVisible);
             }}>
                 
-                <FoodLogModal foodDetails={modalContent} hideButton={<Button title="Hide Modal" onPress={() => {setModalVisible(false)}} />} />
+                <FoodLogModal 
+                    foodDetails={modalContent} 
+                    hideButton={ <Button title="Hide Modal" onPress={() => {setModalVisible(false)}} /> }
+                    addToBasket={(f) => addToBasket(f)}
+                    />
             </Modal>
 
 
