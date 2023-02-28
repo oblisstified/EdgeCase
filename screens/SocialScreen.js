@@ -10,8 +10,8 @@ const {width} = Dimensions.get('window');
 
 const SocialScreen = ({navigation}) => {
 
-    const user = getAuth();
-    const [communitiesData,setCommunitiesData] = useState(null);
+    // const user = getAuth();
+    // const [communitiesData,setCommunitiesData] = useState(null);
 
     // const viewCommunity = (index) => {
     //     let community = `{"id": "${index}"}`

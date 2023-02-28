@@ -37,19 +37,6 @@ const Leaderboard = ({navigation}) => {
         getData();
         }, []);
 
-        /* function sortByChallengeType(allUsers){
-            let copy = [...allUsers];
-            if(challengeType.includes("calorie")){
-                return copy.sort((a, b) => b.timesCalGoalHit - a.timesCalGoalHit);
-            }
-            else if(challengeType.includes("recipe")){
-                return copy.sort((a, b) => b.recipes - a.recipes);
-            }
-            else{
-                return copy.sort((a, b) => b.steps - a.steps);
-            }
-        }; */
-
         function sortByChallengeType(allUsers){
             let copy = [...allUsers];
             let x;
@@ -88,21 +75,12 @@ const Leaderboard = ({navigation}) => {
         )
     };
 
-    const renderLeaderboard = ({item}) => {
-        return(<Leaderboard steps={item.steps} name={item.name} timesCalGoalHit={item.timesCalGoalHit} recipes={item.recipes}/>)
-    };
-
-    const separator = () => {
-        return (<View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>)
-    };
-
     return(
         <View>
             <View style={{alignItems: "center",marginVertical: '5%',}}>
                 <Text>This is the leaderboard</Text>
                 <Text>{challengeDesc}</Text>
             </View>
-            {/* {allUsers && (<FlatList data={allUsers} ItemSeparatorComponent={separator} renderItem = {renderLeaderboard}/>)} */}
             <Table borderStyle={{ borderWidth: 4, borderColor: 'teal' }}>
                 <Row data={headers} style={styles.head} textStyle={styles.headText} />
                 <Rows data={allUsers} textStyle={styles.text} />
