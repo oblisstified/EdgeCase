@@ -8,6 +8,9 @@ import { Platform,TouchableOpacity } from "react-native";
 import Entypo from 'react-native-vector-icons/Entypo';
 import { Dimensions } from "react-native";
 
+import { doc, setDoc} from 'firebase/firestore/lite';
+import { db } from "../firebase";
+
 const {width,height} = Dimensions.get('window'); 
 
 
@@ -29,7 +32,6 @@ const LogInScreen = ({navigation}) => {
     function changeEye(){
         let eyeArray = ["eye", "eye-with-line"];
         setEye(eyeArray[(eyeArray.indexOf(eye)+1)%2]);
-
     }
 
 
@@ -57,6 +59,9 @@ const LogInScreen = ({navigation}) => {
         .then(userCredentials => {
             user = userCredentials.user;
             console.log(user.email)
+            setDoc(doc(db,'users',user.email),{
+                email:user.email,age:null , friends:[],friendRequests:[],gender:null, height: null, name: null
+            });
 
             navigation.replace("HomeScreen")
         })

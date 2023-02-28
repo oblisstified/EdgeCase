@@ -9,7 +9,13 @@ import LogInScreen from './screens/LogInScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import LogFoodScreen from './screens/LogFoodScreen';
 import EditProfileScreen from './screens/EditProfileScreen';
+import FoodBasketScreen from './screens/FoodBasketScreen';
+
 import BottomBar from './screens/components/BottomBar'
+import AllUsersScreen from './screens/AllUsersScreen';
+import OtherUserProfileScreen from './screens/OtherUserProfileScreen';
+import FriendRequestsScreen from './screens/FriendRequestsScreen';
+import FriendsScreen from './screens/FriendsScreen';
 
 const Stack = createStackNavigator();
 
@@ -23,6 +29,11 @@ export default function App() {
         <Stack.Screen name="LogFoodScreen" component={LogFoodScreen} />
         <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
         <Stack.Screen name="BottomBar" component={BottomBar} />
+        <Stack.Screen name="AllUsersScreen" component={AllUsersScreen} />
+        <Stack.Screen name = "OtherUserProfileScreen" component={OtherUserProfileScreen}/>
+        <Stack.Screen name = "FriendRequestsScreen" component={FriendRequestsScreen}/>
+        <Stack.Screen name = "FriendsScreen" component={FriendsScreen}/>
+        <Stack.Screen name = "FoodBasketScreen" component={FoodBasketScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

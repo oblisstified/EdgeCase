@@ -7,8 +7,10 @@ import { TextInput } from "react-native-gesture-handler";
 
 import FoodView from "./components/FoodView"
 import FoodLogModal from "./components/FoodLogModal";
+import { useNavigation } from "@react-navigation/native";
 
 const LogFoodScreen = () => {
+    const nav = useNavigation();
 
     let [searchValue, setSearchValue] = useState("") 
     let [matches, setMatches] = useState([]);
@@ -18,7 +20,7 @@ const LogFoodScreen = () => {
     let [basket, setBasket] = useState([]);
 
 
-    function addToBasket(food){
+    async function addToBasket(food){
         let temp = []
         
         for(let i = 0; i < basket.length; i++){ 
@@ -26,12 +28,15 @@ const LogFoodScreen = () => {
         }
         
         temp.push(food)
-        setBasket(temp)
+        await setBasket(temp)
+
+        console.log(basket.length)
         
     }
 
 
     function getMatches(){
+        
         setMatches([])
 
         let myFoods = findFoodObjects(searchValue)
@@ -57,6 +62,7 @@ const LogFoodScreen = () => {
             <Text>Food Screen</Text>
             <TextInput testID="foodSearchBar" onChangeText={ (text) => {setSearchValue(text); getMatches()} } />
             <Button testID="foodSearch" title="search" onPress={ getMatches } />
+            <Button title="View Basket" onPress={() => nav.push("FoodBasketScreen", {currentBasket: JSON.stringify(basket)})} />
 
             {/* list of matches */}
             <ScrollView>
