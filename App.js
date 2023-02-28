@@ -9,6 +9,7 @@ import LogFoodScreen from './screens/LogFoodScreen';
 import EditProfileScreen from './screens/EditProfileScreen';
 import SocialScreen from './screens/SocialScreen';
 import ChallengesViewScreen from './screens/ChallengesViewScreen';
+import Leaderboard from './screens/Leaderboard';
 import Page1 from './screens/build-profile/Page1';
 import Page2 from './screens/build-profile/Page2';
 import Page3 from './screens/build-profile/Page3';
@@ -33,6 +34,7 @@ export default function App() {
         <Stack.Screen name="Page4" component={Page4} />
         <Stack.Screen name="SocialScreen" component={SocialScreen} />
         <Stack.Screen name="ChallengesViewScreen" component={ChallengesViewScreen} />
+        <Stack.Screen name="Leaderboard" component={Leaderboard} />
       </Stack.Navigator>
     </NavigationContainer>
   );

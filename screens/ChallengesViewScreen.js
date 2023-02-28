@@ -1,37 +1,60 @@
 import React, { useState, useEffect } from "react";
 import 'react-native-gesture-handler';
-import { Animated, StyleSheet, Text, View, FlatList,TouchableOpacity } from 'react-native';
+import { Animated, StyleSheet, Text, View, FlatList,TouchableOpacity,Modal,Button } from 'react-native';
 import { db } from "../firebase";
 import { getAuth } from 'firebase/auth'
-import { collection, getDocs } from 'firebase/firestore/lite';
+import { collection, getDocs, getDoc, doc } from 'firebase/firestore/lite';
 import BottomBar from './components/BottomBar'
 
-const ChallengesViewScreen = ({navigation}) => {    
+const ChallengesViewScreen = ({navigation}) => {
+    const user = getAuth().currentUser;
+    
     const [challenges,setChallenges] = useState(null);
+    const [profile,setProfile] = useState(null);
+    let [modalVisible, setModalVisible] = useState(null)
+
 
     useEffect(() => {
         async function getData () {
+            const userRef = doc(db, 'users', user.email);
             const challengesCol = collection(db, "challenges"); //challenges collection
+            const userSnapshot = await getDoc(userRef);
             const challengesSnapshot = await getDocs(challengesCol); //gets all docs from the collection
+            const userData = userSnapshot.data();
             const challengesData = challengesSnapshot.docs.map(doc => doc.data());
+            setProfile(userData);
             setChallenges(challengesData);
         }
         getData();
         }, []);
 
-    const renderFriendsProgress = (index) => {
-        console.log(index)
+    const renderFriendsProgress = (index,challenge) => {
+        let challengeInfo = `{
+            "id":"${index}",
+            "challenge": "${challenge}"
+        }`;
+        navigation.navigate("Leaderboard",{challengeInfo})
     };
 
     const Challenge = ({challenge,goal,index}) => {
+        let x;
+        if(index.includes("calorie")){
+            x = profile.timesCalGoalHit;
+        }
+        else if(index.includes("recipe")){
+            x = profile.recipes
+        }
+        else{
+            x = profile.steps
+        }
         return(
             <View style={styles.displayInfo}>
                 <Text>{challenge}</Text>
                 <View style={styles.progressBar}>
-                    <Animated.View style={([StyleSheet.absoluteFill], {backgroundColor: "#8BED4F", width: "33%"})}/>
+                    <Animated.View style={([StyleSheet.absoluteFill], {backgroundColor: "#8BED4F", width: `${(x/goal)*100}%`})}/>
                 </View>
-                <Text>0/{goal}</Text>
-                <TouchableOpacity onPress={() => renderFriendsProgress(index)} style= {styles.button}>
+                <Text>{x}/{goal}</Text>
+                <TouchableOpacity onPress={() => renderFriendsProgress(index,challenge)} style= {styles.button}>
                     <Text style={styles.text}>View Friends Progress</Text>
                 </TouchableOpacity>
             </View>
