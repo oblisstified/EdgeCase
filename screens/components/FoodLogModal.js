@@ -26,7 +26,8 @@ const FoodLogModal = (props) => {
                   <TextInput inputMode="numeric" onChangeText={(t) => setAmountGrams(t)}/>
                   <Button title="submit" onPress={() => {
                     props.addToBasket(
-                      `{"weight":` + amountGrams + `,"foodObject":` + JSON.stringify(props.foodDetails) + "}");
+                      JSON.parse(`{"weight":` + amountGrams + `,"foodObject":` + JSON.stringify(props.foodDetails) + "}")
+                      );
                     }} />
                 </View>
                 

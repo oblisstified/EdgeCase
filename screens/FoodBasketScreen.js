@@ -1,24 +1,40 @@
 import React, { useState } from "react";
 import 'react-native-gesture-handler';
-import { StyleSheet, Text, View, Button, ScrollView, Modal, Touchable, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView, Modal, Touchable, TouchableOpacity, DeviceEventEmitter } from 'react-native';
 
 const FoodBasketScreen = props => {
 
-    let basket = JSON.parse(props.route.params.currentBasket)
+    let [food, setFood] = useState(props.route.params.currentBasket)
 
-    let [foodList, setFoodList] = useState()
-    
-    let ingredientList = [];
+    function handleRemove(o){
+        let temp = [];
 
-    for(let i = 0; i < basket.length; i++){
-        ingredientList.push(JSON.parse(basket[i]))
+        for(let i = 0; i < food.length; i++){
+            if(o != food[i]) temp.push(food[i])
+        }
+
+        setFood(temp);
     }
 
-    console.log(ingredientList)
+    console.log(props.route.params.currentBasket)
+
+    function saveBasket(){
+        console.log(food)
+        DeviceEventEmitter.emit("event.saveBasket", JSON.stringify(food))
+    }
 
     return (
         <View>
-            { ingredientList.map((o) => <Text>{ o.weight } grams of { o["foodObject"]["Description"] }</Text>) }
+            { food && food.map((o) => o &&
+                <View key={o.foodObject.Description}>
+                    <Text>
+                        {o.foodObject.Description}
+                    </Text>
+                    <Button title="remove" onPress={()=>handleRemove(o)}/>
+                </View>
+            ) }
+
+            <Button title="save" onPress={saveBasket} />
         </View>
     )
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import 'react-native-gesture-handler';
-import { StyleSheet, Text, View, Button, ScrollView, Modal, Touchable, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView, Modal, Touchable, TouchableOpacity, DeviceEventEmitter } from 'react-native';
 import BottomBar from "./components/BottomBar";
 import { findFoodObjects } from "../utils/searcher";
 import { TextInput } from "react-native-gesture-handler";
@@ -20,6 +20,9 @@ const LogFoodScreen = () => {
     let [basket, setBasket] = useState([]);
 
 
+
+    DeviceEventEmitter.addListener("event.saveBasket", (eventData) => {setBasket(JSON.parse(eventData)), console.log(eventData)});
+
     async function addToBasket(food){
         let temp = []
         
@@ -29,9 +32,6 @@ const LogFoodScreen = () => {
         
         temp.push(food)
         await setBasket(temp)
-
-        console.log(basket.length)
-        
     }
 
 
@@ -62,7 +62,7 @@ const LogFoodScreen = () => {
             <Text>Food Screen</Text>
             <TextInput testID="foodSearchBar" onChangeText={ (text) => {setSearchValue(text); getMatches()} } />
             <Button testID="foodSearch" title="search" onPress={ getMatches } />
-            <Button title="View Basket" onPress={() => nav.push("FoodBasketScreen", {currentBasket: JSON.stringify(basket)})} />
+            <Button title="View Basket" onPress={() => nav.push("FoodBasketScreen", {currentBasket: basket})} />
 
             {/* list of matches */}
             <ScrollView>
