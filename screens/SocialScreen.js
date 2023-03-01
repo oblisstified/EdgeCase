@@ -42,7 +42,6 @@ const SocialScreen = ({navigation}) => {
     return(
         <View style={{flex:1}} >
             <View style={{flex:1}}>
-                <Text>These are your communities ... </Text>
                 <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
                 {/* {communitiesData && (<FlatList data={communitiesData} ItemSeparatorComponent={separator} renderItem = {renderCommunities}/>)} */}
                 <ScrollView style={{marginBottom: '10%',}}>
@@ -56,9 +55,9 @@ const SocialScreen = ({navigation}) => {
                     <Text>View Friends</Text>
                     </TouchableOpacity>
                     <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
-                    <TouchableOpacity style={styles.displayInfo}>
+                    <TouchableOpacity style={styles.displayInfo} onPress={() => navigation.navigate('CommunityScreen')}>
                     <Image source={{uri: "https://images.pexels.com/photos/1000445/pexels-photo-1000445.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}}style = {{ width: '90%', height: 200 }}/>
-                    <Text>Communities (Coming Soon ...)</Text>
+                    <Text>Communities</Text>
                     </TouchableOpacity>
                     <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
                 </ScrollView>
