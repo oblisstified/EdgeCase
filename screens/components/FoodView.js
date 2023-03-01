@@ -5,9 +5,12 @@ import { useNavigation } from '@react-navigation/native';
 import FoodLogModal from './FoodLogModal'
 
 const FoodView = props => {
-    const firstWord = props.foodDetails["Description"];
-    const calories = props.foodDetails["Calories"];
-    const protein = props.foodDetails["Protein"];
+
+    
+
+    const firstWord = props.foodDetails.item["Description"];
+    const calories = props.foodDetails.item["Calories"];
+    const protein = props.foodDetails.item["Protein"];
 
     return (
         <View style={styles.displayInfo}>

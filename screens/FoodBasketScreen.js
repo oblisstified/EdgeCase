@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import 'react-native-gesture-handler';
 import { StyleSheet, Text, View, Button, ScrollView, Modal, Touchable, TouchableOpacity, DeviceEventEmitter } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
 
 const FoodBasketScreen = props => {
 
+    const nav = useNavigation();
     let [food, setFood] = useState(props.route.params.currentBasket)
 
     function handleRemove(o){
@@ -21,6 +23,7 @@ const FoodBasketScreen = props => {
     function saveBasket(){
         console.log(food)
         DeviceEventEmitter.emit("event.saveBasket", JSON.stringify(food))
+        nav.pop()
     }
 
     return (
