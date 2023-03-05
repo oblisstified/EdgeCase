@@ -1,20 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import 'react-native-gesture-handler';
 import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 import BottomBar from "./components/BottomBar";
 import {TextInput } from "react-native-gesture-handler";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAuth } from 'firebase/auth'
+import { db } from "../firebase";
+import { collection, getDocs,updateDoc,doc,getDoc} from 'firebase/firestore/lite';
+
 
 
 const ProfileScreen = ({route, navigation}) => {
-    let [profile, setProfile] = useState(null)
 
-    const user = getAuth()
+    const user = getAuth().currentUser;
 
-    const renderProfile = (result) => {
-       setProfile(JSON.parse(result));
-    }
+
+
+    const [userData, setUser] = useState({});
+
+    useEffect(() => {
+        async function getData () {
+            const userRef = doc(db, 'users', user.email);
+            const userSnapshot = await getDoc(userRef);
+            const userData = userSnapshot.data();
+            setUser(userData);
+        }
+    
+        getData();
+      }, []);
 
     function CustomText(props){
         return (
@@ -24,7 +37,7 @@ const ProfileScreen = ({route, navigation}) => {
         );
     }
 
-    AsyncStorage.getItem(user.currentUser.email).then((result) => renderProfile(result));
+
 
 
     return(
@@ -32,19 +45,19 @@ const ProfileScreen = ({route, navigation}) => {
             <ScrollView style={{maxHeight: "90%"}}>
                 <View style={styles.displayInfo}>
                     <CustomText>Name:</CustomText>
-                    <CustomText> { profile && profile.name } </CustomText>
+                    <CustomText> {userData.name} </CustomText>
                 </View>
                 <View style={styles.displayInfo}>
                     <CustomText>Age:</CustomText>
-                    <CustomText> { profile && profile.age }</CustomText>
+                    <CustomText> {userData.age} </CustomText>
                 </View>
                 <View style={styles.displayInfo}>
                     <CustomText>Gender:</CustomText>
-                    <CustomText> { profile && profile.gender }</CustomText>
+                    <CustomText> {userData.gender} </CustomText>
                 </View>
                 <View style={styles.displayInfo}>
                     <CustomText>Height:</CustomText>
-                    <CustomText> { profile && profile.height }</CustomText>
+                    <CustomText> {userData.height} </CustomText>
                 </View>
                 <View style={styles.displayInfo}>
                     <CustomText>PlaceHolder:</CustomText>

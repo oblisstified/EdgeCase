@@ -4,6 +4,9 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { TextInput } from "react-native-gesture-handler";
 import { getAuth } from "firebase/auth"
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { db } from "../firebase";
+import {ref, set,onValue,child ,get} from  'firebase/database';
+import { collection, getDocs,updateDoc,doc,getDoc} from 'firebase/firestore/lite';
 
 import BottomBar from "./components/BottomBar";
 
@@ -18,23 +21,19 @@ const EditProfileScreen = ({route, navigation}) => {
     let [changeSaved, setChangeSaved] = useState(false)
 
 
-    const user = getAuth();
+    const user = getAuth().currentUser;
 
-    const handleSaveChanges = () => {
-        
-        let jsonProfile= 
-        `{
-            "name": "${name}", 
-            "gender": "${gender}", 
-            "age": "${age}", 
-            "height": "${height}"
-        }`;
-
-        AsyncStorage.setItem(
-            user.currentUser.email,
-            jsonProfile,
-            setChangeSaved(true)
-        )
+    async function handleSaveChanges(){
+        try {
+            const userRef = doc(db, 'users', user.email);
+            await updateDoc(userRef, { name: name});
+            await updateDoc(userRef, { gender: gender});
+            await updateDoc(userRef, { age: age});
+            await updateDoc(userRef, { height: height});
+          } 
+          catch (error) {
+            console.error(error); 
+          }
     }
 
     return(
