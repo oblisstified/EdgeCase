@@ -32,7 +32,7 @@ const FoodBasketScreen = props => {
             { food && food.map((o) => o &&
                 <View key={o.foodObject.Description}>
                     <Text>
-                        {o.foodObject.Description}
+                        {o.foodObject.Description + ": " + o.weight}
                     </Text>
                     <Button testID={o.foodObject.Description + "button"} title="remove" onPress={()=>handleRemove(o)}/>
                 </View>

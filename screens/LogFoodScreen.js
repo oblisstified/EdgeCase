@@ -62,13 +62,23 @@ const LogFoodScreen = () => {
 
 
     function addToBasket(food){
+        // this ugliness is to ensure no duplicate items are added 
+
         let temp = []
+        let isContained = false;
+        let addVal = food;
         
         for(let i = 0; i < basket.length; i++){
-            temp.push(basket[i]);
+            if(basket[i]["foodObject"]["Description"] == food["foodObject"]["Description"]){
+                let concatenateObj = basket[i];
+                concatenateObj.weight += food.weight;
+                temp.push(concatenateObj)
+                isContained=true;
+            } else {
+                temp.push(basket[i]);
+            }
         }
-        
-        temp.push(food)
+        isContained || temp.push(addVal)
         setBasket(temp)
     }
 
