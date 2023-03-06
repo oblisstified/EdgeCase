@@ -6,7 +6,8 @@ import { useNavigation } from "@react-navigation/native";
 const FoodBasketScreen = props => {
 
     const nav = useNavigation();
-    let [food, setFood] = useState(props.route.params.currentBasket)
+    // verbose inside te
+    let [food, setFood] = useState((props.route && props.route.params.currentBasket) || props.currentBasket)
 
     function handleRemove(o){
         let temp = [];
@@ -27,17 +28,17 @@ const FoodBasketScreen = props => {
     }
 
     return (
-        <View>
+        <View testID="basketList">
             { food && food.map((o) => o &&
                 <View key={o.foodObject.Description}>
                     <Text>
                         {o.foodObject.Description}
                     </Text>
-                    <Button title="remove" onPress={()=>handleRemove(o)}/>
+                    <Button testID={o.foodObject.Description + "button"} title="remove" onPress={()=>handleRemove(o)}/>
                 </View>
             ) }
 
-            <Button title="save" onPress={saveBasket} />
+            <Button  testID="saveButton" title="save" onPress={saveBasket} />
         </View>
     )
 }

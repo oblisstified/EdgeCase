@@ -92,6 +92,7 @@ const LogFoodScreen = () => {
 
             {/* list of matches */}
             <FlatList
+                testID="foodResultList"
                 data={ matches }
                 keyExtractor = {(item) => item.Description}
                 renderItem={(match) => (
@@ -115,7 +116,8 @@ const LogFoodScreen = () => {
                 setModalVisible(!modalVisible);
             }}>
                 
-                <FoodLogModal 
+                <FoodLogModal
+                    testID="foodModal"
                     foodDetails={modalContent} 
                     hideButton={ <Button title="Hide Modal" onPress={() => {setModalVisible(false)}} /> }
                     // this prop will be used as a callback to update the basket from the modal

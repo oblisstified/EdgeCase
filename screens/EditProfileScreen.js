@@ -3,7 +3,6 @@ import "react-native-gesture-handler";
 import { StyleSheet, Text, View, Button } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { getAuth } from "firebase/auth";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { db } from "../firebase";
 import { ref, set, onValue, child, get } from "firebase/database";
 import {

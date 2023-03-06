@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import 'react-native-gesture-handler';
 import { StyleSheet, Text, View, Button, TouchableOpacity,FlatList } from 'react-native';
 import { TextInput } from "react-native-gesture-handler";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAuth, signOut } from 'firebase/auth';
 import { collection, getDocs,updateDoc,doc,getDoc} from 'firebase/firestore/lite';
 import {ref, set} from  'firebase/database';

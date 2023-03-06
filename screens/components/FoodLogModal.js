@@ -9,7 +9,7 @@ const FoodLogModal = (props) => {
     let [amountGrams, setAmountGrams] = useState(0);
 
     return (
-            <View style={styles.slideUpPanel}>
+            <View style={styles.slideUpPanel} testID="foodModal">
                 <View>
                   {/* props.foodDetails contains a json object with all the details about the food shown */}
                   <Text style={styles.modalText}>{props.foodDetails.item["Description"]}</Text>
@@ -24,10 +24,13 @@ const FoodLogModal = (props) => {
                 <View>
                   <Text style={styles.card}>Input amount</Text>
                   <TextInput inputMode="numeric" onChangeText={(t) => setAmountGrams(t)}/>
-                  <Button title="submit" onPress={() => {
-                    props.addToBasket(
-                      JSON.parse(`{"weight":` + amountGrams + `,"foodObject":` + JSON.stringify(props.foodDetails.item) + "}")
-                      );
+                  <Button 
+                    testID="addButton"
+                    title="submit" 
+                    onPress={() => {
+                      props.addToBasket(
+                        JSON.parse(`{"weight":` + amountGrams + `,"foodObject":` + JSON.stringify(props.foodDetails.item) + "}")
+                        );
                     }} />
                 </View>
                 
