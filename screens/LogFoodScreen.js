@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import { db } from "../firebase";
 import {ref, set,onValue,child ,get} from  'firebase/database';
-import { collection, getDocs,updateDoc,doc,getDoc, setDoc } from 'firebase/firestore/lite';
+import { collection, getDocs, updateDoc, doc,getDoc, setDoc } from 'firebase/firestore/lite';
 
 const LogFoodScreen = () => {
     const nav = useNavigation();
@@ -49,7 +49,7 @@ const LogFoodScreen = () => {
 
                 if(!basketSaved){
                     basketSaved = true; 
-                    await setDoc(userRef, {mealList:newMealList})
+                    await updateDoc(userRef, {mealList:newMealList})
                     .then(() => setBasket([]))
                 }
             }
@@ -62,7 +62,7 @@ const LogFoodScreen = () => {
 
 
     function addToBasket(food){
-        // this ugliness is to ensure no duplicate items are added 
+        // this ugliness is to ensure no duplicate items are added
 
         let temp = []
         let isContained = false;
