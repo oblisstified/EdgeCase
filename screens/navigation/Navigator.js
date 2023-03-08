@@ -27,7 +27,7 @@ const BottomTabNavigator = () => {
         name="HomeScreen"
         component={HomeScreen}
         options={{
-          tabBarLabel: "",
+          tabBarLabel: "Home",
           tabBarIcon: ({ color, size }) => (
             <Image
               source={require("../images/heart-home.png")}
@@ -38,10 +38,10 @@ const BottomTabNavigator = () => {
       />
 
       <Tab.Screen
-        name="Log Food"
+        name="LogFoodScreen"
         component={LogFoodScreen}
         options={{
-          tabBarLabel: "",
+          tabBarLabel: "Log Food",
           tabBarIcon: ({ color, size }) => (
             <Image
               source={require("../images/log-food.png")}
@@ -52,10 +52,10 @@ const BottomTabNavigator = () => {
       />
 
       <Tab.Screen
-        name="Profile"
+        name="ProfileScreen"
         component={ProfileScreen}
         options={{
-          tabBarLabel: "",
+          tabBarLabel: "Profile",
           tabBarIcon: ({ color, size }) => (
             <Image
               source={require("../images/profile.png")}
@@ -66,10 +66,10 @@ const BottomTabNavigator = () => {
       />
 
       <Tab.Screen
-        name="Add Friends"
+        name="AllUsersScreen"
         component={AllUsersScreen}
         options={{
-          tabBarLabel: "",
+          tabBarLabel: "Add Friends",
           tabBarIcon: ({ color, size }) => (
             <Image
               source={require("../images/add-friends.png")}
