@@ -32,7 +32,6 @@ const FoodBasketScreen = props => {
     }
 
     function saveBasket(){
-        console.log(food)
         DeviceEventEmitter.emit("event.saveBasket", JSON.stringify(food))
         nav.pop()
     }
@@ -56,8 +55,6 @@ const FoodBasketScreen = props => {
             oldPresetList = await presetData.allPresets
             oldPresetList.push(newPreset)
 
-            console.log(oldPresetList);
-
             await updateDoc(userRef, {allPresets:oldPresetList}).then(()=>{setPresetSaved(true)})
         } catch (error){
             console.log(error)
@@ -69,7 +66,7 @@ const FoodBasketScreen = props => {
 
     function createPreset(){
         let presetObject = {
-            "Name": description,
+            "Description": description,
             "Ingredients": [],
             "Calories": 0,
             "Protein": 0,

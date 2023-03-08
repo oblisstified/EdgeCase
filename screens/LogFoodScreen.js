@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import 'react-native-gesture-handler';
 import { StyleSheet, Text, View, Button, ScrollView, Modal, Touchable, TouchableOpacity, DeviceEventEmitter } from 'react-native';
 import BottomBar from "./components/BottomBar";
-import { findFoodObjects } from "../utils/searcher";
+import { findFoodObjects, findPresetObjects } from "../utils/searcher";
 import { FlatList, TextInput } from "react-native-gesture-handler";
 
 import { getAuth } from 'firebase/auth'
@@ -23,6 +23,8 @@ const LogFoodScreen = () => {
     let [matches, setMatches] = useState([]);
     let [modalVisible, setModalVisible] = useState(false)
     let [modalContent, setModalContent] = useState(null)
+    let [presetMatches, setPresetMatches] = useState([])
+    let [showPresets, setShowPresets] = useState(false)
 
     let [basket, setBasket] = useState([]);
     
@@ -86,10 +88,24 @@ const LogFoodScreen = () => {
 
 
     function getMatches(){
+        setShowPresets(false);
         setMatches([])
 
         let myFoods = findFoodObjects(searchValue)
         setMatches(myFoods.slice(0, 100))
+    }
+
+    async function getPresetMatches(){
+        let presets = []
+        setShowPresets(true);
+        setPresetMatches([])
+        try{
+            presets = await findPresetObjects(searchValue)
+        } catch(error){
+            console.log(error)
+        }
+
+        setPresetMatches(presets)
     }
 
     return(
@@ -99,24 +115,38 @@ const LogFoodScreen = () => {
             <Text>Food Screen</Text>
             <TextInput testID="foodSearchBar" onChangeText={ (text) => {setSearchValue(text); getMatches()} } />
             <Button testID="foodSearch" title="search" onPress={ getMatches } />
+            <Button title="search custom presets" onPress={ getPresetMatches } />
             <Button title="View Basket" onPress={() => nav.push("FoodBasketScreen", {currentBasket: basket})} />
             <Text>{basket.length} items</Text>
 
             {/* list of matches */}
-            <FlatList
-                testID="foodResultList"
-                data={ matches }
-                keyExtractor = {(item) => item.Description}
-                renderItem={(match) => (
-                    <FoodView 
-                        foodDetails={ match }
-                        // these buttons are rendered in the FoodView component
-                        button={<View style={{flexDirection:"row", flexGrow:2, alignItems:"space-between", alignSelf: "center"}}>
-                                    <Button title='i' />
-                                    <Button title="Add" onPress={() => {setModalContent(match); setModalVisible(true)}} />
-                                </View>} />
-                )}
-            />
+            {!showPresets &&
+                <FlatList
+                    testID="foodResultList"
+                    data={ matches }
+                    keyExtractor = {(item) => item["Description"]}
+                    renderItem={(match) => (
+                        <FoodView 
+                            foodDetails={ match }
+                            // these buttons are rendered in the FoodView component
+                            button={<View style={{flexDirection:"row", flexGrow:2, alignItems:"space-between", alignSelf: "center"}}>
+                                        <Button title='i' />
+                                        <Button title="Add" onPress={() => {setModalContent(match); setModalVisible(true)}} />
+                                    </View>} />
+                    )}
+            />}
+            {showPresets &&
+                <FlatList 
+                    data = { presetMatches }
+                    keyExtractor={(item) => (item["Description"])}
+                    renderItem={(item) => (
+                        <Text>{ item.item["Description"] }</Text>
+                    )
+                    }
+
+                />
+
+            }
 
             {/* Popup for the modal */}
             <Modal
