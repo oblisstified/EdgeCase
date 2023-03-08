@@ -1,7 +1,8 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-// import Detail from " ../Detail";
+import Detail from "../Detail";
+import LogInScreen from "../LogInScreen";
 import HomeScreen from "../HomeScreen";
 import LogFoodScreen from "../LogFoodScreen";
 import ProfileScreen from "../ProfileScreen";
@@ -23,14 +24,14 @@ const BottomTabNavigator = () => {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="HomeScreen"
         component={HomeScreen}
         options={{
           tabBarLabel: "",
           tabBarIcon: ({ color, size }) => (
             <Image
               source={require("../images/heart-home.png")}
-              style={{ height: 20, width: 20 }}
+              style={{ height: 30, width: 30 }}
             />
           ),
         }}
@@ -44,7 +45,7 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <Image
               source={require("../images/log-food.png")}
-              style={{ height: 20, width: 20 }}
+              style={{ height: 30, width: 30 }}
             />
           ),
         }}
@@ -58,7 +59,7 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <Image
               source={require("../images/profile.png")}
-              style={{ height: 20, width: 20 }}
+              style={{ height: 30, width: 30 }}
             />
           ),
         }}
@@ -72,7 +73,7 @@ const BottomTabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <Image
               source={require("../images/add-friends.png")}
-              style={{ height: 20, width: 20 }}
+              style={{ height: 30, width: 30 }}
             />
           ),
         }}
@@ -89,7 +90,8 @@ const screenOptionStyle = {
 const HomeStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
-      <Stack.Screen name="Home" component={BottomTabNavigator} />
+      <Stack.Screen name="LogInScreen" component={LogInScreen} />
+      <Stack.Screen name="HomeScreen" component={BottomTabNavigator} />
     </Stack.Navigator>
   );
 };

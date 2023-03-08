@@ -48,12 +48,15 @@ const HomeScreen = ({ navigation }) => {
             width: "100%",
           }}
         >
-          <View style={{ width: "50%" }}>
+          <View style={{ width: "80%" }}>
             <Text style={{ fontSize: 28, color: "#FFF", fontWeight: "bold" }}>
               welcome
             </Text>
+            <Text style={{ fontSize: 20, color: "#FFF", fontWeight: "normal" }}>
+              {user.currentUser.email}
+            </Text>
           </View>
-          <View style={{ width: "50%", alignItems: "flex-end" }}>
+          <View style={{ width: "20%", alignItems: "flex-end" }}>
             <Image
               source={require("./images/pantry.png")}
               style={{ height: 60, width: 60 }}
