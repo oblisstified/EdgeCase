@@ -1,7 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import Detail from " ../Detail";
+// import Detail from " ../Detail";
 import HomeScreen from "../HomeScreen";
 import LogFoodScreen from "../LogFoodScreen";
 import ProfileScreen from "../ProfileScreen";
@@ -90,9 +90,10 @@ const HomeStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="Home" component={BottomTabNavigator} />
-      <Stack.Screen name="Detail" component={Detail} />
     </Stack.Navigator>
   );
 };
 
 export default HomeStackNavigator;
+
+// <Stack.Screen name="Detail" component={Detail} />
