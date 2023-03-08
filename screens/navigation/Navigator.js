@@ -97,5 +97,3 @@ const HomeStackNavigator = () => {
 };
 
 export default HomeStackNavigator;
-
-// <Stack.Screen name="Detail" component={Detail} />
