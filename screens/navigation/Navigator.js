@@ -1,7 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import Detail from "../Detail";
 import LogInScreen from "../LogInScreen";
 import HomeScreen from "../HomeScreen";
 import LogFoodScreen from "../LogFoodScreen";
@@ -13,6 +12,7 @@ const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
+      screenOptions={screenOptionStyle}
       tabBarOptions={{
         style: {
           height: 65,

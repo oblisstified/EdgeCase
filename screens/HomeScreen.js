@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   View,
+  SafeAreaView,
   Image,
   ImageBackground,
 } from "react-native";
@@ -27,24 +28,50 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={{ backgroundColor: "#FFF", flex: 1 }}>
-      <View
+      <SafeAreaView
         style={{
           backgroundColor: "#00a46c",
-          height: "28%",
+          height: "30%",
           borderBottomLeftRadius: 20,
           borderBottomRightRadius: 20,
           paddingHorizontal: 20,
         }}
       >
-        <Image
-          source={require("./images/menu.png")}
-          style={{ height: 25, width: 25, marginTop: 15 }}
-        />
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            width: "100%",
+          }}
+        >
+          <View style={{ width: "80%", alignItems: "flex-start" }}>
+            <TouchableOpacity>
+              <Image
+                source={require("./images/menu.png")}
+                style={{ height: 25, width: 25, marginLeft: 15 }}
+              />
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{ width: "18%", alignItems: "flex-end", marginRight: 15 }}
+          >
+            <TouchableOpacity onPress={handleSignOut}>
+              <Image
+                source={require("./images/log-out.png")}
+                style={{ height: 25, width: 25 }}
+              />
+              <Text style={{ fontSize: 8, color: "#FFF", fontWeight: "bold" }}>
+                Log Out
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
         <View
           style={{
             flexDirection: "row",
             alignItems: "center",
             marginTop: 25,
+            marginLeft: 15,
             width: "100%",
           }}
         >
@@ -56,14 +83,14 @@ const HomeScreen = ({ navigation }) => {
               {user.currentUser.email}
             </Text>
           </View>
-          <View style={{ width: "20%", alignItems: "flex-end" }}>
+          <View style={{ width: "12%", alignItems: "flex-end" }}>
             <Image
               source={require("./images/pantry.png")}
               style={{ height: 60, width: 60 }}
             />
           </View>
         </View>
-      </View>
+      </SafeAreaView>
       <LinearGradient
         colors={["rgba(0,164,109,0.4)", "transparent"]}
         style={{
@@ -73,15 +100,9 @@ const HomeScreen = ({ navigation }) => {
           margin: -45,
         }}
       ></LinearGradient>
-
-      <BottomBar navigation={navigation} />
     </View>
   );
 };
-
-// <Text>Successful login</Text>
-// <Text>Welcome {user.currentUser.email}</Text>
-// <Button title="logout" onPress={handleSignOut} />
 
 export default HomeScreen;
 
