@@ -4,15 +4,16 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { TextInput } from "react-native-gesture-handler";
 import { getAuth } from "firebase/auth"
 
-const Friends = ({navigation}) => {
+const GainMuscle = ({navigation}) => {
 
     const user = getAuth();
 
     return (
         <view>
-            <Text>Friends Feed</Text>
+            <Text>Community Feed</Text>
+            
         </view>
     );
 }
 
-export default Friends
+export default GainMuscle
