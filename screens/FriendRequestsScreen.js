@@ -26,7 +26,7 @@ const FriendRequestsScreen = ({route, navigation}) => {
       }
   
       getData();
-    }, []);
+    }, []); 
 
     async function AcceptFriendRequest(email){
         try {

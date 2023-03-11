@@ -13,9 +13,6 @@ import { collection, getDocs,updateDoc,doc,getDoc} from 'firebase/firestore/lite
 const ProfileScreen = ({route, navigation}) => {
 
     const user = getAuth().currentUser;
-
-
-
     const [userData, setUser] = useState({});
 
     useEffect(() => {
@@ -36,9 +33,6 @@ const ProfileScreen = ({route, navigation}) => {
             </Text>
         );
     }
-
-
-
 
     return(
         <View>

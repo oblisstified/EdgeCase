@@ -13,7 +13,7 @@ const HomeScreen = ({navigation}) => {
     }
 
     return(
-        <View style={{flex:1}}>
+        <View style={{flex:1}} testID = 'HomeScreen'>
             <View>
                 <Text>Successful login</Text>
                 <Text>Welcome {user.currentUser.email} </Text>

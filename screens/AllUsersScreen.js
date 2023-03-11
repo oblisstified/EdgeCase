@@ -54,7 +54,7 @@ const AllUsersScreen = ({route, navigation}) => {
  
   console.log(userList);
   return (
-    <View style = {{flex:1}} >
+    <View style = {{flex:1}}  testID="AllUsersScreen">
        
             <View>
                 <Text>hello {user.email}</Text>
