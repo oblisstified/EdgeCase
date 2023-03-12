@@ -97,9 +97,214 @@ const HomeScreen = ({ navigation }) => {
           left: 0,
           right: 0,
           height: 90,
-          margin: -45,
+          marginTop: -45,
         }}
       ></LinearGradient>
+      <View
+        style={{
+          flexDirection: "row",
+          paddingHorizontal: 20,
+          width: "100%",
+          alignItems: "center",
+        }}
+      >
+        <View style={{ width: "50%" }}>
+          <Text
+            style={{
+              fontWeight: "bold",
+              fontSize: 20,
+              color: "#585a61",
+            }}
+          >
+            Calories
+          </Text>
+          <View
+            style={{
+              height: 4,
+              backgroundColor: "#ble5d3",
+              width: 115,
+              marginTop: -5,
+            }}
+          ></View>
+        </View>
+        <View style={{ width: "50%", alignItems: "flex-end" }}>
+          <View
+            style={{
+              backgroundColor: "#00a46c",
+              paddingHorizontal: 20,
+              paddingVertical: 5,
+              borderRadius: 15,
+            }}
+          >
+            <Text
+              style={{
+                fontWeight: "bold",
+                fontSize: 15,
+                color: "#FFF",
+              }}
+            >
+              more
+            </Text>
+          </View>
+          <View
+            style={{
+              height: 4,
+              backgroundColor: "#ble5d3",
+              width: 115,
+              marginTop: -5,
+            }}
+          ></View>
+        </View>
+      </View>
+
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={{ height: 400 }}
+      >
+        <LinearGradient
+          colors={["rgba(0,164,109,0.09)", "transparent"]}
+          style={{
+            position: "absolute",
+            left: 0,
+            right: 0,
+            height: 100,
+            marginTop: 220,
+            top: 0,
+          }}
+        />
+        <TouchableOpacity
+          onPress={() => navigation.navigate("LogFoodScreen")}
+          style={{
+            height: 250,
+            elevation: 2,
+            backgroundColor: "#FFF",
+            marginLeft: 20,
+            marginTop: 20,
+            borderRadius: 15,
+            marginBottom: 10,
+            width: 160,
+          }}
+        >
+          <Image source={require("./images/log-food.png")} />
+          <View
+            style={{
+              flexDirection: "row",
+              paddingTop: 10,
+              paddingHorizontal: 10,
+            }}
+          >
+            <Text style={{ fontWeight: "bold" }}>Calories Consumed / Goal</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate("LogFoodScreen")}
+          style={{
+            height: 250,
+            elevation: 2,
+            backgroundColor: "#FFF",
+            marginLeft: 20,
+            marginTop: 20,
+            borderRadius: 15,
+            marginBottom: 10,
+            width: 160,
+          }}
+        >
+          <Image source={require("./images/log-food.png")} />
+          <View
+            style={{
+              flexDirection: "row",
+              paddingTop: 10,
+              paddingHorizontal: 10,
+            }}
+          >
+            <Text style={{ fontWeight: "bold" }}>Last Meal ...?</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => navigation.navigate("LogFoodScreen")}
+          style={{
+            height: 250,
+            elevation: 2,
+            backgroundColor: "#FFF",
+            marginLeft: 20,
+            marginTop: 20,
+            borderRadius: 15,
+            marginBottom: 10,
+            width: 160,
+          }}
+        >
+          <Image source={require("./images/log-food.png")} />
+          <View
+            style={{
+              flexDirection: "row",
+              paddingTop: 10,
+              paddingHorizontal: 10,
+            }}
+          >
+            <Text style={{ fontWeight: "bold" }}>Etc. Etc. ...</Text>
+          </View>
+        </TouchableOpacity>
+      </ScrollView>
+
+      <View
+        style={{
+          flexDirection: "row",
+          paddingHorizontal: 20,
+          width: "100%",
+          alignItems: "center",
+        }}
+      >
+        <View style={{ width: "50%" }}>
+          <Text
+            style={{
+              fontWeight: "bold",
+              fontSize: 20,
+              color: "#585a61",
+            }}
+          >
+            Progress
+          </Text>
+          <View
+            style={{
+              height: 4,
+              backgroundColor: "#ble5d3",
+              width: 115,
+              marginTop: -5,
+            }}
+          ></View>
+        </View>
+        <View style={{ width: "50%", alignItems: "flex-end" }}>
+          <View
+            style={{
+              backgroundColor: "#00a46c",
+              paddingHorizontal: 20,
+              paddingVertical: 5,
+              borderRadius: 15,
+            }}
+          >
+            <Text
+              style={{
+                fontWeight: "bold",
+                fontSize: 15,
+                color: "#FFF",
+              }}
+            >
+              more
+            </Text>
+          </View>
+          <View
+            style={{
+              height: 4,
+              backgroundColor: "#ble5d3",
+              width: 115,
+              marginTop: -5,
+            }}
+          ></View>
+        </View>
+      </View>
     </View>
   );
 };
