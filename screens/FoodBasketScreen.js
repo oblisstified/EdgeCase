@@ -37,7 +37,7 @@ const FoodBasketScreen = props => {
     function saveBasket(){
         DeviceEventEmitter.emit("event.saveBasket", JSON.stringify(food))
         nav.pop()
-    }w
+    }
     async function savePreset(){
         if(description.length == 0){
             setPresetNameError(true);
