@@ -25,6 +25,7 @@ const LogFoodScreen = () => {
     let [modalContent, setModalContent] = useState(null)
     let [presetMatches, setPresetMatches] = useState([])
     let [showPresets, setShowPresets] = useState(false)
+    let [infoModal, setInfoModal] = useState(false);
 
     let [basket, setBasket] = useState([]);
     
@@ -96,7 +97,6 @@ const LogFoodScreen = () => {
     }
 
     async function getPresetMatches(){
-        console.log("esets")
         let presets = []
         setShowPresets(true);
         setPresetMatches([])
@@ -137,7 +137,7 @@ const LogFoodScreen = () => {
                             foodDetails={ match }
                             // these buttons are rendered in the FoodView component
                             button={<View style={{flexDirection:"row", flexGrow:2, alignItems:"space-between", alignSelf: "center"}}>
-                                        <Button title='i' />
+                                        <Button title='i' onPress={() => {setModalContent(match); setInfoModal(true)}} />
                                         <Button title="Add" onPress={() => {setModalContent(match); setModalVisible(true)}} />
                                     </View>} />
                     )}
@@ -151,13 +151,12 @@ const LogFoodScreen = () => {
                     data = { presetMatches }
                     keyExtractor={(item) => (JSON.stringify(item.preset))}
                     renderItem={(item) => (
-                        <View style={{flex:1}}>
+                        <View style={{flex:1, flexDirection:"column"}}>
                             <View style={{alignSelf:"flex-start"}}>
                                 <Text>{ JSON.stringify(item.item.preset[item.item.preset.length - 1]["name"]) }</Text>
                             </View>
                             <View>
                                 <View style={{flexDirection:"row", flexGrow:2, alignItems:"space-between", alignSelf: "center"}}>
-                                    <Button title='i' />
                                     <Button title="Add" onPress={() => {saveItem(item.item.preset)}} />
                                 </View>
                             </View>
@@ -169,8 +168,9 @@ const LogFoodScreen = () => {
 
             }
 
-            {/* Popup for the modal */}
+            {/* Popup for logging modal */}
             <Modal
+                style={styles.infoModal}
                 animationType="slide"
                 transparent={true}
                 visible={modalVisible}
@@ -187,6 +187,48 @@ const LogFoodScreen = () => {
                     addToBasket={(f) => addToBasket(f)}
                     />
             </Modal>
+
+            <Modal
+                animationType="slide"
+                transparent={false}
+                visible={infoModal}
+                onRequestClose={() => {
+                    Alert.alert('Modal has been closed.');
+                    setInfoModal(!modalVisible);
+            }}>
+                <Text>
+                    Values per 100g
+                </ Text>
+                <Text>
+                    Name: {modalContent && modalContent.item["Description"]}
+                    {modalContent && console.log(modalContent)}
+                </ Text>
+                <Text>
+                    Calories: {modalContent && modalContent.item["Calories"]}
+                </ Text>
+                <Text>
+                    Protein: {modalContent && modalContent.item["Protein"]}
+                </ Text>
+                <Text>
+                    Sugar: {modalContent && modalContent.item["Sugar"]}
+                </ Text>
+                <Text>
+                    Fiber: {modalContent && modalContent.item["Fiber"]}
+                </ Text>
+                <Text>
+                    Monounsaturated Fat: {modalContent && modalContent.item["Monounsaturated Fat"]}
+                </ Text>
+                <Text>
+                    Polyunsaturated Fats": {modalContent && modalContent.item["Polyunsaturated Fats"]}
+                </ Text>
+                <Text>
+                    Saturated Fat: {modalContent && modalContent.item["Saturated Fat"]}
+                </ Text>
+                <Button title="hide" onPress={() => setInfoModal(false)}/>
+            </Modal>
+
+
+
             <BottomBar />       
         </View>
     )
@@ -198,4 +240,7 @@ export default LogFoodScreen
 
 
 const styles = StyleSheet.create({
+    infoModal: {
+
+    }
 })
