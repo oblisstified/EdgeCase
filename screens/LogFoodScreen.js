@@ -96,6 +96,7 @@ const LogFoodScreen = () => {
     }
 
     async function getPresetMatches(){
+        console.log("esets")
         let presets = []
         setShowPresets(true);
         setPresetMatches([])
@@ -104,8 +105,14 @@ const LogFoodScreen = () => {
         } catch(error){
             console.log(error)
         }
+        
 
         setPresetMatches(presets)
+    }
+
+    async function saveItem(item){
+        setBasket(item);
+        saveBasket();
     }
 
     return(
@@ -115,7 +122,7 @@ const LogFoodScreen = () => {
             <Text>Food Screen</Text>
             <TextInput testID="foodSearchBar" onChangeText={ (text) => {setSearchValue(text); getMatches()} } />
             <Button testID="foodSearch" title="search" onPress={ getMatches } />
-            <Button title="search custom presets" onPress={ getPresetMatches } />
+            <Button title="search custom presets" onPress={() => {setShowPresets(true);getPresetMatches()}} />
             <Button title="View Basket" onPress={() => nav.push("FoodBasketScreen", {currentBasket: basket})} />
             <Text>{basket.length} items</Text>
 
@@ -135,12 +142,26 @@ const LogFoodScreen = () => {
                                     </View>} />
                     )}
             />}
+
+            
+            {/* list of presets */}
+
             {showPresets &&
                 <FlatList 
                     data = { presetMatches }
-                    keyExtractor={(item) => (item["Description"])}
+                    keyExtractor={(item) => (JSON.stringify(item.preset))}
                     renderItem={(item) => (
-                        <Text>{ item.item["Description"] }</Text>
+                        <View style={{flex:1}}>
+                            <View style={{alignSelf:"flex-start"}}>
+                                <Text>{ JSON.stringify(item.item.preset[item.item.preset.length - 1]["name"]) }</Text>
+                            </View>
+                            <View>
+                                <View style={{flexDirection:"row", flexGrow:2, alignItems:"space-between", alignSelf: "center"}}>
+                                    <Button title='i' />
+                                    <Button title="Add" onPress={() => {saveItem(item.item.preset)}} />
+                                </View>
+                            </View>
+                        </View>
                     )
                     }
 
@@ -166,8 +187,6 @@ const LogFoodScreen = () => {
                     addToBasket={(f) => addToBasket(f)}
                     />
             </Modal>
-
-
             <BottomBar />       
         </View>
     )
