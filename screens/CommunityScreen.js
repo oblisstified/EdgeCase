@@ -13,6 +13,7 @@ const CommunityScreen = ({navigation}) => {
     const user = getAuth();
 
     const [communities,setCommunity] = useState(null);
+    const [communityIds, setCommunityId] = useState(null); 
 
     useEffect(() => {
         async function getData () {
@@ -21,6 +22,7 @@ const CommunityScreen = ({navigation}) => {
             const communitiesSnapshot = await getDocs(communitiesCol); //gets all docs from the collection
             const communitiesData = communitiesSnapshot.docs.map(doc => doc.data());
             setCommunity(communitiesData);
+            setCommunityId(communitiesData.map(community => community.communityId));
           } catch (error) {
             console.log(error); // handle error appropriately, e.g. display a message to the user
           }
@@ -28,16 +30,16 @@ const CommunityScreen = ({navigation}) => {
         getData();
       }, []);
 
-    const Community = ({name,id,description,image,joined}) => {
+    const Community = ({name,communityId,description,image}) => {
         return(
             <View style={styles.displayInfo}>
-                <Text>{name}</Text>
+                <Text>{communityId}</Text>
                 <Text>{description}</Text>
                 <Image source={{uri:image}} style ={{width: '30%', height:100}}/>
-                <Text>{joined}</Text>
-                <TouchableOpacity onPress={() => renderCommunityFeed(index)} style= {styles.button}>
+                <TouchableOpacity onPress={() => renderCommunityFeed(communityId)} style= {styles.button}>
                     <Text style={styles.text}>View Community Feed</Text>
                 </TouchableOpacity>
+
             </View>
         )
     };
@@ -46,62 +48,23 @@ const CommunityScreen = ({navigation}) => {
         return (<View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>)
     };
 
-    const renderCommunityFeed = (index) => {
-        
+    const renderCommunityFeed = (communityId) => {
 
+        navigation.replace('CommunityFeed', {communityId: communityId});
+        console.log(communityId);
     };
 
     const renderCommunities = ({item}) => {
-        return(<Community name={item.name} id={item.id} description={item.description} image={item.image} joined={item.joined}/>)
+        return(<Community communityId={item.communityId} name={item.name} id={item.id} description={item.description} image={item.image} joined={item.joined}/>)
+        
     };
 
     return(
-
-        // <View>
-        //     <View style={{alignItems: "center",marginVertical: '5%',}}>
-        //         <Text>These are your communities</Text>
-        //     </View>
-        //     {communities && (<FlatList data={communities} ItemSeparatorComponent={separator} renderItem = {renderCommunities}/>)}
-        //     <BottomBar navigation={navigation}/>        
-        // </View>
 
         <View style={{flex:1}} >
         <View style={{flex:1}}>
             <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
             {communities && (<FlatList data={communities} ItemSeparatorComponent={separator} renderItem = {renderCommunities}/>)}
-            {/* <ScrollView style={{marginBottom: '10%',}}>
-
-                <TouchableOpacity style={styles.displayInfo} onPress={() => navigation.navigate('FriendsFeed')}>
-                <Image source={{uri: "https://images.pexels.com/photos/6345328/pexels-photo-6345328.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}} style = {{ width: '90%', height: 200 }}/>
-                <Text>Friends</Text>
-                </TouchableOpacity>
-                <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
-
-                <TouchableOpacity style={styles.displayInfo} onPress={() => navigation.navigate('KetoFeed')}>
-                <Image source={{uri: "https://images.pexels.com/photos/3822356/pexels-photo-3822356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}}style = {{ width: '90%', height: 200 }}/>
-                <Text>Keto</Text>
-                </TouchableOpacity>
-                <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
-
-                <TouchableOpacity style={styles.displayInfo} onPress={() => navigation.navigate('VeganFeed')}>
-                <Image source={{uri: "https://images.pexels.com/photos/1000445/pexels-photo-1000445.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}}style = {{ width: '90%', height: 200 }}/>
-                <Text>Vegan</Text>
-                </TouchableOpacity>
-                <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
-
-                <TouchableOpacity style={styles.displayInfo} onPress={() => navigation.navigate('GainMuscleFeed')}>
-                <Image source={{uri: "https://images.pexels.com/photos/1000445/pexels-photo-1000445.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}}style = {{ width: '90%', height: 200 }}/>
-                <Text>GainMuscle</Text>
-                </TouchableOpacity>
-                <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
-
-                <TouchableOpacity style={styles.displayInfo} onPress={() => navigation.navigate('WeightLossFeed')}>
-                <Image source={{uri: "https://images.pexels.com/photos/1000445/pexels-photo-1000445.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}}style = {{ width: '90%', height: 200 }}/>
-                <Text>WeightLoss</Text>
-                </TouchableOpacity>
-                <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
-
-            </ScrollView> */}
         </View>
         <BottomBar navigation={navigation}/>     
         </View>

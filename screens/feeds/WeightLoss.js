@@ -5,13 +5,38 @@ import { TextInput } from "react-native-gesture-handler";
 import { getAuth } from "firebase/auth"
 
 const WeightLoss = ({navigation}) => {
+    const [posts, setPosts] = useState([]);
 
-    const user = getAuth();
-
+    useEffect(() => {
+      // Get all posts for the "vegan" community
+      const unsubscribe = collection(db, "posts")
+        .where('communityId', '==', 'vegan')
+        .onSnapshot((querySnapshot) => {
+          const newPosts = [];
+          querySnapshot.forEach((doc) => {
+            newPosts.push({
+              id: doc.id,
+              ...doc.data()
+            });
+          });
+          setPosts(newPosts);
+        });
+  
+      // Unsubscribe from snapshot listener when component unmounts
+      return () => unsubscribe();
+    }, []);
+  
     return (
-        <view>
-            <Text>Community Feed</Text>
-        </view>
+      <View>
+        <Text>Vegan Community Feed</Text>
+        {posts.map((post) => (
+          <View key={post.id}>
+            <Text>{post.content}</Text>
+            <Text>{post.createdAt}</Text>
+          </View>
+        ))}
+        <BottomBar />
+      </View>
     );
 }
 

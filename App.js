@@ -19,6 +19,7 @@ import GainMuscle from './screens/feeds/GainMuscle';
 import Keto from './screens/feeds/Keto';
 import Vegan from './screens/feeds/Vegan';
 import WeightLoss from './screens/feeds/WeightLoss';
+import CommunityFeed from './screens/CommunityFeed';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -47,7 +48,7 @@ export default function App() {
         <Stack.Screen name="KetoFeed" component={Keto} />
         <Stack.Screen name="VeganFeed" component={Vegan} />
         <Stack.Screen name="WeightLossFeed" component={WeightLoss} />
-
+        <Stack.Screen name="CommunityFeed" component={CommunityFeed} />
 
       </Stack.Navigator>
     </NavigationContainer>

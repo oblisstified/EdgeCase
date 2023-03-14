@@ -38,7 +38,7 @@ const ChallengesViewScreen = ({navigation}) => {
         )
     };
 
-    const renderChallenges = ({id, }) => {
+    const renderChallenges = ({item}) => {
         return(<Challenge challenge={item.challenge} goal={item.goal} index={item.id}/>)
     };
 
