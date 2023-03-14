@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, LogBox } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
@@ -10,6 +10,7 @@ import EditProfileScreen from './screens/EditProfileScreen';
 import SocialScreen from './screens/SocialScreen';
 import ChallengesViewScreen from './screens/ChallengesViewScreen';
 import Leaderboard from './screens/Leaderboard';
+import MedalsScreen from './screens/MedalsScreen';
 import Page1 from './screens/build-profile/Page1';
 import Page2 from './screens/build-profile/Page2';
 import Page3 from './screens/build-profile/Page3';
@@ -18,6 +19,7 @@ import Page4 from './screens/build-profile/Page4';
 
 
 const Stack = createStackNavigator();
+LogBox.ignoreLogs(['Warning: Failed prop type: Invalid prop `textStyle` of type `array` supplied to `Cell`, expected `object`.']);
 
 export default function App() {
   return (
@@ -35,6 +37,7 @@ export default function App() {
         <Stack.Screen name="SocialScreen" component={SocialScreen} />
         <Stack.Screen name="ChallengesViewScreen" component={ChallengesViewScreen} />
         <Stack.Screen name="Leaderboard" component={Leaderboard} />
+        <Stack.Screen name="MedalsScreen" component={MedalsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

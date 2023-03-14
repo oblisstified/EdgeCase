@@ -12,7 +12,7 @@ const Leaderboard = ({navigation}) => {
     const user = getAuth().currentUser;
     const route = useRoute();
     const challengeI = JSON.parse(route.params.challengeInfo);
-    const challengeType = challengeI.id;
+    const challengeType = challengeI.type;
     const challengeDesc = challengeI.challenge
 
     const [allUsers,setAllUsers] = useState(null);
@@ -56,24 +56,6 @@ const Leaderboard = ({navigation}) => {
                 return x.map(person => [position++,person.name,person.steps])
             }
         };
-
-    const Leaderboard = ({steps,name,timesCalGoalHit,recipes}) => {
-        let x;
-        if(challengeType.includes("calorie")){
-            x = timesCalGoalHit;
-        }
-        else if(challengeType.includes("recipe")){
-            x = recipes
-        }
-        else{
-            x = steps
-        }
-        return(
-            <View style={styles.displayInfo}>
-                <Text>{name} ------ {x}</Text>
-            </View>
-        )
-    };
 
     return(
         <View>
