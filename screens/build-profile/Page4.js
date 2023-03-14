@@ -5,6 +5,8 @@ import { getAuth } from "firebase/auth"
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TouchableOpacity } from "react-native";
 import { useRoute } from '@react-navigation/native';
+import { doc, setDoc} from 'firebase/firestore/lite';
+import { db } from "../../firebase"
 
 const Page4 = ({navigation}) => {
   // state for textinput
@@ -17,22 +19,12 @@ const Page4 = ({navigation}) => {
   const user = getAuth()
 
   const saveDataandSwitch = () => {
-        
-    let json= 
-    `{
-      "name": "${responseJson.name}", 
-      "gender": "${responseJson.gender}", 
-      "age": "${responseJson.age}", 
-      "height": "${responseJson.height}",
-      "weight": "${responseJson.weight}",
-      "activity": "${responseJson.activity}",
-      "goal": "${goal}"
-    }`;
 
-    AsyncStorage.setItem(
-        user.currentUser.email,
-        json
-    )
+    setDoc(doc(db,'users',user.currentUser.email),{
+      email:user.currentUser.email, name: responseJson.name, age:responseJson.age, 
+      friends:[], friendRequests:[], gender:responseJson.gender, height:responseJson.height, 
+      weight:responseJson.weight, activity:responseJson.activity, goal:goal
+    });
 
     navigation.replace("HomeScreen")
     navigation.reset({
