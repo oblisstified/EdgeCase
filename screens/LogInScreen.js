@@ -9,6 +9,9 @@ import { Platform,TouchableOpacity } from "react-native";
 import Entypo from 'react-native-vector-icons/Entypo';
 import { Dimensions } from "react-native";
 
+import { doc, setDoc} from 'firebase/firestore/lite';
+import { db } from "../firebase";
+
 const {width,height} = Dimensions.get('window'); 
 
 
@@ -30,7 +33,6 @@ const LogInScreen = ({navigation}) => {
     function changeEye(){
         let eyeArray = ["eye", "eye-with-line"];
         setEye(eyeArray[(eyeArray.indexOf(eye)+1)%2]);
-
     }
 
 
