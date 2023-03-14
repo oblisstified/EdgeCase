@@ -99,7 +99,7 @@ const HomeScreen = ({ navigation }) => {
           height: 90,
           marginTop: -45,
         }}
-      ></LinearGradient>
+      />
       <ScrollView vertical showsVerticalScrollIndicator={false}>
         <View
           style={{
@@ -161,34 +161,11 @@ const HomeScreen = ({ navigation }) => {
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          style={{ height: 250 }}
+          style={{ height: 300 }}
         >
-          <LinearGradient
-            colors={["rgba(0,164,109,0.09)", "transparent"]}
-            style={{
-              position: "absolute",
-              left: 0,
-              right: 0,
-              height: 100,
-              marginTop: 120,
-              top: 0,
-            }}
-          />
           <TouchableOpacity
             onPress={() => navigation.navigate("LogFoodScreen")}
-            style={{
-              height: 250,
-              width: 250,
-              elevation: 2,
-              backgroundColor: "#FFF",
-              marginLeft: 20,
-              marginTop: 20,
-              borderRadius: 15,
-              marginBottom: 10,
-              width: 160,
-              borderRadius: 1,
-              borderColor: "rgba(0,164,109,0.09)",
-            }}
+            style={[styles.touchableWindow, styles.shadowProp]}
           >
             <Image source={require("./images/log-food.png")} />
             <View
@@ -206,16 +183,7 @@ const HomeScreen = ({ navigation }) => {
 
           <TouchableOpacity
             onPress={() => navigation.navigate("LogFoodScreen")}
-            style={{
-              height: 250,
-              elevation: 2,
-              backgroundColor: "#FFF",
-              marginLeft: 20,
-              marginTop: 20,
-              borderRadius: 15,
-              marginBottom: 10,
-              width: 160,
-            }}
+            style={[styles.touchableWindow, styles.shadowProp]}
           >
             <Image source={require("./images/log-food.png")} />
             <View
@@ -231,16 +199,7 @@ const HomeScreen = ({ navigation }) => {
 
           <TouchableOpacity
             onPress={() => navigation.navigate("LogFoodScreen")}
-            style={{
-              height: 250,
-              elevation: 2,
-              backgroundColor: "#FFF",
-              marginLeft: 20,
-              marginTop: 20,
-              borderRadius: 15,
-              marginBottom: 10,
-              width: 160,
-            }}
+            style={[styles.touchableWindow, styles.shadowProp]}
           >
             <Image source={require("./images/log-food.png")} />
             <View
@@ -311,6 +270,177 @@ const HomeScreen = ({ navigation }) => {
             ></View>
           </View>
         </View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={{ height: 300 }}
+        >
+          <TouchableOpacity
+            onPress={() => navigation.navigate("LogFoodScreen")}
+            style={[styles.touchableWindow, styles.shadowProp]}
+          >
+            <Image source={require("./images/analytics.png")} />
+            <View
+              style={{
+                flexDirection: "row",
+                paddingTop: 10,
+                paddingHorizontal: 10,
+              }}
+            >
+              <Text style={{ fontWeight: "bold" }}>
+                Calories-Consumed Graph (per day)
+              </Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate("LogFoodScreen")}
+            style={[styles.touchableWindow, styles.shadowProp]}
+          >
+            <Image source={require("./images/analytics.png")} />
+            <View
+              style={{
+                flexDirection: "row",
+                paddingTop: 10,
+                paddingHorizontal: 10,
+              }}
+            >
+              <Text style={{ fontWeight: "bold" }}>
+                Weight Graph (per month)
+              </Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate("LogFoodScreen")}
+            style={[styles.touchableWindow, styles.shadowProp]}
+          >
+            <Image source={require("./images/analytics.png")} />
+            <View
+              style={{
+                flexDirection: "row",
+                paddingTop: 10,
+                paddingHorizontal: 10,
+              }}
+            >
+              <Text style={{ fontWeight: "bold" }}>Etc. Etc. ...</Text>
+            </View>
+          </TouchableOpacity>
+        </ScrollView>
+
+        <View
+          style={{
+            flexDirection: "row",
+            paddingHorizontal: 20,
+            width: "100%",
+            alignItems: "center",
+          }}
+        >
+          <View style={{ width: "50%" }}>
+            <Text
+              style={{
+                fontWeight: "bold",
+                fontSize: 20,
+                color: "#585a61",
+              }}
+            >
+              Achievements
+            </Text>
+            <View
+              style={{
+                height: 4,
+                backgroundColor: "#ble5d3",
+                width: 115,
+                marginTop: -5,
+              }}
+            ></View>
+          </View>
+          <View style={{ width: "50%", alignItems: "flex-end" }}>
+            <View
+              style={{
+                backgroundColor: "#00a46c",
+                paddingHorizontal: 20,
+                paddingVertical: 5,
+                borderRadius: 15,
+              }}
+            >
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  fontSize: 15,
+                  color: "#FFF",
+                }}
+              >
+                more
+              </Text>
+            </View>
+            <View
+              style={{
+                height: 4,
+                backgroundColor: "#ble5d3",
+                width: 115,
+                marginTop: -5,
+              }}
+            ></View>
+          </View>
+        </View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={{ height: 300 }}
+        >
+          <TouchableOpacity
+            onPress={() => navigation.navigate("LogFoodScreen")}
+            style={[styles.touchableWindow, styles.shadowProp]}
+          >
+            <Image source={require("./images/analytics.png")} />
+            <View
+              style={{
+                flexDirection: "row",
+                paddingTop: 10,
+                paddingHorizontal: 10,
+              }}
+            >
+              <Text style={{ fontWeight: "bold" }}>
+                Number of Medals
+              </Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate("LogFoodScreen")}
+            style={[styles.touchableWindow, styles.shadowProp]}
+          >
+            <Image source={require("./images/analytics.png")} />
+            <View
+              style={{
+                flexDirection: "row",
+                paddingTop: 10,
+                paddingHorizontal: 10,
+              }}
+            >
+              <Text style={{ fontWeight: "bold" }}>
+                Next Achievable Medal
+              </Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => navigation.navigate("LogFoodScreen")}
+            style={[styles.touchableWindow, styles.shadowProp]}
+          >
+            <Image source={require("./images/analytics.png")} />
+            <View
+              style={{
+                flexDirection: "row",
+                paddingTop: 10,
+                paddingHorizontal: 10,
+              }}
+            >
+              <Text style={{ fontWeight: "bold" }}>Etc. Etc. ...</Text>
+            </View>
+          </TouchableOpacity>
+        </ScrollView>
       </ScrollView>
     </View>
   );
@@ -318,4 +448,21 @@ const HomeScreen = ({ navigation }) => {
 
 export default HomeScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  touchableWindow: {
+    height: 250,
+    width: 250,
+    elevation: 2,
+    backgroundColor: "#FFF",
+    marginLeft: 20,
+    marginTop: 20,
+    borderRadius: 15,
+    marginBottom: 10,
+  },
+  shadowProp: {
+    shadowColor: "#171717",
+    shadowOffset: { width: -2, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  },
+});
