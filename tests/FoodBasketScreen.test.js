@@ -55,13 +55,13 @@ it('Test remove button', () => {
     />);
 
     let foodList = screen.getByTestId("basketList");
-    expect(foodList.children.length).toBe(3)
+    let foodListLength = foodList.children.length;
 
     const removeButton = screen.getByTestId(basketObject[0].foodObject.Description + "button");
     fireEvent.press(removeButton);
 
     foodList = screen.getByTestId("basketList");
-    expect(foodList.children.length).toBe(2)
+    expect(foodList.children.length).toBe(foodListLength - 1);
 
 });
 

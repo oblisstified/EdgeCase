@@ -8,11 +8,16 @@ const FoodLogModal = (props) => {
 
     let [amountGrams, setAmountGrams] = useState(0);
 
+    console.log(props.foodDetails)
+    // A little ugly, loads the modal content from preset/list
+    let foodHeader = props.foodDetails.item == undefined ? props.foodDetails[props.foodDetails.length-1]["name"] : props.foodDetails.item["Description"]
+
+
     return (
             <View style={styles.slideUpPanel} testID="foodModal">
                 <View>
                   {/* props.foodDetails contains a json object with all the details about the food shown */}
-                  <Text style={styles.modalText}>{props.foodDetails.item["Description"]}</Text>
+                  <Text style={styles.modalText}>{ foodHeader }</Text>
 
                   {/* button passed in through props to enable the button to hide */}
                   {props.hideButton}
