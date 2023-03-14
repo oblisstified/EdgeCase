@@ -291,7 +291,7 @@ const HomeScreen = ({ navigation }) => {
               }}
             >
               <Text style={{ fontWeight: "bold", textAlign: "center" }}>
-                Calories-Consumed Graph (per day)
+                Calories-Consumed Graph{"\n"}(per day)
               </Text>
             </View>
           </TouchableOpacity>
@@ -309,7 +309,7 @@ const HomeScreen = ({ navigation }) => {
               }}
             >
               <Text style={{ fontWeight: "bold", textAlign: "center" }}>
-                Weight Graph (per month)
+                Weight Graph{"\n"}(per month)
               </Text>
             </View>
           </TouchableOpacity>
