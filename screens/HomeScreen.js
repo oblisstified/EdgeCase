@@ -1,22 +1,9 @@
 import React from "react";
 import "react-native-gesture-handler";
-import {
-  Button,
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  Image,
-  ImageBackground,
-} from "react-native";
-import {
-  TextInput,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native-gesture-handler";
+import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import { getAuth, signOut } from "firebase/auth";
-import BottomBar from "./components/BottomBar";
 
 const HomeScreen = ({ navigation }) => {
   const user = getAuth();
