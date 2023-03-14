@@ -50,11 +50,6 @@ const Leaderboard = ({navigation}) => {
                 let position = 1
                 return x.map(person => [position++,person.name,person.recipes])
             }
-            else{
-                x =  copy.sort((a, b) => b.steps - a.steps);
-                let position = 1
-                return x.map(person => [position++,person.name,person.steps])
-            }
         };
 
     return(

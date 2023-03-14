@@ -53,19 +53,19 @@ const ProfileScreen = ({ route, navigation }) => {
           <CustomText> {userData.height} </CustomText>
         </View>
         <View style={styles.displayInfo}>
-          <CustomText>PlaceHolder:</CustomText>
-          <CustomText> {}</CustomText>
+          <CustomText>Weight:</CustomText>
+          <CustomText> {userData.weight}</CustomText>
         </View>
         <View style={styles.displayInfo}>
-          <CustomText>PlaceHolder:</CustomText>
-          <CustomText> {}</CustomText>
+          <CustomText>Activity:</CustomText>
+          <CustomText> {userData.activity}</CustomText>
         </View>
         <View style={styles.displayInfo}>
-          <CustomText>PlaceHolder:</CustomText>
-          <CustomText> {}</CustomText>
+          <CustomText>Goal:</CustomText>
+          <CustomText> {userData.goal}</CustomText>
         </View>
         <View style={styles.displayInfo}>
-          <CustomText>PlaceHolder:</CustomText>
+          <CustomText>Calorie Goal:</CustomText>
           <CustomText> {}</CustomText>
         </View>
       </ScrollView>

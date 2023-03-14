@@ -58,7 +58,7 @@ const ChallengesViewScreen = ({navigation}) => {
             x = profile.recipes
         }
         else{
-            x = profile.steps
+            x = null;
         }
         if(x>=goal){
             if(completed===true){
