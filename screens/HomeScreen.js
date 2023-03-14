@@ -91,6 +91,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </View>
       </SafeAreaView>
+
       <LinearGradient
         colors={["rgba(0,164,109,0.4)", "transparent"]}
         style={{
@@ -100,6 +101,7 @@ const HomeScreen = ({ navigation }) => {
           marginTop: -45,
         }}
       />
+
       <ScrollView vertical showsVerticalScrollIndicator={false}>
         <View
           style={{
@@ -270,6 +272,7 @@ const HomeScreen = ({ navigation }) => {
             ></View>
           </View>
         </View>
+
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -287,7 +290,7 @@ const HomeScreen = ({ navigation }) => {
                 paddingHorizontal: 10,
               }}
             >
-              <Text style={{ fontWeight: "bold" }}>
+              <Text style={{ fontWeight: "bold", textAlign: "center" }}>
                 Calories-Consumed Graph (per day)
               </Text>
             </View>
@@ -305,7 +308,7 @@ const HomeScreen = ({ navigation }) => {
                 paddingHorizontal: 10,
               }}
             >
-              <Text style={{ fontWeight: "bold" }}>
+              <Text style={{ fontWeight: "bold", textAlign: "center" }}>
                 Weight Graph (per month)
               </Text>
             </View>
@@ -323,7 +326,9 @@ const HomeScreen = ({ navigation }) => {
                 paddingHorizontal: 10,
               }}
             >
-              <Text style={{ fontWeight: "bold" }}>Etc. Etc. ...</Text>
+              <Text style={{ fontWeight: "bold", textAlign: "center" }}>
+                Etc. Etc. ...
+              </Text>
             </View>
           </TouchableOpacity>
         </ScrollView>
@@ -384,6 +389,7 @@ const HomeScreen = ({ navigation }) => {
             ></View>
           </View>
         </View>
+
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -393,7 +399,7 @@ const HomeScreen = ({ navigation }) => {
             onPress={() => navigation.navigate("LogFoodScreen")}
             style={[styles.touchableWindow, styles.shadowProp]}
           >
-            <Image source={require("./images/analytics.png")} />
+            <Image source={require("./images/prize.png")} />
             <View
               style={{
                 flexDirection: "row",
@@ -401,7 +407,7 @@ const HomeScreen = ({ navigation }) => {
                 paddingHorizontal: 10,
               }}
             >
-              <Text style={{ fontWeight: "bold" }}>
+              <Text style={{ fontWeight: "bold", textAlign: "center" }}>
                 Number of Medals
               </Text>
             </View>
@@ -411,7 +417,7 @@ const HomeScreen = ({ navigation }) => {
             onPress={() => navigation.navigate("LogFoodScreen")}
             style={[styles.touchableWindow, styles.shadowProp]}
           >
-            <Image source={require("./images/analytics.png")} />
+            <Image source={require("./images/prize.png")} />
             <View
               style={{
                 flexDirection: "row",
@@ -419,7 +425,7 @@ const HomeScreen = ({ navigation }) => {
                 paddingHorizontal: 10,
               }}
             >
-              <Text style={{ fontWeight: "bold" }}>
+              <Text style={{ fontWeight: "bold", textAlign: "center" }}>
                 Next Achievable Medal
               </Text>
             </View>
@@ -429,7 +435,7 @@ const HomeScreen = ({ navigation }) => {
             onPress={() => navigation.navigate("LogFoodScreen")}
             style={[styles.touchableWindow, styles.shadowProp]}
           >
-            <Image source={require("./images/analytics.png")} />
+            <Image source={require("./images/prize.png")} />
             <View
               style={{
                 flexDirection: "row",
@@ -437,7 +443,9 @@ const HomeScreen = ({ navigation }) => {
                 paddingHorizontal: 10,
               }}
             >
-              <Text style={{ fontWeight: "bold" }}>Etc. Etc. ...</Text>
+              <Text style={{ fontWeight: "bold", textAlign: "center" }}>
+                Etc. Etc. ...
+              </Text>
             </View>
           </TouchableOpacity>
         </ScrollView>
@@ -458,10 +466,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderRadius: 15,
     marginBottom: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
   shadowProp: {
     shadowColor: "#171717",
-    shadowOffset: { width: -2, height: 4 },
+    shadowOffset: { width: -2, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
   },
