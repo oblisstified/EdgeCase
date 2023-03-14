@@ -1,12 +1,18 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
+import { Image } from "react-native";
 import LogInScreen from "../LogInScreen";
+import AllUsersScreen from "../AllUsersScreen";
+import EditProfileScreen from "../EditProfileScreen";
+import FoodBasketScreen from "../FoodBasketScreen";
+import FriendRequestsScreen from "../FriendRequestsScreen";
+import FriendsScreen from "../FriendsScreen";
 import HomeScreen from "../HomeScreen";
 import LogFoodScreen from "../LogFoodScreen";
+import OtherUserProfileScreen from "../OtherUserProfileScreen";
 import ProfileScreen from "../ProfileScreen";
-import AllUsersScreen from "../AllUsersScreen";
-import { Image } from "react-native";
+import BottomBar from "../components/BottomBar";
 
 const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
@@ -28,7 +34,7 @@ const BottomTabNavigator = () => {
         component={HomeScreen}
         options={{
           tabBarLabel: "Home",
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: () => (
             <Image
               source={require("../images/heart-home.png")}
               style={{ height: 30, width: 30 }}
@@ -42,7 +48,7 @@ const BottomTabNavigator = () => {
         component={LogFoodScreen}
         options={{
           tabBarLabel: "Log Food",
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: () => (
             <Image
               source={require("../images/log-food.png")}
               style={{ height: 30, width: 30 }}
@@ -56,7 +62,7 @@ const BottomTabNavigator = () => {
         component={ProfileScreen}
         options={{
           tabBarLabel: "Profile",
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: () => (
             <Image
               source={require("../images/profile.png")}
               style={{ height: 30, width: 30 }}
@@ -70,7 +76,7 @@ const BottomTabNavigator = () => {
         component={AllUsersScreen}
         options={{
           tabBarLabel: "Add Friends",
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: () => (
             <Image
               source={require("../images/add-friends.png")}
               style={{ height: 30, width: 30 }}
@@ -92,6 +98,21 @@ const HomeStackNavigator = () => {
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="LogInScreen" component={LogInScreen} />
       <Stack.Screen name="HomeScreen" component={BottomTabNavigator} />
+      <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+      <Stack.Screen name="LogFoodScreen" component={LogFoodScreen} />
+      <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
+      <Stack.Screen name="BottomBar" component={BottomBar} />
+      <Stack.Screen name="AllUsersScreen" component={AllUsersScreen} />
+      <Stack.Screen
+        name="OtherUserProfileScreen"
+        component={OtherUserProfileScreen}
+      />
+      <Stack.Screen
+        name="FriendRequestsScreen"
+        component={FriendRequestsScreen}
+      />
+      <Stack.Screen name="FriendsScreen" component={FriendsScreen} />
+      <Stack.Screen name="FoodBasketScreen" component={FoodBasketScreen} />
     </Stack.Navigator>
   );
 };
