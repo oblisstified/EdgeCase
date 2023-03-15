@@ -3,7 +3,6 @@ import 'react-native-gesture-handler';
 import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 import BottomBar from "./components/BottomBar";
 import {TextInput } from "react-native-gesture-handler";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getAuth } from 'firebase/auth'
 import { db } from "../firebase";
 import {ref, set,onValue,child ,get} from  'firebase/database';
@@ -33,10 +32,10 @@ const OtherUserProfileScreen = ({route, navigation}) => {
     return(
         <View>
             <Text>{email}'s profile</Text>
-            <Text>{userData.name}</Text>
-            <Text>{userData.gender}</Text>
-            <Text>{userData.height}</Text>
-            <Text>{userData.age}</Text>
+            <Text>name: {userData.name}</Text>
+            <Text>gender: {userData.gender}</Text>
+            <Text>height: {userData.height}</Text>
+            <Text>age: {userData.age}</Text>
             {/* add some other features that people would need to know */}
             <BottomBar />
         </View>

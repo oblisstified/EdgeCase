@@ -1,6 +1,6 @@
 import React from "react";
 import 'react-native-gesture-handler';
-import { Button, Dimensions, StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native';
+import { Button, Dimensions, StyleSheet, Text, View, KeyboardAvoidingView, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const WINDOW_HEIGHT = Dimensions.get('window').height;
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         height: 40,
         left: 0, 
-        top: WINDOW_HEIGHT - 120, 
+        top: WINDOW_HEIGHT - 160, 
         width: "100%",
     }
 })
