@@ -1,21 +1,37 @@
 import { LineChart } from 'react-native-chart-kit';
-import React from 'react';
-import { View } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text } from 'react-native';
 
+import { getDataArray } from '../../utils/analytics'
+import { getAuth } from 'firebase/auth'
 
-
-const data = {
-  labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-  datasets: [
-    {
-      data: [2500, 2200, 1900, 2000, 1800, 2700, 10000],
-      color: () => '#00a46c',
-      strokeWidth: 2,
-    },
-  ],
-};
 
 const BazierLineChart = () => {
+
+  let [dataList, setDataList] = useState([])
+
+  const email = getAuth().currentUser.email;
+  const today = (new Date(Date.now())).toDateString();
+  
+  getDataArray(email, today, 7, "Protein").then((info) => setDataList(info))
+
+  let data = {
+    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    datasets: [
+      {
+        data: dataList,
+        color: () => '#00a46c',
+        strokeWidth: 2,
+      },
+    ],
+  };
+  
+  if(dataList.length == 0){
+    return(
+      <Text>Loading Data....</Text>
+    )
+  }
+
   return (
     <View style={{ backgroundColor: 'white' }}>
       <LineChart
