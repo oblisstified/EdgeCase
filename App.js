@@ -15,6 +15,7 @@ import Page3 from './screens/build-profile/Page3';
 import Page4 from './screens/build-profile/Page4';
 import CommunityScreen from './screens/CommunityScreen';
 import CommunityFeed from './screens/CommunityFeed';
+import ViewFriendsScreen from './screens/ViewFriendsScreen';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -39,6 +40,7 @@ export default function App() {
         <Stack.Screen name="ChallengesViewScreen" component={ChallengesViewScreen} />
         <Stack.Screen name="CommunityScreen" component={CommunityScreen} />
         <Stack.Screen name="CommunityFeed" component={CommunityFeed} />
+        <Stack.Screen name="ViewFriendsScreen" component={ViewFriendsScreen} />
 
       </Stack.Navigator>
     </NavigationContainer>
