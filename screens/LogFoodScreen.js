@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import 'react-native-gesture-handler';
 import { StyleSheet, Text, View, Button, ScrollView, Modal, Touchable, TouchableOpacity, DeviceEventEmitter } from 'react-native';
 import BottomBar from "./components/BottomBar";
-import { findFoodObjects, findPresetObjects } from "../utils/searcher";
+
 import { FlatList, TextInput } from "react-native-gesture-handler";
 
 import { getAuth } from 'firebase/auth'
@@ -10,9 +10,9 @@ import FoodView from "./components/FoodView"
 import FoodLogModal from "./components/FoodLogModal";
 import { useNavigation } from "@react-navigation/native";
 
-import { db } from "../firebase";
-import {ref, set,onValue,child ,get} from  'firebase/database';
-import { collection, getDocs, updateDoc, doc,getDoc, setDoc } from 'firebase/firestore/lite';
+import { findFoodObjects, findPresetObjects } from "../utils/searcher";
+import { saveMeal } from "../utils/saver";
+
 
 const LogFoodScreen = () => {
     const nav = useNavigation();
@@ -27,9 +27,10 @@ const LogFoodScreen = () => {
     let [showPresets, setShowPresets] = useState(false)
     let [infoModal, setInfoModal] = useState(false);
 
-    let [basket, setBasket] = useState([]);
+    let [basket, setBasket] = useState([]); 
+    let [saved, setSaved] = useState(false);
     
-    let basketSaved = false;
+    let saving = false;
 
 
     // Remove basket on basket screen triggers and event here, persisting an item removal
@@ -39,36 +40,64 @@ const LogFoodScreen = () => {
     DeviceEventEmitter.addListener("event.saveBasket", (eventData) => {setBasket(JSON.parse(eventData)); saveBasket()});
 
     
-    async function saveBasket(){
-        try {
-            if(user && !basketSaved && basket.length > 0){
-                let email = user["email"];
-                let userRef = doc(db, 'users', email);
-                const userSnapshot = await getDoc(userRef);
-                const userData = userSnapshot.data();
-                let newMealList = await userData.mealList;
+    // async function saveBasket(item){
+    //     let saveItem = (item == undefined ? basket : item);
 
-                if(newMealList == undefined){
-                    newMealList = []
-                }
-                newMealList.push({meal : basket});
 
-                if(!basketSaved){
-                    basketSaved = true; 
-                    await updateDoc(userRef, {mealList:newMealList})
-                    .then(() => setBasket([]))
-                }
-            }
-          } 
-          catch (error) {
-            console.error(error);
-          }
-    }
+    //     try {
+    //         if(user && !basketSaved && saveItem.length > 0){
+    //             let email = user["email"];
+    //             let userRef = doc(db, 'users', email);
+    //             const userSnapshot = await getDoc(userRef);
+    //             const userData = userSnapshot.data();
+    //             let newMealList = await userData.mealList;
+
+    //             if(newMealList == undefined){
+    //                 newMealList = []
+    //             }
+
+    //             let date = new Date(Date.now());
+    //             let dateString = date.toDateString()
+                
+    //             console.log(item);
+    //             let metaDataObject;
+    //             // create the metadata for this meal
+    //             if(item){
+    //                 // this denotes the fact that it was called from a preset
+    //                 metaDataObject = {
+    //                     date: dateString,
+    //                     isPreset: true,
+    //                     presetName: item[0]["metaData"]["presetName"]
+    //                 }
+    //             } else {
+    //                 metaDataObject = {
+    //                     date: dateString,
+    //                     isPreset: false,
+    //                     presetName: ""
+    //                 }
+    //             }
+
+    //             newMealList.push({
+    //                 meal : saveItem,
+    //                 metaDate : metaDataObject
+    //             });
+
+    //             if(!basketSaved){
+    //                 basketSaved = true; 
+    //                 await updateDoc(userRef, {mealList:newMealList})
+    //                 .then(() => {setBasket([]); console.log("suc")})
+    //             }
+    //         }
+    //       } 
+    //       catch (error) {
+    //         console.error(error);
+    //       }
+    // }
 
 
     function addToBasket(food){
-        // this ugliness is to ensure no duplicate items are added
 
+        // this ugliness is to ensure no duplicate items are added
         let temp = []
         let isContained = false;
         let addVal = food;
@@ -105,26 +134,37 @@ const LogFoodScreen = () => {
         } catch(error){
             console.log(error)
         }
-        
 
         setPresetMatches(presets)
     }
 
-    async function saveItem(item){
-        setBasket(item);
-        saveBasket();
+    async function saveItem(foodObject, isPreset){
+        const email = user.email
+        
+        let success = false;
+        // if(saving) return;
+
+        console.log(foodObject)
+        saving = true;
+        if(!isPreset){
+            if(basket.length == 0) return;
+
+            success = saveMeal(basket, email, isPreset);
+        } else {
+            success = saveMeal(foodObject, email, isPreset);
+        }
     }
 
     return(
         <View style={{flex:1, alignContent: "center", justifyContent: "center"}}>
-
             {/* search bar */}
             <Text>Food Screen</Text>
             <TextInput testID="foodSearchBar" onChangeText={ (text) => {setSearchValue(text); getMatches()} } />
             <Button testID="foodSearch" title="search" onPress={ getMatches } />
-            <Button title="search custom presets" onPress={() => {setShowPresets(true);getPresetMatches()}} />
+            <Button title="search custom presets" onPress={() => {setBasket([]); setShowPresets(true); getPresetMatches()}} />
             <Button title="View Basket" onPress={() => nav.push("FoodBasketScreen", {currentBasket: basket})} />
             <Text>{basket.length} items</Text>
+            {saved && <Text style={{color:"green"}}>Successfully saved!</Text>}
 
             {/* list of matches */}
             {!showPresets &&
@@ -149,15 +189,15 @@ const LogFoodScreen = () => {
             {showPresets &&
                 <FlatList 
                     data = { presetMatches }
-                    keyExtractor={(item) => (JSON.stringify(item.preset))}
+                    keyExtractor={(item) => (JSON.stringify(item))}
                     renderItem={(item) => (
                         <View style={{flex:1, flexDirection:"column"}}>
                             <View style={{alignSelf:"flex-start"}}>
-                                <Text>{ JSON.stringify(item.item.preset[item.item.preset.length - 1]["name"]) }</Text>
+                                <Text>{ item.item.metaData.presetName }</Text>
                             </View>
                             <View>
                                 <View style={{flexDirection:"row", flexGrow:2, alignItems:"space-between", alignSelf: "center"}}>
-                                    <Button title="Add" onPress={() => {saveItem(item.item.preset)}} />
+                                    <Button title="Add" onPress={() => {saveItem(item.item, true)}} />
                                 </View>
                             </View>
                         </View>
@@ -165,7 +205,6 @@ const LogFoodScreen = () => {
                     }
 
                 />
-
             }
 
             {/* Popup for logging modal */}
