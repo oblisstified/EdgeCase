@@ -14,11 +14,6 @@ import Page2 from './screens/build-profile/Page2';
 import Page3 from './screens/build-profile/Page3';
 import Page4 from './screens/build-profile/Page4';
 import CommunityScreen from './screens/CommunityScreen';
-import Friends from './screens/feeds/Friends';
-import GainMuscle from './screens/feeds/GainMuscle';
-import Keto from './screens/feeds/Keto';
-import Vegan from './screens/feeds/Vegan';
-import WeightLoss from './screens/feeds/WeightLoss';
 import CommunityFeed from './screens/CommunityFeed';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
@@ -43,11 +38,6 @@ export default function App() {
         <Stack.Screen name="SocialScreen" component={SocialScreen} />
         <Stack.Screen name="ChallengesViewScreen" component={ChallengesViewScreen} />
         <Stack.Screen name="CommunityScreen" component={CommunityScreen} />
-        <Stack.Screen name="FriendsFeed" component={Friends} />
-        <Stack.Screen name="GainMuscleFeed" component={GainMuscle} />
-        <Stack.Screen name="KetoFeed" component={Keto} />
-        <Stack.Screen name="VeganFeed" component={Vegan} />
-        <Stack.Screen name="WeightLossFeed" component={WeightLoss} />
         <Stack.Screen name="CommunityFeed" component={CommunityFeed} />
 
       </Stack.Navigator>

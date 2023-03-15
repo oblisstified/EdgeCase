@@ -16,43 +16,98 @@ const CommunityFeed = ({route, navigation }) => {
   const [posts, setPosts] = useState([]);
 
   const communityId = route.params.communityId;
+  const user = getAuth().currentUser;
 
   useEffect(() => {
     async function getData () {
-    // Get all posts for the specified community
-
-    const postsQuery =  query(
-        collection(db, 'posts'),
-        where('communityId', '==', communityId),
-    );
-    const postsRef = await getDocs(postsQuery)
-    const allPosts = postsRef.docs.map(doc => doc.data());
-
-    /* const postCol = doc(db, "posts", communityId)
-    const postSnapshot = await getDoc(postCol)
-    const postList = postSnapshot.docs.map(doc => doc.data()); */
-    setPosts(allPosts);
-    console.log(communityId);
-    console.log(postList);
+      try {
+      // Get all posts for the specified community
+      
+      const postsQuery =  query(
+          collection(db, 'posts'),
+          where('communityId', '==', communityId),
+      );
+      const postsRef = await getDocs(postsQuery)
+      const allPosts = postsRef.docs.map(doc => doc.data());
+      setPosts(allPosts);
+      console.log(communityId);
+      console.log(allPosts);
+      } catch (error) {
+          console.log(error);
+      }
     }
 
     getData();
   }, []);
       
+  const onPressAddPost = ({item}) => {
+    return(<Challenge challenge={item.challenge} goal={item.goal} index={item.id}/>)
+};
 
   return (
+    <View style={styles.container}>
     <View>
-      <Text>{communityId} Feed</Text>
+      <Text style={styles.heading}>{communityId} Feed</Text>
       {posts.map((post) => (
-        <View key={post.id}>
-          <Text>{post.userId}</Text>
-          <Text>{post.content}</Text>
-          <Text>{post.createdAt}</Text>
+        <View key={post.id} style={styles.post}>
+          <Text style={styles.username}>{post.userId}</Text>
+          <Text style={styles.content}>{post.content}</Text>
+          <Text style={styles.time}>{post.createdAt}</Text>
         </View>
       ))}
+      <TouchableOpacity style={styles.addButton} onPress={onPressAddPost}>
+        <Text style={styles.addButtonText}>Add Post</Text>
+      </TouchableOpacity>
       <BottomBar />
+    </View>
     </View>
   );
 }
 
 export default CommunityFeed;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  heading: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 20,
+    paddingHorizontal: 10,
+  },
+  post: {
+    flexDirection: 'column',
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  username: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  content: {
+    fontSize: 14,
+    marginBottom: 10,
+  },
+  time: {
+    fontSize: 12,
+    color: '#999',
+  },
+  addButton: {
+    backgroundColor: '#007AFF',
+    padding: 10,
+    borderRadius: 5,
+    margin: 10,
+  },
+  addButtonText: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+})
