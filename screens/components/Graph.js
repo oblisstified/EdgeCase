@@ -13,7 +13,7 @@ const BazierLineChart = () => {
   const email = getAuth().currentUser.email;
   const today = (new Date(Date.now())).toDateString();
   
-  getDataArray(email, today, 7, "Protein").then((info) => setDataList(info))
+  getDataArray(email, today, 7, "Calories").then((info) => setDataList(info))
 
   let data = {
     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],

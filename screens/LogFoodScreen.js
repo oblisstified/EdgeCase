@@ -39,62 +39,6 @@ const LogFoodScreen = () => {
     // Save button on basket screen triggers an event here telling the program to save the basket remotely
     DeviceEventEmitter.addListener("event.saveBasket", (eventData) => {setBasket(JSON.parse(eventData)); saveBasket()});
 
-    
-    // async function saveBasket(item){
-    //     let saveItem = (item == undefined ? basket : item);
-
-
-    //     try {
-    //         if(user && !basketSaved && saveItem.length > 0){
-    //             let email = user["email"];
-    //             let userRef = doc(db, 'users', email);
-    //             const userSnapshot = await getDoc(userRef);
-    //             const userData = userSnapshot.data();
-    //             let newMealList = await userData.mealList;
-
-    //             if(newMealList == undefined){
-    //                 newMealList = []
-    //             }
-
-    //             let date = new Date(Date.now());
-    //             let dateString = date.toDateString()
-                
-    //             console.log(item);
-    //             let metaDataObject;
-    //             // create the metadata for this meal
-    //             if(item){
-    //                 // this denotes the fact that it was called from a preset
-    //                 metaDataObject = {
-    //                     date: dateString,
-    //                     isPreset: true,
-    //                     presetName: item[0]["metaData"]["presetName"]
-    //                 }
-    //             } else {
-    //                 metaDataObject = {
-    //                     date: dateString,
-    //                     isPreset: false,
-    //                     presetName: ""
-    //                 }
-    //             }
-
-    //             newMealList.push({
-    //                 meal : saveItem,
-    //                 metaDate : metaDataObject
-    //             });
-
-    //             if(!basketSaved){
-    //                 basketSaved = true; 
-    //                 await updateDoc(userRef, {mealList:newMealList})
-    //                 .then(() => {setBasket([]); console.log("suc")})
-    //             }
-    //         }
-    //       } 
-    //       catch (error) {
-    //         console.error(error);
-    //       }
-    // }
-
-
     function addToBasket(food){
 
         // this ugliness is to ensure no duplicate items are added
@@ -115,7 +59,6 @@ const LogFoodScreen = () => {
         isContained || temp.push(addVal)
         setBasket(temp)
     }
-
 
     function getMatches(){
         setShowPresets(false);

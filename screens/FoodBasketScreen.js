@@ -17,7 +17,7 @@ const FoodBasketScreen = props => {
     const user = auth.currentUser;
 
     const nav = useNavigation();
-    // verbose inside te
+
     let [food, setFood] = useState((props.route && props.route.params.currentBasket) || props.currentBasket)
     let [description, setDescription] = useState("")
     let [presetNameError, setPresetNameError] = useState(false)
@@ -52,53 +52,6 @@ const FoodBasketScreen = props => {
 
         createPreset(food, description).then(() => setPresetSaved(true));
     }
-
-    // async function savePreset(){
-    //     if(description.length == 0){
-    //         setPresetNameError(true);
-    //         return;
-    //     };
-    //     try{
-    //         // prevent duplicate entries
-    //         if(saving) return;
-    //         saving = true;
-
-    //         let presetRef = doc(db, 'presets', "presetList");
-    //         const presetSnapshot = await getDoc(presetRef);
-    //         const data = presetSnapshot.data();
-    //         let newPresets = await data.presets;
-
-    //         if(newPresets == undefined){
-    //             newPresets = []
-    //         }
-
-    //         let date = new Date(Date.now());
-
-    //         metaDataObject = {
-    //             date: dateString,
-    //             isPreset: true,
-    //             presetName: description
-    //         }
-
-    //         let temp = food;
-    //         food.push(labelDate);
-    //         food.push(labelName);
-
-    //         newPresets.push({
-    //             preset : temp,
-    //             metaData: metaDataObject
-    //         });
-
-    //         console.log(temp.name)
-
-    //         await updateDoc(presetRef, {presets:newPresets})
-    //         .then(() => {setPresetSaved(true); setFood([]); nav.pop()})
-
-    //     } catch (error){
-    //         console.log(error)
-    //     }
-
-    // }
 
     return (
         <View testID="basketList">
