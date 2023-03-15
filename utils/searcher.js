@@ -1,6 +1,10 @@
 import { descriptions } from "../resources/foodIndexes"
 import { getDescription } from "../resources/foodDetails"
 
+import { db } from "../firebase";
+import {ref, set,onValue,child ,get} from  'firebase/database';
+import { collection, getDocs, updateDoc, doc,getDoc, setDoc } from 'firebase/firestore/lite';
+
 // case insensetive regex match for the start of food descriptions
 function findFoodObjects(food_search){
     let indexList = [];
@@ -22,4 +26,31 @@ function findFoodObjects(food_search){
     return foodObjectList
 }
 
-export { findFoodObjects }
+async function findPresetObjects(food_search){
+    let matches = []
+
+    console.log("here")
+    try {
+        let userRef = doc(db, 'presets', "presetList");
+        let presetList = await getDoc(userRef);
+        let presetData = presetList.data().presets;
+
+        var strRegExPattern = '^'+food_search+'.*'; 
+        var re = new RegExp(strRegExPattern, 'i');
+
+        for(let i = 0; i < presetData.length; i++){
+            for(var key in presetData[i]["preset"]){
+                if(presetData[i]["preset"][key]["name"]){
+                    matches.push(presetData[i])
+                }
+            }
+        }
+
+    } catch (error) {
+        console.log(error)
+    }
+    return matches;
+    
+}
+
+export { findFoodObjects, findPresetObjects }
