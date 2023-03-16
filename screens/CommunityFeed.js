@@ -58,8 +58,8 @@ const CommunityFeed = ({route, navigation }) => {
       <TouchableOpacity style={styles.addButton} onPress={onPressAddPost}>
         <Text style={styles.addButtonText}>Add Post</Text>
       </TouchableOpacity>
-      <BottomBar />
     </View>
+    <BottomBar />
     </View>
   );
 }
