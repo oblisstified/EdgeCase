@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "react-native-gesture-handler";
-import { StyleSheet, Text, View, Button, ScrollView } from "react-native";
+import { StyleSheet, Text, View, Button, ScrollView,TouchableOpacity } from "react-native";
 import BottomBar from "./components/BottomBar";
 import { TextInput } from "react-native-gesture-handler";
 import { getAuth } from "firebase/auth";
 import { db } from "../firebase";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {
   collection,
   getDocs,
@@ -36,6 +37,10 @@ const ProfileScreen = ({ route, navigation }) => {
   return (
     <View>
       <ScrollView style={{ maxHeight: "90%" }}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.replace("MedalsScreen")}>
+            <Icon name="medal" size={24} color="#000" />
+            <Text style={styles.buttonText}>View Medals</Text>
+      </TouchableOpacity>
         <View style={styles.displayInfo}>
           <CustomText>Name:</CustomText>
           <CustomText> {userData.name} </CustomText>
@@ -93,5 +98,17 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 15,
     borderColor: "purple",
+  },
+  button: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingBottom: 8, 
+    paddingTop: 15,
+  },
+  buttonText: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#000",
   },
 });

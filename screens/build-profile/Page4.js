@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import 'react-native-gesture-handler';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { getAuth } from "firebase/auth"
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TouchableOpacity } from "react-native";
 import { useRoute } from '@react-navigation/native';
 import { doc, setDoc} from 'firebase/firestore/lite';

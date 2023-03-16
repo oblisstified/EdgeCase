@@ -29,7 +29,6 @@ function findFoodObjects(food_search){
 async function findPresetObjects(food_search){
     let matches = []
 
-    console.log("here")
     try {
         let userRef = doc(db, 'presets', "presetList");
         let presetList = await getDoc(userRef);
@@ -39,10 +38,9 @@ async function findPresetObjects(food_search){
         var re = new RegExp(strRegExPattern, 'i');
 
         for(let i = 0; i < presetData.length; i++){
-            for(var key in presetData[i]["preset"]){
-                if(presetData[i]["preset"][key]["name"]){
-                    matches.push(presetData[i])
-                }
+            const matchStr = presetData[i]["metaData"]["presetName"]
+            if(re.test(matchStr)){
+                matches.push(presetData[i])
             }
         }
 

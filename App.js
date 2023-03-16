@@ -8,10 +8,6 @@ import ProfileScreen from './screens/ProfileScreen';
 import LogFoodScreen from './screens/LogFoodScreen';
 import EditProfileScreen from './screens/EditProfileScreen';
 
-import SocialScreen from './screens/SocialScreen';
-import ChallengesViewScreen from './screens/ChallengesViewScreen';
-import Leaderboard from './screens/Leaderboard';
-import MedalsScreen from './screens/MedalsScreen';
 import Page1 from './screens/build-profile/Page1';
 import Page2 from './screens/build-profile/Page2';
 import Page3 from './screens/build-profile/Page3';
@@ -23,6 +19,13 @@ import AllUsersScreen from './screens/AllUsersScreen';
 import OtherUserProfileScreen from './screens/OtherUserProfileScreen';
 import FriendRequestsScreen from './screens/FriendRequestsScreen';
 import FriendsScreen from './screens/FriendsScreen';
+
+import SocialScreen from './screens/SocialScreen';
+import ChallengesViewScreen from './screens/ChallengesViewScreen';
+import Leaderboard from './screens/Leaderboard';
+import MedalsScreen from './screens/MedalsScreen';
+import CommunityScreen from './screens/CommunityScreen';
+import CommunityFeed from './screens/CommunityFeed';
 
 const Stack = createStackNavigator();
 LogBox.ignoreLogs(['Warning: Failed prop type: Invalid prop `textStyle` of type `array` supplied to `Cell`, expected `object`.']);
@@ -41,10 +44,6 @@ export default function App() {
         <Stack.Screen name="Page2" component={Page2} />
         <Stack.Screen name="Page3" component={Page3} />
         <Stack.Screen name="Page4" component={Page4} />
-        <Stack.Screen name="SocialScreen" component={SocialScreen} />
-        <Stack.Screen name="ChallengesViewScreen" component={ChallengesViewScreen} />
-        <Stack.Screen name="Leaderboard" component={Leaderboard} />
-        <Stack.Screen name="MedalsScreen" component={MedalsScreen} />
           
         <Stack.Screen name="BottomBar" component={BottomBar} />
         <Stack.Screen name="AllUsersScreen" component={AllUsersScreen} />
@@ -52,6 +51,13 @@ export default function App() {
         <Stack.Screen name = "FriendRequestsScreen" component={FriendRequestsScreen}/>
         <Stack.Screen name = "FriendsScreen" component={FriendsScreen}/>
         <Stack.Screen name = "FoodBasketScreen" component={FoodBasketScreen}/>
+
+        <Stack.Screen name="SocialScreen" component={SocialScreen} />
+        <Stack.Screen name="ChallengesViewScreen" component={ChallengesViewScreen} />
+        <Stack.Screen name="Leaderboard" component={Leaderboard} />
+        <Stack.Screen name="MedalsScreen" component={MedalsScreen} />
+        <Stack.Screen name="CommunityScreen" component={CommunityScreen} />
+        <Stack.Screen name="CommunityFeed" component={CommunityFeed} />
       </Stack.Navigator>
     </NavigationContainer>
   );

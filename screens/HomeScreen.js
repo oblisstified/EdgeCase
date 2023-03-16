@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import 'react-native-gesture-handler';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { getAuth, signOut } from 'firebase/auth'
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import BottomBar from './components/BottomBar'
+import BazierLineChart from './components/Graph'
+
+
 
 const HomeScreen = ({navigation}) => {
     const user = getAuth();
@@ -19,8 +21,6 @@ const HomeScreen = ({navigation}) => {
         setProfile(JSON.parse(result))
     }
 
-    AsyncStorage.getItem(user.currentUser.email).then((result) => renderProfile(result));
-
     return(
         <View style={{flex:1}}>
             <View>
@@ -28,6 +28,11 @@ const HomeScreen = ({navigation}) => {
                 <Text>Welcome {user.currentUser.email} </Text>
                 <Button title="logout" onPress={handleSignOut} />
             </View>
+
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <BazierLineChart />
+                </View>
+
             <BottomBar navigation={navigation}/>            
         </View>
     )
