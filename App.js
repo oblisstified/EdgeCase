@@ -17,6 +17,11 @@ import OtherUserProfileScreen from './screens/OtherUserProfileScreen';
 import FriendRequestsScreen from './screens/FriendRequestsScreen';
 import FriendsScreen from './screens/FriendsScreen';
 
+import SocialScreen from './screens/SocialScreen';
+import ChallengesViewScreen from './screens/ChallengesViewScreen';
+import CommunityScreen from './screens/CommunityScreen';
+import CommunityFeed from './screens/CommunityFeed';
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -34,6 +39,10 @@ export default function App() {
         <Stack.Screen name = "FriendRequestsScreen" component={FriendRequestsScreen}/>
         <Stack.Screen name = "FriendsScreen" component={FriendsScreen}/>
         <Stack.Screen name = "FoodBasketScreen" component={FoodBasketScreen}/>
+        <Stack.Screen name="SocialScreen" component={SocialScreen} />
+        <Stack.Screen name="ChallengesViewScreen" component={ChallengesViewScreen} />
+        <Stack.Screen name="CommunityScreen" component={CommunityScreen} />
+        <Stack.Screen name="CommunityFeed" component={CommunityFeed} />
       </Stack.Navigator>
     </NavigationContainer>
   );

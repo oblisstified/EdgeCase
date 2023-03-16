@@ -29,7 +29,8 @@ const FriendsScreen = ({route, navigation}) => {
 
     return(
         <View>
-            <Text>friends:</Text>
+            <Text>You have {friendsList.length} friends</Text>
+            <Text>Friends:</Text>
            <FlatList
                 data={friendsList}
                 keyExtractor={(item) => item.email}
