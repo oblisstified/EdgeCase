@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "react-native-gesture-handler";
-import { StyleSheet, Text, View, Button, ScrollView } from "react-native";
+import { StyleSheet, Text, View, Button, ScrollView,TouchableOpacity } from "react-native";
 import BottomBar from "./components/BottomBar";
 import { TextInput } from "react-native-gesture-handler";
 import { getAuth } from "firebase/auth";
 import { db } from "../firebase";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {
   collection,
   getDocs,
@@ -32,10 +33,14 @@ const ProfileScreen = ({ route, navigation }) => {
   function CustomText(props) {
     return <Text style={styles.textStyle}>{props.children}</Text>;
   }
-
+  
   return (
     <View>
       <ScrollView style={{ maxHeight: "90%" }}>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.replace("MedalsScreen")}>
+            <Icon name="medal" size={24} color="#000" />
+            <Text style={styles.buttonText}>View Medals</Text>
+      </TouchableOpacity>
         <View style={styles.displayInfo}>
           <CustomText>Name:</CustomText>
           <CustomText> {userData.name} </CustomText>
@@ -53,19 +58,19 @@ const ProfileScreen = ({ route, navigation }) => {
           <CustomText> {userData.height} </CustomText>
         </View>
         <View style={styles.displayInfo}>
-          <CustomText>PlaceHolder:</CustomText>
-          <CustomText> {}</CustomText>
+          <CustomText>Weight:</CustomText>
+          <CustomText> {userData.weight}</CustomText>
         </View>
         <View style={styles.displayInfo}>
-          <CustomText>PlaceHolder:</CustomText>
-          <CustomText> {}</CustomText>
+          <CustomText>Activity:</CustomText>
+          <CustomText> {userData.activity}</CustomText>
         </View>
         <View style={styles.displayInfo}>
-          <CustomText>PlaceHolder:</CustomText>
-          <CustomText> {}</CustomText>
+          <CustomText>Goal:</CustomText>
+          <CustomText> {userData.goal}</CustomText>
         </View>
         <View style={styles.displayInfo}>
-          <CustomText>PlaceHolder:</CustomText>
+          <CustomText>Calorie Goal:</CustomText>
           <CustomText> {}</CustomText>
         </View>
       </ScrollView>
@@ -93,5 +98,17 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 15,
     borderColor: "purple",
+  },
+  button: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingBottom: 8, 
+    paddingTop: 15,
+  },
+  buttonText: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#000",
   },
 });
