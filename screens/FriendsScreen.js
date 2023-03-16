@@ -29,6 +29,7 @@ const FriendsScreen = ({route, navigation}) => {
 
     return(
         <View>
+        <View >
             <Text>You have {friendsList.length} friends</Text>
             <Text>Friends:</Text>
            <FlatList
@@ -40,7 +41,8 @@ const FriendsScreen = ({route, navigation}) => {
                     </View>
                 )}
             />
-           <BottomBar />  
+        </View>
+        <BottomBar /> 
         </View>
     )
 }
