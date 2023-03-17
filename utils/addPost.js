@@ -29,31 +29,26 @@ async function savePost(email, postBody) {
       }
 }
 
-async function createPost(saveObject, presetName){
-    const  dateString = (new Date(Date.now())).toDateString();
+async function createPost(saveObject){
 
-    const metaDataObject = {
-        date: dateString,
-        presetName: presetName
-    }
+    const  dateString = (new Date(Date.now())).toDateString();
 
     try{
         // pull relevant references
-        let presetRef = doc(db, 'presets', "presetList");
-        const presetSnapshot = await getDoc(presetRef);
-        const data = presetSnapshot.data();
-        let newPresets = await data.presets;
+        let postRef = doc(db, 'post', "postList");
+        const postSnapshot = await getDoc(postRef);
+        const data = postSnapshot.data();
+        let newPosts = await data.post;
 
-        if(newPresets == undefined){
-            newPresets = []
+        if(newPosts == undefined){
+            newPosts = []
         }
 
-        newPresets.push({
-            preset : saveObject,
-            metaData: metaDataObject
+        newPosts.push({
+            post : saveObject,
         });
 
-        await updateDoc(presetRef, {presets:newPresets})
+        await updateDoc(postRef, {post:newPosts})
         .then(() => {return true;})
 
     } catch (error){
@@ -63,4 +58,4 @@ async function createPost(saveObject, presetName){
 
 }
 
-export { saveMeal, createPreset }
+export { savePost, createPost }

@@ -1,41 +1,9 @@
 import { db } from "../firebase";
 import { collection, getDocs, updateDoc, doc,getDoc, setDoc } from 'firebase/firestore/lite';
-/**
- * 
- * @param {*} saveObject 
- * ===============================
- * MealList is a list of all saveObjects'/mealObjects (used interchangably) ever eaten by the user
- * SaveObject structure:
- * {
- *  meal: [{
- *      foodObject: {
-                Decription: "Ingredient 2",
-                Calories: 0,
-                ect....
-*           },
-        weight: 12                
- *      },
- *      foodObject: {
-                Decription: "Ingredient 1",
-                Calories: 0,
-                ect....
-*           },
-        weight: 12     
- * ]
- *  metaData: {
- *      date:
- *      isPreset:
- *      presetName:
- *  }
- * }
- * 
- * @param {*} email 
- * @param {*} isPreset 
- * @returns 
- */
 
 
-async function savePost(saveObject, email, isPreset){
+
+async function saveMeal(saveObject, email, isPreset){
     console.log(saveObject)
     if(!saveObject || !email) return false;
     
@@ -79,26 +47,31 @@ async function savePost(saveObject, email, isPreset){
     
 }
 
-async function createPost(saveObject){
+async function createPreset(saveObject, presetName){
     const  dateString = (new Date(Date.now())).toDateString();
 
+    const metaDataObject = {
+        date: dateString,
+        presetName: presetName
+    }
 
     try{
         // pull relevant references
-        let presetRef = doc(db, 'posts', "postList");
-        const postSnapshot = await getDoc(postRef);
-        const data = postSnapshot.data();
-        let newPosts = await data.presets;
+        let presetRef = doc(db, 'presets', "presetList");
+        const presetSnapshot = await getDoc(presetRef);
+        const data = presetSnapshot.data();
+        let newPresets = await data.presets;
 
-        if(newPosts == undefined){
-            newPosts = []
+        if(newPresets == undefined){
+            newPresets = []
         }
 
-        newPosts.push({
-            post : saveObject,
+        newPresets.push({
+            preset : saveObject,
+            metaData: metaDataObject
         });
 
-        await updateDoc(postRef, {posts:newPosts})
+        await updateDoc(presetRef, {presets:newPresets})
         .then(() => {return true;})
 
     } catch (error){
@@ -108,4 +81,4 @@ async function createPost(saveObject){
 
 }
 
-export { savePost, createPost }
+export { saveMeal, createPreset }
