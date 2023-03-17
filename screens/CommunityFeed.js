@@ -46,18 +46,22 @@ const CommunityFeed = ({route, navigation }) => {
 
   return (
     <View style={styles.container}>
+        
     <View>
-      <Text style={styles.heading}>{communityId} Feed</Text>
-      {posts.map((post) => (
-        <View key={post.id} style={styles.post}>
-          <Text style={styles.username}>{post.userId}</Text>
-          <Text style={styles.content}>{post.content}</Text>
-          <Text style={styles.time}>{post.createdAt}</Text>
-        </View>
-      ))}
-      <TouchableOpacity style={styles.addButton} onPress={onPressAddPost}>
+        <Text style={styles.heading}>{communityId} Feed</Text>
+
+        <TouchableOpacity style={styles.addButton} onPress={onPressAddPost}>
         <Text style={styles.addButtonText}>Add Post</Text>
-      </TouchableOpacity>
+        </TouchableOpacity>
+
+          {posts.map((post) => (
+            <View key={post.id} style={styles.post}>
+            <Text style={styles.username}>{post.userId}</Text>
+            <Text style={styles.content}>{post.content}</Text>
+            <Text style={styles.time}>{post.createdAt}</Text>
+    </View>
+      ))}
+      
     </View>
     <BottomBar />
     </View>
