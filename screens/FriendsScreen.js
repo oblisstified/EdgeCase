@@ -28,7 +28,7 @@ const FriendsScreen = ({route, navigation}) => {
 
 
     return(
-        <View>
+        <View style={{flex:1}}>
         <View >
             <Text>You have {friendsList.length} friends</Text>
             <Text>Friends:</Text>

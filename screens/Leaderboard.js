@@ -58,7 +58,7 @@ const Leaderboard = ({navigation}) => {
         };
 
     return(
-        <View>
+        <View style={{flex:1}}>
             <View style={{alignItems: "center",marginVertical: '5%',}}>
                 <Text>This is the leaderboard</Text>
                 <Text>{challengeDesc}</Text>

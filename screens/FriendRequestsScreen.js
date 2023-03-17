@@ -58,7 +58,8 @@ const FriendRequestsScreen = ({route, navigation}) => {
 
 
     return(
-        <View>
+        <View style={{flex:1}}>
+            <View>
            <FlatList
                 data={friendRequestsList}
                 keyExtractor={(item) => item.email}
@@ -80,7 +81,8 @@ const FriendRequestsScreen = ({route, navigation}) => {
                     </View>
                 )}
             />
-           <BottomBar />  
+            </View>
+           <BottomBar/>  
         </View>
     )
 }

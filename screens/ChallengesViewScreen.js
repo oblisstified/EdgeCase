@@ -128,7 +128,7 @@ const ChallengesViewScreen = ({navigation}) => {
     };
 
     return(
-        <View>
+        <View style={{flex:1}}>
             <View style={{alignItems: "center",marginVertical: '5%',}}>
                 <Text>These are your challenges</Text>
             </View>
@@ -136,7 +136,9 @@ const ChallengesViewScreen = ({navigation}) => {
                 <Button onPress={() => setCompleted(false)} title="Active"/>
                 <Button onPress={() => setCompleted(true)} title="Completed"/> 
             </View>
+            <View>
             {challenges && (<FlatList data={challenges} contentContainerStyle={{ paddingBottom: 150 }} renderItem = {renderChallenges}/>)}
+            </View>
             <BottomBar navigation={navigation}/>        
         </View>
     )

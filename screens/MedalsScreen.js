@@ -51,7 +51,7 @@ const MedalsScreen = ({navigation}) => {
     };
 
     return(
-        <View>
+        <View style={{flex:1}}>
             <View style={{alignItems: "center",marginVertical: '5%',}}>
                 <Text>These are your medals</Text>
             </View>

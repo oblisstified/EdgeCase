@@ -35,7 +35,7 @@ const ProfileScreen = ({ route, navigation }) => {
   }
   
   return (
-    <View>
+    <View style={{flex:1}}>
       <ScrollView style={{ maxHeight: "90%" }}>
       <TouchableOpacity style={styles.button} onPress={() => navigation.replace("MedalsScreen")}>
             <Icon name="medal" size={24} color="#000" />
