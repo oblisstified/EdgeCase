@@ -35,7 +35,7 @@ import { collection, getDocs, updateDoc, doc,getDoc, setDoc } from 'firebase/fir
  */
 
 
-async function saveMeal(saveObject, email, isPreset){
+async function savePost(saveObject, email, isPreset){
     console.log(saveObject)
     if(!saveObject || !email) return false;
     
@@ -79,31 +79,26 @@ async function saveMeal(saveObject, email, isPreset){
     
 }
 
-async function createPreset(saveObject, presetName){
+async function createPost(saveObject){
     const  dateString = (new Date(Date.now())).toDateString();
 
-    const metaDataObject = {
-        date: dateString,
-        presetName: presetName
-    }
 
     try{
         // pull relevant references
-        let presetRef = doc(db, 'presets', "presetList");
-        const presetSnapshot = await getDoc(presetRef);
-        const data = presetSnapshot.data();
-        let newPresets = await data.presets;
+        let presetRef = doc(db, 'posts', "postList");
+        const postSnapshot = await getDoc(postRef);
+        const data = postSnapshot.data();
+        let newPosts = await data.presets;
 
-        if(newPresets == undefined){
-            newPresets = []
+        if(newPosts == undefined){
+            newPosts = []
         }
 
-        newPresets.push({
-            preset : saveObject,
-            metaData: metaDataObject
+        newPosts.push({
+            post : saveObject,
         });
 
-        await updateDoc(presetRef, {presets:newPresets})
+        await updateDoc(postRef, {posts:newPosts})
         .then(() => {return true;})
 
     } catch (error){
@@ -113,4 +108,4 @@ async function createPreset(saveObject, presetName){
 
 }
 
-export { saveMeal, createPreset }
+export { savePost, createPost }
