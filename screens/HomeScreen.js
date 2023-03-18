@@ -4,11 +4,11 @@ import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import { getAuth, signOut } from "firebase/auth";
-import BazierLineChart from './components/Graph'
+import BazierLineChart from "./components/Graph";
 
 const HomeScreen = ({ navigation }) => {
   const user = getAuth();
-  let [profile, setProfile] = useState(null)
+  let [profile, setProfile] = useState(null);
 
   const handleSignOut = () => {
     signOut(user);
@@ -16,11 +16,12 @@ const HomeScreen = ({ navigation }) => {
   };
 
   const renderProfile = (result) => {
-    setProfile(JSON.parse(result))
-  }
+    setProfile(JSON.parse(result));
+  };
 
   return (
     <View style={{ backgroundColor: "#FFF", flex: 1 }}>
+      {/* Page title banner */}
       <SafeAreaView
         style={{
           backgroundColor: "#00a46c",
@@ -95,6 +96,7 @@ const HomeScreen = ({ navigation }) => {
         }}
       />
 
+      {/* Beginning of actual content */}
       <ScrollView vertical showsVerticalScrollIndicator={false}>
         <View
           style={{
@@ -104,6 +106,7 @@ const HomeScreen = ({ navigation }) => {
             alignItems: "center",
           }}
         >
+          {/* Calories-related content */}
           <View style={{ width: "50%" }}>
             <Text
               style={{
@@ -153,6 +156,8 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </View>
 
+        {/* Calorie windows */}
+        {/* Each TouchableOpacity represents a window of data displayed */}
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -209,6 +214,7 @@ const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
         </ScrollView>
 
+        {/* Analytics(progress)-related content */}
         <View
           style={{
             flexDirection: "row",
@@ -266,6 +272,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </View>
 
+        {/* Analytics (progress) windows */}
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -326,6 +333,7 @@ const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
         </ScrollView>
 
+        {/* Achievements-related content */}
         <View
           style={{
             flexDirection: "row",
@@ -383,6 +391,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </View>
 
+        {/* Achievements windows */}
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
