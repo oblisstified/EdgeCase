@@ -121,7 +121,7 @@ const LogFoodScreen = ({ navigation }) => {
       <SafeAreaView
         style={{
           backgroundColor: "#00a46c",
-          height: "23%",
+          height: "19%",
           borderBottomLeftRadius: 20,
           borderBottomRightRadius: 20,
           paddingHorizontal: 20,
@@ -131,22 +131,7 @@ const LogFoodScreen = ({ navigation }) => {
           style={{
             flexDirection: "row",
             alignItems: "center",
-            width: "100%",
-          }}
-        >
-          <View style={{ width: "80%", alignItems: "flex-start" }}>
-            <TouchableOpacity style={{ marginLeft: 15 }}>
-              <Image
-                source={require("./images/go-back.png")}
-                style={{ height: 25, width: 25 }}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
+            marginTop: 15,
             marginLeft: 15,
             width: "100%",
           }}
@@ -155,12 +140,6 @@ const LogFoodScreen = ({ navigation }) => {
             <Text style={{ fontSize: 28, color: "#FFF", fontWeight: "bold" }}>
               Log Food
             </Text>
-          </View>
-          <View style={{ width: "12%", alignItems: "flex-end" }}>
-            <Image
-              source={require("./images/pantry.png")}
-              style={{ height: 60, width: 60 }}
-            />
           </View>
         </View>
       </SafeAreaView>
