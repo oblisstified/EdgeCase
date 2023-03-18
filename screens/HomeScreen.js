@@ -25,7 +25,7 @@ const HomeScreen = ({ navigation }) => {
       <SafeAreaView
         style={{
           backgroundColor: "#00a46c",
-          height: "30%",
+          height: "22%",
           borderBottomLeftRadius: 20,
           borderBottomRightRadius: 20,
           paddingHorizontal: 20,
@@ -36,37 +36,8 @@ const HomeScreen = ({ navigation }) => {
             flexDirection: "row",
             alignItems: "center",
             width: "100%",
-          }}
-        >
-          <View style={{ width: "80%", alignItems: "flex-start" }}>
-            <TouchableOpacity>
-              <Image
-                source={require("./images/menu.png")}
-                style={{ height: 25, width: 25, marginLeft: 15 }}
-              />
-            </TouchableOpacity>
-          </View>
-          <View
-            style={{ width: "18%", alignItems: "flex-end", marginRight: 15 }}
-          >
-            <TouchableOpacity onPress={handleSignOut}>
-              <Image
-                source={require("./images/log-out.png")}
-                style={{ height: 25, width: 25 }}
-              />
-              <Text style={{ fontSize: 8, color: "#FFF", fontWeight: "bold" }}>
-                Log Out
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            marginTop: 25,
             marginLeft: 15,
-            width: "100%",
+            marginTop: 15
           }}
         >
           <View style={{ width: "80%" }}>
@@ -77,11 +48,19 @@ const HomeScreen = ({ navigation }) => {
               {user.currentUser.email}
             </Text>
           </View>
-          <View style={{ width: "12%", alignItems: "flex-end" }}>
-            <Image
-              source={require("./images/pantry.png")}
-              style={{ height: 60, width: 60 }}
-            />
+          <View style={{ width: "20%" }}>
+            <TouchableOpacity
+              onPress={handleSignOut}
+              style={{ marginLeft: 15 }}
+            >
+              <Image
+                source={require("./images/log-out.png")}
+                style={{ height: 25, width: 25 }}
+              />
+              <Text style={{ fontSize: 8, color: "#FFF", fontWeight: "bold" }}>
+                Log Out
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </SafeAreaView>
@@ -91,8 +70,8 @@ const HomeScreen = ({ navigation }) => {
         style={{
           left: 0,
           right: 0,
-          height: 90,
-          marginTop: -45,
+          height: 80,
+          marginTop: -41,
         }}
       />
 
@@ -142,7 +121,7 @@ const HomeScreen = ({ navigation }) => {
                   color: "#FFF",
                 }}
               >
-                more
+                info
               </Text>
             </View>
             <View
@@ -258,7 +237,7 @@ const HomeScreen = ({ navigation }) => {
                   color: "#FFF",
                 }}
               >
-                more
+                info
               </Text>
             </View>
             <View
@@ -377,7 +356,7 @@ const HomeScreen = ({ navigation }) => {
                   color: "#FFF",
                 }}
               >
-                more
+                info
               </Text>
             </View>
             <View
