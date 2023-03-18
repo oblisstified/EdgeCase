@@ -2,23 +2,30 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Image } from "react-native";
-import HomeScreen from './screens/HomeScreen';
-import LogInScreen from './screens/LogInScreen';
-import ProfileScreen from './screens/ProfileScreen';
-import LogFoodScreen from './screens/LogFoodScreen';
-import EditProfileScreen from './screens/EditProfileScreen';
+import HomeScreen from '../HomeScreen';
+import LogInScreen from '../LogInScreen';
+import ProfileScreen from '../ProfileScreen';
+import LogFoodScreen from '../LogFoodScreen';
+import EditProfileScreen from '../EditProfileScreen';
 
-import Page1 from './screens/build-profile/Page1';
-import Page2 from './screens/build-profile/Page2';
-import Page3 from './screens/build-profile/Page3';
-import Page4 from './screens/build-profile/Page4';
+import Page1 from '../build-profile/Page1';
+import Page2 from '../build-profile/Page2';
+import Page3 from '../build-profile/Page3';
+import Page4 from '../build-profile/Page4';
 
-import FoodBasketScreen from './screens/FoodBasketScreen';
-import BottomBar from './screens/components/BottomBar'
-import AllUsersScreen from './screens/AllUsersScreen';
-import OtherUserProfileScreen from './screens/OtherUserProfileScreen';
-import FriendRequestsScreen from './screens/FriendRequestsScreen';
-import FriendsScreen from './screens/FriendsScreen';
+import FoodBasketScreen from '../FoodBasketScreen';
+import BottomBar from '../components/BottomBar'
+import AllUsersScreen from '../AllUsersScreen';
+import OtherUserProfileScreen from '../OtherUserProfileScreen';
+import FriendRequestsScreen from '../FriendRequestsScreen';
+import FriendsScreen from '../FriendsScreen';
+
+import SocialScreen from '../SocialScreen';
+import ChallengesViewScreen from '../ChallengesViewScreen';
+import Leaderboard from '../Leaderboard';
+import MedalsScreen from '../MedalsScreen';
+import CommunityScreen from '../CommunityScreen';
+import CommunityFeed from '../CommunityFeed';
 
 const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
@@ -57,6 +64,20 @@ const BottomTabNavigator = () => {
           tabBarIcon: () => (
             <Image
               source={require("../images/log-food.png")}
+              style={{ height: 30, width: 30 }}
+            />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="SocialScreen"
+        component={SocialScreen}
+        options={{
+          tabBarLabel: "Social",
+          tabBarIcon: () => (
+            <Image
+              source={require("../images/social.png")}
               style={{ height: 30, width: 30 }}
             />
           ),
@@ -103,7 +124,7 @@ const HomeStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
       <Stack.Screen name="LogInScreen" component={LogInScreen} />
-      <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      <Stack.Screen name="HomeScreen" component={BottomTabNavigator} />
       <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
       <Stack.Screen name="LogFoodScreen" component={LogFoodScreen} />
       <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
