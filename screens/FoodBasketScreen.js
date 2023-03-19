@@ -22,6 +22,7 @@ const FoodBasketScreen = props => {
     let [description, setDescription] = useState("")
     let [presetNameError, setPresetNameError] = useState(false)
     let [presetSaved, setPresetSaved] = useState(false)
+    let [mealSaved, setMealSaved] = useState(false);
 
     let saving = false;
 
@@ -37,6 +38,9 @@ const FoodBasketScreen = props => {
     }
 
     function saveBasket(){
+        if(mealSaved) return;
+        setMealSaved(true);
+
         const email = user.email;
         saveMeal(food, email, false);
     }
