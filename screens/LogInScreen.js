@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput, Button, KeyboardAvoidingView } from 'react-native'
 
 import HomeScreen from "./HomeScreen";
+import Page1 from "./build-profile/Page1";
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { Platform,TouchableOpacity } from "react-native";
@@ -59,11 +60,7 @@ const LogInScreen = ({navigation}) => {
         .then(userCredentials => {
             user = userCredentials.user;
             console.log(user.email)
-            setDoc(doc(db,'users',user.email),{
-                email:user.email,age:null , friends:[],friendRequests:[],gender:null, height: null, name: null
-            });
-
-            navigation.replace("HomeScreen")
+            navigation.replace("Page1")
         })
         .catch(error => alert(error.message))
         

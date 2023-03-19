@@ -55,7 +55,6 @@ const AllUsersScreen = ({route, navigation}) => {
 
 
  
-  console.log(userList);
   return (
     <View style = {{flex:1}}  testID="AllUsersScreen">
        
