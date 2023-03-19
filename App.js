@@ -24,8 +24,10 @@ import SocialScreen from './screens/SocialScreen';
 import ChallengesViewScreen from './screens/ChallengesViewScreen';
 import Leaderboard from './screens/Leaderboard';
 import MedalsScreen from './screens/MedalsScreen';
+
 import CommunityScreen from './screens/CommunityScreen';
 import CommunityFeed from './screens/CommunityFeed';
+import WritePost from './screens/WritePost';
 
 const Stack = createStackNavigator();
 LogBox.ignoreLogs(['Warning: Failed prop type: Invalid prop `textStyle` of type `array` supplied to `Cell`, expected `object`.']);
@@ -56,8 +58,11 @@ export default function App() {
         <Stack.Screen name="ChallengesViewScreen" component={ChallengesViewScreen} />
         <Stack.Screen name="Leaderboard" component={Leaderboard} />
         <Stack.Screen name="MedalsScreen" component={MedalsScreen} />
+
         <Stack.Screen name="CommunityScreen" component={CommunityScreen} />
         <Stack.Screen name="CommunityFeed" component={CommunityFeed} />
+        <Stack.Screen name="WritePost" component={WritePost} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

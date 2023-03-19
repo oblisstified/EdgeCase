@@ -35,7 +35,7 @@ async function createPost(saveObject){
 
     try{
         // pull relevant references
-        let postRef = doc(db, 'post', "postList");
+        let postRef = doc(db, 'posts', "postList");
         const postSnapshot = await getDoc(postRef);
         const data = postSnapshot.data();
         let newPosts = await data.post;

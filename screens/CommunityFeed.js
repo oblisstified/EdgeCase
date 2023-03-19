@@ -40,8 +40,8 @@ const CommunityFeed = ({route, navigation }) => {
     getData();
   }, []);
       
-  const onPressAddPost = ({item}) => {
-    return(<Challenge challenge={item.challenge} goal={item.goal} index={item.id}/>)
+  const onPressAddPost = () => {
+    navigation.navigate('WritePost', { communityId });
 };
 
   return (
@@ -56,10 +56,11 @@ const CommunityFeed = ({route, navigation }) => {
 
           {posts.map((post) => (
             <View key={post.id} style={styles.post}>
-            <Text style={styles.username}>{post.userId}</Text>
-            <Text style={styles.content}>{post.content}</Text>
-            <Text style={styles.time}>{post.createdAt}</Text>
-    </View>
+              <Text style={styles.username}>{post.userId}</Text>
+              <Text style={styles.heading}>{post.title}</Text>
+              <Text style={styles.content}>{post.content}</Text>
+              <Text style={styles.time}>{post.createdAt}</Text>
+            </View>
       ))}
       
     </View>
@@ -94,6 +95,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 5,
   },
+  postTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    },
   content: {
     fontSize: 14,
     marginBottom: 10,
