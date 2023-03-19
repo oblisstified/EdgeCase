@@ -61,9 +61,10 @@ const FriendRequestsScreen = ({route, navigation}) => {
         <View>
            <FlatList
                 data={friendRequestsList}
-                keyExtractor={(item) => item.email}
+                testID = "flatlist"
+                keyExtractor={(item) => item}
                 renderItem={({ item }) => (
-                    <View style = {styles.userItem}>
+                    <View style = {styles.userItem} testID = "child">
                         <Text>{item}</Text>
                         <View style= {{flexDirection:"row"}}>
                             <TouchableOpacity style = {styles.Button} onPress={() =>AcceptFriendRequest(item)}>

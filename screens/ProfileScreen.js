@@ -36,42 +36,43 @@ const ProfileScreen = ({ route, navigation }) => {
 
   return (
     <View>
-      <ScrollView style={{ maxHeight: "90%" }}>
-        <View style={styles.displayInfo}>
+      <ScrollView style={{ maxHeight: "90%" }} testID = "scrollView">
+        <View style={styles.displayInfo} testID = "scrollViewChild">
           <CustomText>Name:</CustomText>
           <CustomText> {userData.name} </CustomText>
         </View>
-        <View style={styles.displayInfo}>
+        <View style={styles.displayInfo} testID = "scrollViewChild">
           <CustomText>Age:</CustomText>
           <CustomText> {userData.age} </CustomText>
         </View>
-        <View style={styles.displayInfo}>
+        <View style={styles.displayInfo}testID = "scrollViewChild">
           <CustomText>Gender:</CustomText>
           <CustomText> {userData.gender} </CustomText>
         </View>
-        <View style={styles.displayInfo}>
+        <View style={styles.displayInfo}testID = "scrollViewChild">
           <CustomText>Height:</CustomText>
           <CustomText> {userData.height} </CustomText>
         </View>
-        <View style={styles.displayInfo}>
+        <View style={styles.displayInfo}testID = "scrollViewChild">
           <CustomText>PlaceHolder:</CustomText>
           <CustomText> {}</CustomText>
         </View>
-        <View style={styles.displayInfo}>
+        <View style={styles.displayInfo}testID = "scrollViewChild">
           <CustomText>PlaceHolder:</CustomText>
           <CustomText> {}</CustomText>
         </View>
-        <View style={styles.displayInfo}>
+        <View style={styles.displayInfo}testID = "scrollViewChild">
           <CustomText>PlaceHolder:</CustomText>
           <CustomText> {}</CustomText>
         </View>
-        <View style={styles.displayInfo}>
+        <View style={styles.displayInfo}testID = "scrollViewChild">
           <CustomText>PlaceHolder:</CustomText>
           <CustomText> {}</CustomText>
         </View>
       </ScrollView>
       <Button
         title="Edit Profile"
+        testID = "editProfile"
         onPress={() => navigation.replace("EditProfileScreen")}
       />
       <View style={{ flex: 0.5 }} />

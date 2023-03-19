@@ -79,7 +79,7 @@ const AllUsersScreen = ({route, navigation}) => {
 
                             <TouchableOpacity   onPress={() => FriendRequestMade(item.email)}>
                                 <View>
-                                <Text > Add friend</Text>
+                                <Text >Add friend</Text>
                                 </View>
                             </TouchableOpacity>
                             </View>
