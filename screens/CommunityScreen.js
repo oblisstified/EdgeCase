@@ -7,6 +7,7 @@ import { collection, getDocs } from 'firebase/firestore/lite';
 import BottomBar from './components/BottomBar'
 import { ScrollView } from "react-native-gesture-handler";
 
+import { getPosts } from "../utils/addPost";
 
 const CommunityScreen = ({navigation}) => {    
 
@@ -64,7 +65,7 @@ const CommunityScreen = ({navigation}) => {
         <View style={{flex:1}} >
         <View style={{flex:1}}>
             <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
-            {communities && (<FlatList data={communities} ItemSeparatorComponent={separator} renderItem = {renderCommunities}/>)}
+            {communities && (<FlatList  keyExtractor={(item) => {item.communityId}} data={communities} ItemSeparatorComponent={separator} renderItem = {renderCommunities}/>)}
         </View>
         <BottomBar navigation={navigation}/>     
         </View>

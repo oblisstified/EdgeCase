@@ -9,6 +9,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore/lite';
 import { getAuth } from 'firebase/auth';
 
 
+import { getPosts } from '../utils/addPost';
 
 
 const CommunityFeed = ({route, navigation }) => {
@@ -20,21 +21,8 @@ const CommunityFeed = ({route, navigation }) => {
 
   useEffect(() => {
     async function getData () {
-      try {
-      // Get all posts for the specified community
-      
-      const postsQuery =  query(
-          collection(db, 'posts'),
-          where('communityId', '==', communityId),
-      );
-      const postsRef = await getDocs(postsQuery)
-      const allPosts = postsRef.docs.map(doc => doc.data());
-      setPosts(allPosts);
-      console.log(communityId);
-      console.log(allPosts);
-      } catch (error) {
-          console.log(error);
-      }
+      let communityPosts = await getPosts(communityId);
+      setPosts(communityPosts);
     }
 
     getData();
@@ -53,16 +41,17 @@ const CommunityFeed = ({route, navigation }) => {
         <TouchableOpacity style={styles.addButton} onPress={onPressAddPost}>
         <Text style={styles.addButtonText}>Add Post</Text>
         </TouchableOpacity>
-
-          {posts.map((post) => (
-            <View key={post.id} style={styles.post}>
-              <Text style={styles.username}>{post.userId}</Text>
-              <Text style={styles.heading}>{post.title}</Text>
-              <Text style={styles.content}>{post.content}</Text>
-              <Text style={styles.time}>{post.createdAt}</Text>
-            </View>
-      ))}
-      
+          <FlatList
+            data={ posts }
+            keyExtractor={(post) => post.content}
+            renderItem={(post) =>_
+              (<View key={post.id} style={styles.post}>
+                <Text style={styles.username}>{post.userId}</Text>
+                <Text style={styles.heading}>{post.title}</Text>
+                <Text style={styles.content}>{post.content}</Text>
+                <Text style={styles.time}>{post.createdAt}</Text>
+              </View>)}
+          />
     </View>
     <BottomBar />
     </View>

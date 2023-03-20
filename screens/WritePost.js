@@ -1,33 +1,45 @@
 import React, { useState } from 'react';
 import { StyleSheet, TextInput, View, Text, TouchableOpacity } from 'react-native';
 import { db } from "../firebase";
+import { getAuth } from "firebase/auth"
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore/lite';
 
-const WritePost = ({ route, navigation }) => {
-  const user = getAuth().currentUser;
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const { communityId } = route.params;
+import { createPost } from '../utils/addPost';
 
-  const onPressSavePost = async () => {
-    try {
-      // Create a new post document in the database
-      const postDoc = await addDoc(collection(db, 'posts'), {
-        id: postDoc.id,
-        title,
-        content,
-        userId: user.email, // replace with actual user ID
-        communityId,
-        createdAt: serverTimestamp(),
-        likes: 0,
-      });
-      console.log('Post saved with ID:', postDoc.id);
-      // Navigate back to the CommunityFeed screen
-      navigation.goBack();
-    } catch (error) {
-      console.error('Error saving post:', error);
-    }
-  };
+const WritePost = ({ route, navigation }) => {
+
+  const user = getAuth().currentUser;
+
+  let [title, setTitle] = useState('');
+  let [content, setContent] = useState('');
+
+  let [postSaved, setPostSaved] = useState(false);
+
+  const { communityId } = route.params.communityId;
+
+
+  async function onPressSavePost(){
+    
+
+    const  dateString = (new Date(Date.now())).toString();
+    const email = user.email;
+    const communityId = communityId;
+
+    let saveObject = 
+      `{
+        "date": "${dateString}",
+        "email": "${email}",
+        "communityId": "${communityId}",
+        "content": "${content}",
+        "title": "${title}",
+        "likes": "0"
+      }`
+
+    let success = await createPost(JSON.parse(saveObject));
+
+    setPostSaved(success);
+  }
+
 
   return (
     <View style={styles.container}>
@@ -42,12 +54,13 @@ const WritePost = ({ route, navigation }) => {
       <TextInput
         style={[styles.input, styles.contentInput]}
         value={content}
-        onChangeText={setContent}
+        onChangeText={ setContent }
         placeholder="Enter post content"
         multiline
       />
       <TouchableOpacity style={styles.saveButton} onPress={onPressSavePost}>
         <Text style={styles.saveButtonText}>Save Post</Text>
+        { postSaved && <Text style={{color:"green"}}> Saved!!</Text>}
       </TouchableOpacity>
     </View>
   );
