@@ -3,6 +3,7 @@ import { StyleSheet, TextInput, View, Text, TouchableOpacity } from 'react-nativ
 import { db } from "../firebase";
 import { getAuth } from "firebase/auth"
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore/lite';
+import { getAuth } from 'firebase/auth';
 
 import { createPost } from '../utils/addPost';
 
