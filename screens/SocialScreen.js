@@ -13,35 +13,9 @@ const SocialScreen = ({navigation}) => {
     const user = getAuth();
     const [communitiesData,setCommunitiesData] = useState(null);
 
-    // const viewCommunity = (index) => {
-    //     let community = `{"id": "${index}"}`
-    //     navigation.navigate('CommunityViewScreen',{community})
-    // }
-
-    // const Community = ({image,description,index}) => {
-    //     return(
-    //     <View style={styles.displayInfo}>
-    //         <TouchableOpacity onPress={() => viewCommunity(index)}>
-    //         <Image source={{uri: image}} style = {{ width: '90%', height: 200 }}/>
-    //         <Text>{description}</Text>
-    //         </TouchableOpacity>
-    //     </View>
-    //     )
-    // };
-
-    // const renderCommunities = ({item}) => {
-    //     return(
-    //     <Community image ={item.image} description={item.description} index={item.id}/>
-    //     )
-    // };
-
-    // const separator = () => {
-    //     return (<View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>)
-    //   };
 
     return(
-        <View style={{flex:1}} >
-            <View style={{flex:1}}>
+            <View style={{flex:0}}>
                 <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
                 {/* {communitiesData && (<FlatList data={communitiesData} ItemSeparatorComponent={separator} renderItem = {renderCommunities}/>)} */}
                 <ScrollView style={{marginBottom: '10%',}}>
@@ -62,8 +36,7 @@ const SocialScreen = ({navigation}) => {
                     <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
                 </ScrollView>
             </View>
-            <BottomBar navigation={navigation}/>     
-        </View>
+        
     );
 }
 
