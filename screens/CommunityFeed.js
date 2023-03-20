@@ -54,18 +54,25 @@ const CommunityFeed = ({route, navigation }) => {
         <Text style={styles.addButtonText}>Add Post</Text>
         </TouchableOpacity>
 
-          {posts.map((post) => (
-            <View key={post.id} style={styles.post}>
+        {posts &&
+          <FlatList
+            data={ posts }
+            keyExtractor = {(post) => post.id}
+              renderItem={(post) => (
+              <View style={styles.post}>
               <Text style={styles.username}>{post.userId}</Text>
-              <Text style={styles.heading}>{post.title}</Text>
+              <Text style={styles.postTitle}>{post.title}</Text>
               <Text style={styles.content}>{post.content}</Text>
               <Text style={styles.time}>{post.createdAt}</Text>
-            </View>
-      ))}
+              </View>
+                    
+              )}
+          />
+          }
       
-    </View>
-    <BottomBar />
-    </View>
+            </View>
+            <BottomBar />
+            </View>
   );
 }
 

@@ -3,20 +3,22 @@ import { collection, getDocs, updateDoc, doc, getDoc, setDoc } from 'firebase/fi
 
 async function savePost(email, postBody) {
 
-    const dateString = (new Date(Date.now())).toDateString();
-
     try {
         // pull the relevant references from database
-        let userRef = doc(db, 'users', email);
+        let userRef = doc(db, 'posts', "postList");
         const userSnapshot = await getDoc(userRef);
-        const userData = userSnapshot.data();
+        const userData = userSnapshot.data().posts;
         let newPostList = await userData.postList; // pull list of posts from users
+
+        if(newPostList==undefined) {
+            newPostList = [];
+        }
 
         console.log("not dead yet")
 
         // add our object to the reference for postList
         newPostList.push({
-            post : saveObject
+            postList : saveObject
         });
 
         // send the updated information

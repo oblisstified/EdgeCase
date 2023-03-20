@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, TextInput, View, Text, TouchableOpacity } from 'react-native';
 import { db } from "../firebase";
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore/lite';
+import { getAuth } from 'firebase/auth';
 
 const WritePost = ({ route, navigation }) => {
   const user = getAuth().currentUser;
@@ -13,7 +14,6 @@ const WritePost = ({ route, navigation }) => {
     try {
       // Create a new post document in the database
       const postDoc = await addDoc(collection(db, 'posts'), {
-        id: postDoc.id,
         title,
         content,
         userId: user.email, // replace with actual user ID
