@@ -4,7 +4,7 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 import { getAuth, signOut } from 'firebase/auth'
 import BottomBar from './components/BottomBar'
 import BazierLineChart from './components/Graph'
-import ProgressChart from './components/Graph'
+import MyProgressChart from './components/Daily'
 
 
 
@@ -27,9 +27,9 @@ const HomeScreen = ({navigation}) => {
 
             <View style={{ flex: 1 }}>
              <View style={{ height: '40%' }}>
-                <ProgressChart />
+                <MyProgressChart />
             </View>
-            
+
             <View style={{ flex: 1 }}>
                  <BazierLineChart />
             </View>
