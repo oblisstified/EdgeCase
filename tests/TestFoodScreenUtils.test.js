@@ -7,7 +7,11 @@ import { getAuth } from "firebase/auth";
 
 import LogFoodScreen from '../screens/LogFoodScreen'
 
+
 jest.mock("firebase/auth")
+jest.mock("../utils/searcher")
+findPresetObjects.mockReturnValue([]);
+findFoodObjects.mockReturnValue([]);
 
 getAuth.mockReturnValue(JSON.parse(
   `{"currentUser":{"email": "sa@gmail.com"}}`
@@ -29,35 +33,22 @@ jest.mock("@react-navigation/native", () => {
 });
 // =====================================================================
 
-it('Test search function', () => {
-
-    const { getAllByText, getByTestId } = render(<LogFoodScreen />);
-
-    fireEvent.changeText(getByTestId("foodSearchBar"), "endive");
-    fireEvent.press(getByTestId("foodSearch"));
-
-    const result = getAllByText(new RegExp('^'+"endive"+'.*', 'i'))
-    // there should be exactly 1 result for searching endive
-    expect(result.length).toBe(1);
-});
-
-it('Test search function with gibberish', () => {
-
-    const { getByText, getByTestId } = render(<LogFoodScreen />);
-
-    fireEvent.changeText(getByTestId("foodSearchBar"), "haerhartha");
-    fireEvent.press(getByTestId("foodSearch"));
-
-    let errorMessage;
-
-    try {
-      getByText(new RegExp('^'+"haerhartha"+'.*', 'i'))
-    } catch (e) {
-      errorMessage = e.message
-    } 
+it("test search presets calls utils", () => {
+    const { getByTestId, getByText } = render(<LogFoodScreen />);
+  
+    const searchButton = getByTestId("searchPresetButton")
+  
+    act(()=>{
+        fireEvent.press(searchButton);
+    })
+    expect(findPresetObjects).toHaveBeenCalledWith("")
+    act(()=>{
+        fireEvent.changeText(getByTestId("foodSearchBar"), "searchval")
+    })
+    act(()=>{
+        fireEvent.press(searchButton);
+    })
     
-    expect(errorMessage).toEqual("Unable to find an element with text: /^haerhartha.*/i");
-});
-
-
-
+    expect(findPresetObjects).toHaveBeenCalledWith("searchval")
+  })
+  
