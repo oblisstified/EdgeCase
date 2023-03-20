@@ -9,6 +9,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore/lite';
 import { getAuth } from 'firebase/auth';
 
 
+import { getPosts } from '../utils/addPost';
 
 
 const CommunityFeed = ({route, navigation }) => {
@@ -20,44 +21,39 @@ const CommunityFeed = ({route, navigation }) => {
 
   useEffect(() => {
     async function getData () {
-      try {
-      // Get all posts for the specified community
-      
-      const postsQuery =  query(
-          collection(db, 'posts'),
-          where('communityId', '==', communityId),
-      );
-      const postsRef = await getDocs(postsQuery)
-      const allPosts = postsRef.docs.map(doc => doc.data());
-      setPosts(allPosts);
-      console.log(communityId);
-      console.log(allPosts);
-      } catch (error) {
-          console.log(error);
-      }
+      let communityPosts = await getPosts(communityId);
+      setPosts(communityPosts);
     }
 
     getData();
   }, []);
       
-  const onPressAddPost = ({item}) => {
-    return(<Challenge challenge={item.challenge} goal={item.goal} index={item.id}/>)
+  const onPressAddPost = () => {
+    navigation.navigate('WritePost', { communityId });
 };
+
 
   return (
     <View style={styles.container}>
+        
     <View>
-      <Text style={styles.heading}>{communityId} Feed</Text>
-      {posts.map((post) => (
-        <View key={post.id} style={styles.post}>
-          <Text style={styles.username}>{post.userId}</Text>
-          <Text style={styles.content}>{post.content}</Text>
-          <Text style={styles.time}>{post.createdAt}</Text>
-        </View>
-      ))}
-      <TouchableOpacity style={styles.addButton} onPress={onPressAddPost}>
+        <Text style={styles.heading}>{communityId} Feed</Text>
+
+        <TouchableOpacity style={styles.addButton} onPress={onPressAddPost}>
         <Text style={styles.addButtonText}>Add Post</Text>
-      </TouchableOpacity>
+        </TouchableOpacity>
+          <FlatList
+            data={ posts }
+            keyExtractor={(post) => post.content}
+            renderItem={(post) =>
+              (<View key={post.id} style={styles.post}>
+                {console.log(JSON.stringify(post.item.post))}
+                <Text style={styles.username}>{post.item.post.email}</Text>
+                <Text style={styles.heading}>{post.item.post.title}</Text>
+                <Text style={styles.content}>{post.item.post.content}</Text>
+                <Text style={styles.time}>{post.item.post.date}</Text>
+              </View>)}
+          />
     </View>
     <BottomBar />
     </View>
@@ -90,6 +86,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 5,
   },
+  postTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    },
   content: {
     fontSize: 14,
     marginBottom: 10,

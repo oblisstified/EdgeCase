@@ -1,38 +1,6 @@
 import { db } from "../firebase";
 import { collection, getDocs, updateDoc, doc,getDoc, setDoc } from 'firebase/firestore/lite';
-/**
- * 
- * @param {*} saveObject 
- * ===============================
- * MealList is a list of all saveObjects'/mealObjects (used interchangably) ever eaten by the user
- * SaveObject structure:
- * {
- *  meal: [{
- *      foodObject: {
-                Decription: "Ingredient 2",
-                Calories: 0,
-                ect....
-*           },
-        weight: 12                
- *      },
- *      foodObject: {
-                Decription: "Ingredient 1",
-                Calories: 0,
-                ect....
-*           },
-        weight: 12     
- * ]
- *  metaData: {
- *      date:
- *      isPreset:
- *      presetName:
- *  }
- * }
- * 
- * @param {*} email 
- * @param {*} isPreset 
- * @returns 
- */
+
 
 
 async function saveMeal(saveObject, email, isPreset){
