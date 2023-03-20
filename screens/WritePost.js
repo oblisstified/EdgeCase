@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import { StyleSheet, TextInput, View, Text, TouchableOpacity } from 'react-native';
 import { db } from "../firebase";
-import { getAuth } from "firebase/auth"
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore/lite';
 import { getAuth } from 'firebase/auth';
+import { useNavigation } from "@react-navigation/native";
 
 import { createPost } from '../utils/addPost';
 
 const WritePost = ({ route, navigation }) => {
 
   const user = getAuth().currentUser;
+  const nav = useNavigation();
 
   let [title, setTitle] = useState('');
   let [content, setContent] = useState('');
 
   let [postSaved, setPostSaved] = useState(false);
 
-  const { communityId } = route.params.communityId;
+  console.log(route.params["communityId"])
+  const communityId = route.params["communityId"];
 
 
   async function onPressSavePost(){
@@ -24,7 +26,6 @@ const WritePost = ({ route, navigation }) => {
 
     const  dateString = (new Date(Date.now())).toString();
     const email = user.email;
-    const communityId = communityId;
 
     let saveObject = 
       `{
@@ -39,6 +40,7 @@ const WritePost = ({ route, navigation }) => {
     let success = await createPost(JSON.parse(saveObject));
 
     setPostSaved(success);
+    nav.replace("CommunityFeed", {communityId})
   }
 
 

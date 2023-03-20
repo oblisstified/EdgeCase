@@ -72,9 +72,8 @@ async function getPosts(community){
         const data = postSnapshot.data();
         let allPosts = await data.posts;
 
-        
         for(let i = 0; i < allPosts.length; i++){
-            if(allPosts[i]["communityId"] == community){
+            if(allPosts[i]["post"]["communityId"] == community){
                 thisCommunityPosts.push(allPosts[i]);
             }
         }

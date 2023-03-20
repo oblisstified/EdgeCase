@@ -32,6 +32,7 @@ const CommunityFeed = ({route, navigation }) => {
     navigation.navigate('WritePost', { communityId });
 };
 
+
   return (
     <View style={styles.container}>
         
@@ -44,12 +45,13 @@ const CommunityFeed = ({route, navigation }) => {
           <FlatList
             data={ posts }
             keyExtractor={(post) => post.content}
-            renderItem={(post) =>_
+            renderItem={(post) =>
               (<View key={post.id} style={styles.post}>
-                <Text style={styles.username}>{post.userId}</Text>
-                <Text style={styles.heading}>{post.title}</Text>
-                <Text style={styles.content}>{post.content}</Text>
-                <Text style={styles.time}>{post.createdAt}</Text>
+                {console.log(JSON.stringify(post.item.post))}
+                <Text style={styles.username}>{post.item.post.email}</Text>
+                <Text style={styles.heading}>{post.item.post.title}</Text>
+                <Text style={styles.content}>{post.item.post.content}</Text>
+                <Text style={styles.time}>{post.item.post.date}</Text>
               </View>)}
           />
     </View>
