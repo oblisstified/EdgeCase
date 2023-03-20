@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
+import { ProgressChart } from "react-native-chart-kit";
+
 
 import HomeScreen from './screens/HomeScreen';
 import LogInScreen from './screens/LogInScreen';

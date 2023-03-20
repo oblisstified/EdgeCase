@@ -23,7 +23,7 @@ async function getDataArray(email, currentDate, range, field){
     // push food objects to their relevant day (indexed by days from lowerBound)
     for(let i = 0; i < mealData.length; i++){
         const thisDate = new Date(mealData[i]["metaData"]["date"])
-        if(lowerBound <= thisDate && thisDate < upperBound){
+        if(lowerBound < thisDate && thisDate <= upperBound){
             // the index is how many from the lowerbound we find this date
             let index = ((thisDate - lowerBound) / (1000 * 60 * 60 * 24));
 

@@ -4,6 +4,8 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 import { getAuth, signOut } from 'firebase/auth'
 import BottomBar from './components/BottomBar'
 import BazierLineChart from './components/Graph'
+import ProgressChart from './components/Graph'
+
 
 
 
@@ -23,9 +25,16 @@ const HomeScreen = ({navigation}) => {
                 <Button title="logout" onPress={handleSignOut} />
             </View>
 
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <BazierLineChart />
-                </View>
+            <View style={{ flex: 1 }}>
+             <View style={{ height: '40%' }}>
+                <ProgressChart />
+            </View>
+            
+            <View style={{ flex: 1 }}>
+                 <BazierLineChart />
+            </View>
+            </View>
+
 
             <BottomBar navigation={navigation}/>            
         </View>
