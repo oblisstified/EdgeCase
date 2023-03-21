@@ -1,18 +1,30 @@
 import React, { useState, useEffect } from "react";
 import 'react-native-gesture-handler';
 import { Animated, StyleSheet, Text, View, FlatList,TouchableOpacity,Modal,Button } from 'react-native';
+
 import { db } from "../firebase";
 import { getAuth } from 'firebase/auth'
 import { collection, getDocs, getDoc, doc, updateDoc } from 'firebase/firestore/lite';
+
 import BottomBar from './components/BottomBar'
+import { getCalorieGoal, daysCalorieGoalMet, getSavedPresets } from '../utils/analytics'
 
 const ChallengesViewScreen = ({navigation}) => {
     const user = getAuth().currentUser;
     
+    const [dailyCalorieGoal, setDailyCalorieGoal] = useState(0)
     const [challenges,setChallenges] = useState(null);
     const [profile,setProfile] = useState(null);
     const [completed,setCompleted] = useState(false);
-    const [redeemedChallenges,setRedeemedChallenges] = useState([])
+
+    const [redeemedChallenges,setRedeemedChallenges] = useState([]);
+    const [timesCalGoalHit, setTimeCalGoalhit] = useState(0);
+    const [numSavedRecipes, setNumSavedRecipes] = useState(0);
+
+    let calories = -1;
+    let goalHit = -1;
+    let numRecipes = -1;
+
 
     useEffect(() => {
         async function getData () {
@@ -22,9 +34,30 @@ const ChallengesViewScreen = ({navigation}) => {
             const challengesSnapshot = await getDocs(challengesCol); //gets all docs from the collection
             const userData = userSnapshot.data();
             const challengesData = challengesSnapshot.docs.map(doc => doc.data());
+
             setProfile(userData);
             setChallenges(challengesData);
             setRedeemedChallenges(userData.redeemed);
+
+            // ugly pattern to prevent spurious reads
+            if(calories == -1){
+                calories = 0;
+                calories = await getCalorieGoal(user.email)
+            }
+            setDailyCalorieGoal(calories);
+
+            if (goalHit == -1) {
+                goalHit = 0;
+                goalHit = await daysCalorieGoalMet(user.email, 7);
+            }
+            setTimeCalGoalhit(goalHit);
+
+            if (numRecipes == -1) {
+                numRecipes = 0;
+                numRecipes = await getSavedPresets(user.email)
+            }
+            setNumSavedRecipes(numRecipes)
+
         }
         getData();
         }, []);
@@ -52,10 +85,10 @@ const ChallengesViewScreen = ({navigation}) => {
     const Challenge = ({challenge,goal,type,id}) => {
         let x;
         if(type.includes("calorie")){
-            x = profile.timesCalGoalHit;
+            x = timesCalGoalHit;
         }
         else if(type.includes("recipe")){
-            x = profile.recipes
+            x = numSavedRecipes
         }
         else{
             x = profile.friends.length;
@@ -131,6 +164,7 @@ const ChallengesViewScreen = ({navigation}) => {
         <View>
             <View style={{alignItems: "center",marginVertical: '5%',}}>
                 <Text>These are your challenges</Text>
+                <Text>Daily Calorie Goal { dailyCalorieGoal.toString()}</Text>
             </View>
             <View style={{flexDirection: "row", justifyContent: 'center'}}>
                 <Button onPress={() => setCompleted(false)} title="Active"/>
