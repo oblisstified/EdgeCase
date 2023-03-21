@@ -33,6 +33,10 @@ jest.mock("@react-navigation/native", () => {
     };
 });
 // =====================================================================
+afterEach(()=>{
+    jest.clearAllMocks();
+})
+
 
 it("test search presets calls utils", () => {
     const { getByTestId, getByText } = render(<LogFoodScreen />);

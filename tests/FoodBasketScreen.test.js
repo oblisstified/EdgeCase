@@ -4,7 +4,7 @@ import 'react-native-gesture-handler/jestSetup';
 
 import FoodBasketScreen from '../screens/FoodBasketScreen';
 import { DeviceEventEmitter } from 'react-native';
-import { saveMeal } from '../utils/saver';
+import { saveMeal, createPreset } from '../utils/saver';
 import { getAuth } from 'firebase/auth'
 
 jest.mock("../utils/saver");
@@ -73,6 +73,25 @@ it("test call to saveMeal", ()=>{
 
     expect(saveMeal).toHaveBeenCalledTimes(1);
     expect(saveMeal).toHaveBeenCalledWith(basketObject, "sa@gmail.com", false)
+})
+
+it("test call to save presets", ()=>{
+    route={
+        params:{
+            currentBasket: basketObject,
+        },
+    }
+
+    render(<FoodBasketScreen
+        route={ route }
+    />);
+    
+    fireEvent.changeText(screen.getByTestId("nameBar"), "random preset name")
+    const saveButton = screen.getByTestId("savePresetButton");
+    fireEvent.press(saveButton);
+
+    expect(createPreset).toHaveBeenCalledTimes(1);
+    expect(createPreset).toHaveBeenCalledWith(basketObject, "random preset name")
 })
 
 
