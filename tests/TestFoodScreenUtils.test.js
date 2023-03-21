@@ -10,6 +10,7 @@ import LogFoodScreen from '../screens/LogFoodScreen'
 
 jest.mock("firebase/auth")
 jest.mock("../utils/searcher")
+
 findPresetObjects.mockReturnValue([]);
 findFoodObjects.mockReturnValue([]);
 
