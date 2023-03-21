@@ -33,11 +33,6 @@ const LogFoodScreen = () => {
     let saving = false;
 
 
-    // Remove basket on basket screen triggers and event here, persisting an item removal
-    DeviceEventEmitter.addListener("event.removeItem", (eventData) => {setBasket(JSON.parse(eventData))});
-
-    // Save button on basket screen triggers an event here telling the program to save the basket remotely
-    DeviceEventEmitter.addListener("event.saveBasket", (eventData) => {setBasket(JSON.parse(eventData)); saveBasket()});
 
     function addToBasket(food){
 

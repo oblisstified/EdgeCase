@@ -8,6 +8,7 @@ async function getDataArray(email, currentDate, range, field){
     const userSnapshot = await getDoc(userRef);
     const userData = userSnapshot.data();
     let mealData = await userData.mealList;
+    if(mealData == undefined) mealData = []
 
     // initialise date bound variables
     const upperBound = new Date(currentDate);
@@ -54,4 +55,66 @@ async function getDataArray(email, currentDate, range, field){
     return retVals;
 }
 
-export { getDataArray }
+async function getTodaysCalories(email){
+    let userRef = doc(db, 'users', email);
+    const userSnapshot = await getDoc(userRef);
+    const userData = userSnapshot.data();
+
+    const mealList = userData.mealList == undefined ? [] : userData.mealList;
+
+    const todaysDate = (new Date(Date.now())).toDateString();
+    let todaysMeals=[];
+
+    for(let i = 0; i < mealList.length; i++){
+        const thisDateString = (new Date(mealList[i]["metaData"]["date"])).toDateString();
+        if(thisDateString == todaysDate){
+            todaysMeals.push(mealData[i]);
+        }
+    }
+
+    let todaysCalories = 0;
+    //  for each meal
+    for(let i = 0; i < todaysMeals.length; i++){
+        // for each foodobject in each meal
+        for(let j = 0; j < todaysMeals[i].length; j++){
+            todaysCalories += todaysMeals[i][j]["foodObject"]["Calories"] * (todaysMeals[i][j]["weight"]/100)
+        }
+    }
+
+    return todaysCalories;
+}
+
+/*
+*@param email address of the user to 
+*/
+async function getUserProgress(email){
+    let userRef = doc(db, 'users', email);
+    const userSnapshot = await getDoc(userRef);
+    const userData = userSnapshot.data();
+
+    let todayDate = new Date(Date.now());
+
+    
+
+    // collect information relevant to challenges
+    const numFriends = userData.friends == undefined ? 0:userData.friends.length;
+    const numSavedRecipes = userData.numSavedRecipies;
+    const todaysCalories = getTodaysCalories(email);
+    console.log(numSavedRecipes)
+
+    let challengeCompletion = 0;
+    // compare with challenge threshholds
+    if(numSavedRecipes >= 3) challengeCompletion++; 
+    if(numSavedRecipes >= 10) challengeCompletion++; 
+    if(numSavedRecipes >= 25) challengeCompletion++;
+
+    if(numFriends >= 1) challengeCompletion++;
+    if(numFriends >= 5) challengeCompletion++;
+    if(numFriends >= 25) challengeCompletion++;
+    
+    console.log("comp" + challengeCompletion)
+    return (challengeCompletion/9)
+
+}
+
+export { getDataArray, getUserProgress }

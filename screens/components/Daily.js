@@ -3,35 +3,25 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, Dimensions } from 'react-native';
 
 import { getAuth } from 'firebase/auth';
-import { getDataArray } from '../../utils/analytics';
+import { getDataArray, getUserProgress } from '../../utils/analytics';
 
 const MyProgressChart = () => {
 
-  let [dataList, setDataList] = useState([])
+  let [challengesCompleted, setChallengesCompleted] = useState(0)
 
   const screenWidth = Dimensions.get("window").width;
 
   const email = getAuth().currentUser.email;
   const today = (new Date(Date.now())).toDateString();
   
-  getDataArray(email, today, "Calories").then((info) => setDataList(info))
+  getUserProgress(email).then((info) => setChallengesCompleted(info))
 
   let data = {
     labels: ['Goal', 'Food', 'Challenges'],
-    datasets: [
-      {
-        data: dataList,
-        color: () => '#00a46c',
-        strokeWidth: 2,
-      },
-    ],
+    data: [0.2, 0.3, challengesCompleted],
   };
 
-//   if(dataList.length == 0){
-//     return(
-//       <Text>Loading Data....</Text>
-//     )
-//   }
+  
   
   return (
           

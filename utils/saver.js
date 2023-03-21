@@ -47,7 +47,7 @@ async function saveMeal(saveObject, email, isPreset){
     
 }
 
-async function createPreset(saveObject, presetName){
+async function createPreset(saveObject, presetName, email){
     const  dateString = (new Date(Date.now())).toDateString();
 
     const metaDataObject = {
@@ -61,6 +61,22 @@ async function createPreset(saveObject, presetName){
         const presetSnapshot = await getDoc(presetRef);
         const data = presetSnapshot.data();
         let newPresets = await data.presets;
+
+        let userRef = doc(db, 'users', email);
+        const userSnapshot = await getDoc(userRef);
+        const userData = userSnapshot.data();
+
+
+        let numSavedRecipies = await userData.numSavedRecipies;
+        if(numSavedRecipies == undefined){
+            setDoc(userRef, {numSavedRecipies: 1})
+            console.log("undefined")
+        } else {
+            console.log(numSavedRecipies)
+            numSavedRecipies++;
+            console.log("after" + numSavedRecipies)
+            updateDoc(userRef, {numSavedRecipies: numSavedRecipies})
+        }
 
         if(newPresets == undefined){
             newPresets = []
