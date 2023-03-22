@@ -7,7 +7,9 @@ import { getAuth } from 'firebase/auth'
 import { db } from "../firebase";
 import {ref, set,onValue,child ,get} from  'firebase/database';
 import { collection, getDocs, updateDoc, doc,getDoc, setDoc } from 'firebase/firestore/lite';
+import { setStatusBarBackgroundColor } from "expo-status-bar";
 
+import { saveMeal, createPreset } from "../utils/saver";
 
 const FoodBasketScreen = props => {
 
@@ -15,11 +17,12 @@ const FoodBasketScreen = props => {
     const user = auth.currentUser;
 
     const nav = useNavigation();
-    // verbose inside te
+
     let [food, setFood] = useState((props.route && props.route.params.currentBasket) || props.currentBasket)
     let [description, setDescription] = useState("")
     let [presetNameError, setPresetNameError] = useState(false)
     let [presetSaved, setPresetSaved] = useState(false)
+    let [mealSaved, setMealSaved] = useState(false);
 
     let saving = false;
 
@@ -35,43 +38,23 @@ const FoodBasketScreen = props => {
     }
 
     function saveBasket(){
-        DeviceEventEmitter.emit("event.saveBasket", JSON.stringify(food))
-        nav.pop()
+        if(mealSaved) return;
+        setMealSaved(true);
+
+        const email = user.email;
+        saveMeal(food, email, false);
     }
+
     async function savePreset(){
         if(description.length == 0){
             setPresetNameError(true);
             return;
-        };
-        try{
-            // prevent duplicate entries
-            if(saving) return;
-            saving = true;
-
-            let presetRef = doc(db, 'presets', "presetList");
-            const presetSnapshot = await getDoc(presetRef);
-            const data = presetSnapshot.data();
-            let newPresets = await data.presets;
-
-            if(newPresets == undefined){
-                newPresets = []
-            }
-
-            let label = {name: description}
-            let temp = food;
-            food.push(label)
-
-            newPresets.push({preset : temp});
-
-            console.log(temp.name)
-
-            await updateDoc(presetRef, {presets:newPresets})
-            .then(() => console.log("succ"))
-
-        } catch (error){
-            console.log(error)
+        }
+        if(food.length == 0){
+            return;
         }
 
+        createPreset(food, description, user.email).then(() => {setPresetSaved(true); nav.pop()});
     }
 
     return (
@@ -87,7 +70,7 @@ const FoodBasketScreen = props => {
 
             <Button  testID="saveButton" title="save" onPress={saveBasket} />
             <Button testID="savePresetButton" title="Save Preset" onPress={savePreset} />
-            <TextInput placeholder="preset name" onChangeText={setDescription}/>
+            <TextInput testID="nameBar" placeholder="preset name" onChangeText={setDescription}/>
             {presetNameError && <Text style={{color:"red"}}>Preset needs a name to be saved</Text> }
             {presetSaved && <Text style={{color:"green"}}>Preset saved!</Text> }
 

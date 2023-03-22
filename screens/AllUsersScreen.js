@@ -51,7 +51,6 @@ const AllUsersScreen = ({route, navigation}) => {
 
 
  
-  console.log(userList);
   return (
     <View style = {{flex:1}} >
        
@@ -95,7 +94,6 @@ const AllUsersScreen = ({route, navigation}) => {
 
             </View>
               
-            <BottomBar />     
     </View>
 )
 

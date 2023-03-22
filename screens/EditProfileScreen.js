@@ -67,7 +67,6 @@ const EditProfileScreen = ({ route, navigation }) => {
       {changeSaved && <Text style={{ color: "green" }}> Changes Saved!</Text>}
       <Button title="Save Changes" onPress={handleSaveChanges} />
       <View style={{ flex: 0.2 }} />
-      <BottomBar />
     </View>
   );
 };

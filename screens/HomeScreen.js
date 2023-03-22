@@ -1,24 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import "react-native-gesture-handler";
 import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import { getAuth, signOut } from "firebase/auth";
+import BazierLineChart from "./components/Graph";
 
 const HomeScreen = ({ navigation }) => {
   const user = getAuth();
+  let [profile, setProfile] = useState(null);
 
   const handleSignOut = () => {
-    signOut(user);
-    navigation.replace("LogInScreen");
+    signOut(user).then(()=>navigation.replace("LogInScreen"));
+    
+  };
+
+  const renderProfile = (result) => {
+    setProfile(JSON.parse(result));
   };
 
   return (
     <View style={{ backgroundColor: "#FFF", flex: 1 }}>
+      {/* Page title banner */}
       <SafeAreaView
         style={{
           backgroundColor: "#00a46c",
-          height: "30%",
+          height: "22%",
           borderBottomLeftRadius: 20,
           borderBottomRightRadius: 20,
           paddingHorizontal: 20,
@@ -29,37 +36,8 @@ const HomeScreen = ({ navigation }) => {
             flexDirection: "row",
             alignItems: "center",
             width: "100%",
-          }}
-        >
-          <View style={{ width: "80%", alignItems: "flex-start" }}>
-            <TouchableOpacity>
-              <Image
-                source={require("./images/menu.png")}
-                style={{ height: 25, width: 25, marginLeft: 15 }}
-              />
-            </TouchableOpacity>
-          </View>
-          <View
-            style={{ width: "18%", alignItems: "flex-end", marginRight: 15 }}
-          >
-            <TouchableOpacity onPress={handleSignOut}>
-              <Image
-                source={require("./images/log-out.png")}
-                style={{ height: 25, width: 25 }}
-              />
-              <Text style={{ fontSize: 8, color: "#FFF", fontWeight: "bold" }}>
-                Log Out
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            marginTop: 25,
             marginLeft: 15,
-            width: "100%",
+            marginTop: 15
           }}
         >
           <View style={{ width: "80%" }}>
@@ -70,11 +48,19 @@ const HomeScreen = ({ navigation }) => {
               {user.currentUser.email}
             </Text>
           </View>
-          <View style={{ width: "12%", alignItems: "flex-end" }}>
-            <Image
-              source={require("./images/pantry.png")}
-              style={{ height: 60, width: 60 }}
-            />
+          <View style={{ width: "20%" }}>
+            <TouchableOpacity
+              onPress={handleSignOut}
+              style={{ marginLeft: 15 }}
+            >
+              <Image
+                source={require("./images/log-out.png")}
+                style={{ height: 25, width: 25 }}
+              />
+              <Text style={{ fontSize: 8, color: "#FFF", fontWeight: "bold" }}>
+                Log Out
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
       </SafeAreaView>
@@ -84,11 +70,12 @@ const HomeScreen = ({ navigation }) => {
         style={{
           left: 0,
           right: 0,
-          height: 90,
-          marginTop: -45,
+          height: 80,
+          marginTop: -41,
         }}
       />
 
+      {/* Beginning of actual content */}
       <ScrollView vertical showsVerticalScrollIndicator={false}>
         <View
           style={{
@@ -98,6 +85,7 @@ const HomeScreen = ({ navigation }) => {
             alignItems: "center",
           }}
         >
+          {/* Calories-related content */}
           <View style={{ width: "50%" }}>
             <Text
               style={{
@@ -133,7 +121,7 @@ const HomeScreen = ({ navigation }) => {
                   color: "#FFF",
                 }}
               >
-                more
+                info
               </Text>
             </View>
             <View
@@ -147,13 +135,15 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </View>
 
+        {/* Calorie windows */}
+        {/* Each TouchableOpacity represents a window of data displayed */}
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
           style={{ height: 300 }}
         >
           <TouchableOpacity
-            onPress={() => navigation.navigate("LogFoodScreen")}
+            onPress={() => navigation.navigate("ChallengesViewScreen")}
             style={[styles.touchableWindow, styles.shadowProp]}
           >
             <Image source={require("./images/log-food.png")} />
@@ -203,6 +193,7 @@ const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
         </ScrollView>
 
+        {/* Analytics(progress)-related content */}
         <View
           style={{
             flexDirection: "row",
@@ -246,7 +237,7 @@ const HomeScreen = ({ navigation }) => {
                   color: "#FFF",
                 }}
               >
-                more
+                info
               </Text>
             </View>
             <View
@@ -260,6 +251,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </View>
 
+        {/* Analytics (progress) windows */}
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -269,7 +261,7 @@ const HomeScreen = ({ navigation }) => {
             onPress={() => navigation.navigate("LogFoodScreen")}
             style={[styles.touchableWindow, styles.shadowProp]}
           >
-            <Image source={require("./images/analytics.png")} />
+            <BazierLineChart />
             <View
               style={{
                 flexDirection: "row",
@@ -320,6 +312,7 @@ const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
         </ScrollView>
 
+        {/* Achievements-related content */}
         <View
           style={{
             flexDirection: "row",
@@ -363,7 +356,7 @@ const HomeScreen = ({ navigation }) => {
                   color: "#FFF",
                 }}
               >
-                more
+                info
               </Text>
             </View>
             <View
@@ -377,6 +370,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </View>
 
+        {/* Achievements windows */}
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
