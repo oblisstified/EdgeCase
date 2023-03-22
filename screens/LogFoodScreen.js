@@ -20,6 +20,7 @@ import { useNavigation } from "@react-navigation/native";
 import { findFoodObjects, findPresetObjects } from "../utils/searcher";
 import { saveMeal } from "../utils/saver";
 import { LinearGradient } from "expo-linear-gradient";
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const LogFoodScreen = () => {
   const nav = useNavigation();
@@ -183,10 +184,10 @@ const LogFoodScreen = () => {
               width: 260,
             }}
           />
-          <Image
-            source={require("./images/search.png")}
-            style={{ height: 20, width: 20 }}
-          />
+          <AntDesign testID="foodSearch" name = "search1" size = {25}  onPress={getMatches}> 
+           
+          </AntDesign>
+
         </View>
       </LinearGradient>
       <View
@@ -338,7 +339,7 @@ const LogFoodScreen = () => {
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
+         
           setModalVisible(!modalVisible);
         }}
       >
@@ -363,7 +364,7 @@ const LogFoodScreen = () => {
         transparent={false}
         visible={infoModal}
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
+       
           setInfoModal(!modalVisible);
         }}
       >
