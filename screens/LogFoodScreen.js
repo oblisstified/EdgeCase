@@ -152,7 +152,9 @@ const LogFoodScreen = () => {
               >
                 {basket.length} items
               </Text>
-              {saved && <Text style={{ color: "green" }}>Successfully saved!</Text>}
+              {saved && (
+                <Text style={{ color: "green" }}>Successfully saved!</Text>
+              )}
             </TouchableOpacity>
           </View>
         </View>
@@ -261,6 +263,7 @@ const LogFoodScreen = () => {
       {/* list of matches */}
       {!showPresets && (
         <FlatList
+          style={{ borderTopColor: "#e4e4e4", borderTopWidth: 1 }}
           testID="foodResultList"
           data={matches}
           keyExtractor={(item) => item["Description"]}
@@ -272,25 +275,35 @@ const LogFoodScreen = () => {
                 <View
                   style={{
                     flexDirection: "row",
-                    flexGrow: 2,
-                    alignItems: "space-between",
-                    alignSelf: "center",
+                    alignItems: "center",
+                    marginTop: 15,
+                    marginLeft: 10,
                   }}
                 >
-                  <Button
-                    title="i"
+                  <TouchableOpacity
                     onPress={() => {
                       setModalContent(match);
                       setInfoModal(true);
                     }}
-                  />
-                  <Button
-                    title="Add"
+                    style={[styles.shadowProp, {marginRight: 10}]}
+                  >
+                    <Image
+                      source={require("./images/info.png")}
+                      style={{ height: 15, width: 15 }}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity
                     onPress={() => {
                       setModalContent(match);
                       setModalVisible(true);
                     }}
-                  />
+                    style={styles.shadowProp}
+                  >
+                    <Image
+                      source={require("./images/add.png")}
+                      style={{ height: 40, width: 40 }}
+                    />
+                  </TouchableOpacity>
                 </View>
               }
             />
@@ -302,6 +315,7 @@ const LogFoodScreen = () => {
 
       {showPresets && (
         <FlatList
+          style={{ borderTopColor: "#e4e4e4", borderTopWidth: 1 }}
           data={presetMatches}
           keyExtractor={(item) => JSON.stringify(item)}
           renderItem={(item) => (
