@@ -152,7 +152,9 @@ const LogFoodScreen = () => {
               >
                 {basket.length} items
               </Text>
-              {saved && <Text style={{ color: "green" }}>Successfully saved!</Text>}
+              {saved && (
+                <Text style={{ color: "green" }}>Successfully saved!</Text>
+              )}
             </TouchableOpacity>
           </View>
         </View>
@@ -261,6 +263,7 @@ const LogFoodScreen = () => {
       {/* list of matches */}
       {!showPresets && (
         <FlatList
+          style={{ borderTopColor: "#e4e4e4", borderTopWidth: 1 }}
           testID="foodResultList"
           data={matches}
           keyExtractor={(item) => item["Description"]}
@@ -302,6 +305,7 @@ const LogFoodScreen = () => {
 
       {showPresets && (
         <FlatList
+          style={{ borderTopColor: "#e4e4e4", borderTopWidth: 1 }}
           data={presetMatches}
           keyExtractor={(item) => JSON.stringify(item)}
           renderItem={(item) => (
