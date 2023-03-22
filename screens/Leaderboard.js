@@ -67,7 +67,6 @@ const Leaderboard = ({navigation}) => {
                 <Row data={headers} style={styles.head} textStyle={styles.headText} />
                 <Rows data={allUsers} textStyle={styles.text} />
             </Table>
-            <BottomBar navigation={navigation}/>      
         </View>
     )
 }

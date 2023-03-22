@@ -80,7 +80,6 @@ const FriendRequestsScreen = ({route, navigation}) => {
                     </View>
                 )}
             />
-           <BottomBar />  
         </View>
     )
 }

@@ -56,7 +56,6 @@ const MedalsScreen = ({navigation}) => {
                 <Text>These are your medals</Text>
             </View>
             {completedChallenges && (<FlatList data={completedChallenges} ItemSeparatorComponent={separator} renderItem = {renderMedals}/>)}
-            <BottomBar navigation={navigation}/>
         </View>
     )
 }
