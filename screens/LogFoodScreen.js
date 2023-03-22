@@ -275,25 +275,35 @@ const LogFoodScreen = () => {
                 <View
                   style={{
                     flexDirection: "row",
-                    flexGrow: 2,
-                    alignItems: "space-between",
-                    alignSelf: "center",
+                    alignItems: "center",
+                    marginTop: 15,
+                    marginLeft: 10,
                   }}
                 >
-                  <Button
-                    title="i"
+                  <TouchableOpacity
                     onPress={() => {
                       setModalContent(match);
                       setInfoModal(true);
                     }}
-                  />
-                  <Button
-                    title="Add"
+                    style={[styles.shadowProp, {marginRight: 10}]}
+                  >
+                    <Image
+                      source={require("./images/info.png")}
+                      style={{ height: 15, width: 15 }}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity
                     onPress={() => {
                       setModalContent(match);
                       setModalVisible(true);
                     }}
-                  />
+                    style={styles.shadowProp}
+                  >
+                    <Image
+                      source={require("./images/add.png")}
+                      style={{ height: 40, width: 40 }}
+                    />
+                  </TouchableOpacity>
                 </View>
               }
             />
