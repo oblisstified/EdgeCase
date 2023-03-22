@@ -42,6 +42,7 @@ export default FoodView;
 
 const styles = StyleSheet.create({
   header: {
+    fontSize: 14,
     paddingTop: 5,
     marginHorizontal: 5,
   },
@@ -54,9 +55,10 @@ const styles = StyleSheet.create({
   displayInfo: {
     flex: 1,
     flexDirection: "row",
-    marginHorizontal: 2,
-    marginVertical: 2,
-    borderWidth: 2,
+    marginHorizontal: 5,
+    marginVertical: 5,
     borderRadius: 15,
+    backgroundColor: "#ededed",
+    paddingLeft: 5,
   },
 });
