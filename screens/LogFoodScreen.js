@@ -9,6 +9,8 @@ import {
   Image,
   Modal,
   DeviceEventEmitter,
+  TouchableOpacity,
+  Switch,
 } from "react-native";
 import { FlatList, TextInput } from "react-native-gesture-handler";
 import { getAuth } from "firebase/auth";
@@ -118,15 +120,40 @@ const LogFoodScreen = () => {
           style={{
             flexDirection: "row",
             alignItems: "center",
-            marginTop: 15,
+            marginTop: 5,
             marginLeft: 15,
             width: "100%",
           }}
         >
-          <View style={{ width: "80%" }}>
+          <View style={{ width: "75%" }}>
             <Text style={{ fontSize: 28, color: "#FFF", fontWeight: "bold" }}>
               Log Food
             </Text>
+          </View>
+          <View style={{ width: "20%" }}>
+            <TouchableOpacity
+              onPress={() =>
+                nav.push("FoodBasketScreen", { currentBasket: basket })
+              }
+              style={[
+                styles.shadowProp,
+                { justifyContent: "center", alignItems: "center" },
+              ]}
+            >
+              <Image
+                source={require("./images/basket.png")}
+                style={{ height: 40, width: 40 }}
+              />
+              <Text style={{ fontSize: 10, color: "#FFF", fontWeight: "bold" }}>
+                View Basket
+              </Text>
+              <Text
+                style={{ fontSize: 8, color: "#FFF", fontWeight: "normal" }}
+              >
+                {basket.length} items
+              </Text>
+              {saved && <Text style={{ color: "green" }}>Successfully saved!</Text>}
+            </TouchableOpacity>
           </View>
         </View>
       </SafeAreaView>
@@ -143,7 +170,7 @@ const LogFoodScreen = () => {
         {/* Search Bar */}
         <View style={[styles.searchBar, styles.shadowProp]}>
           <TextInput
-            placeholder="Search"
+            placeholder="Start typing a food..."
             placeholderTextColor="#737373"
             testID="foodSearchBar"
             onChangeText={(text) => {
@@ -162,22 +189,74 @@ const LogFoodScreen = () => {
           />
         </View>
       </LinearGradient>
-      <Button testID="foodSearch" title="search" onPress={getMatches} />
-      <Button
-        testID="searchPresetButton"
-        title="search custom presets"
-        onPress={() => {
-          setBasket([]);
-          setShowPresets(true);
-          getPresetMatches();
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          width: "100%",
+          marginTop: 0,
+          marginBottom: 10,
         }}
-      />
-      <Button
-        title="View Basket"
-        onPress={() => nav.push("FoodBasketScreen", { currentBasket: basket })}
-      />
-      <Text>{basket.length} items</Text>
-      {saved && <Text style={{ color: "green" }}>Successfully saved!</Text>}
+      >
+        <View style={{ width: "50%", alignItems: "flex-start" }}>
+          <TouchableOpacity
+            testID="foodSearch"
+            onPress={getMatches}
+            style={[
+              styles.shadowProp,
+              {
+                backgroundColor: "#00a46c",
+                paddingHorizontal: 20,
+                paddingVertical: 5,
+                borderRadius: 15,
+                marginLeft: 15,
+              },
+            ]}
+          >
+            <Text
+              style={{
+                fontWeight: "bold",
+                fontSize: 12,
+                color: "#FFF",
+                textAlign: "center",
+              }}
+            >
+              Search{"\n"}All Items
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ width: "50%", alignItems: "flex-end" }}>
+          <TouchableOpacity
+            testID="searchPresetButton"
+            onPress={() => {
+              setBasket([]);
+              setShowPresets(true);
+              getPresetMatches();
+            }}
+            style={[
+              styles.shadowProp,
+              {
+                backgroundColor: "#00a46c",
+                paddingHorizontal: 20,
+                paddingVertical: 5,
+                borderRadius: 15,
+                marginRight: 15,
+              },
+            ]}
+          >
+            <Text
+              style={{
+                fontWeight: "bold",
+                fontSize: 12,
+                color: "#FFF",
+                textAlign: "center",
+              }}
+            >
+              Search{"\n"}Custom Presets
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
 
       {/* list of matches */}
       {!showPresets && (
@@ -320,9 +399,9 @@ const styles = StyleSheet.create({
   infoModal: {},
   shadowProp: {
     shadowColor: "#171717",
-    shadowOffset: { width: -2, height: 2 },
+    shadowOffset: { width: -4, height: 4 },
     shadowOpacity: 0.2,
-    shadowRadius: 3,
+    shadowRadius: 4,
   },
   searchBar: {
     backgroundColor: "#FFF",
@@ -334,4 +413,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+  searchButton: {},
 });
