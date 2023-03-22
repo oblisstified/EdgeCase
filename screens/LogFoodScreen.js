@@ -285,7 +285,7 @@ const LogFoodScreen = () => {
                       setModalContent(match);
                       setInfoModal(true);
                     }}
-                    style={[styles.shadowProp, {marginRight: 10}]}
+                    style={[styles.shadowProp, { marginRight: 10 }]}
                   >
                     <Image
                       source={require("./images/info.png")}
@@ -319,25 +319,36 @@ const LogFoodScreen = () => {
           data={presetMatches}
           keyExtractor={(item) => JSON.stringify(item)}
           renderItem={(item) => (
-            <View style={{ flex: 1, flexDirection: "column" }}>
-              <View style={{ alignSelf: "flex-start" }}>
-                <Text>{item.item.metaData.presetName}</Text>
+            <View style={styles.displayInfo}>
+              <View
+                style={{ flex: 3, alignSelf: "flex-start", marginLeft: 10 }}
+              >
+                <View>
+                  <Text style={[styles.header, {marginTop: 20}]}>
+                    {item.item.metaData.presetName}
+                  </Text>
+                </View>
               </View>
-              <View>
+              <View style={{ flex: 1 }}>
                 <View
                   style={{
                     flexDirection: "row",
-                    flexGrow: 2,
-                    alignItems: "space-between",
-                    alignSelf: "center",
+                    alignItems: "center",
+                    marginTop: 15,
+                    marginLeft: 35,
                   }}
                 >
-                  <Button
-                    title="Add"
+                  <TouchableOpacity
                     onPress={() => {
                       saveItem(item.item, true);
                     }}
-                  />
+                    style={styles.shadowProp}
+                  >
+                    <Image
+                      source={require("./images/add.png")}
+                      style={{ height: 40, width: 40 }}
+                    />
+                  </TouchableOpacity>
                 </View>
               </View>
             </View>
@@ -428,4 +439,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   searchButton: {},
+  header: {
+    fontSize: 14,
+    paddingTop: 5,
+    marginHorizontal: 5,
+    marginTop: 12,
+  },
+  displayInfo: {
+    flex: 1,
+    flexDirection: "row",
+    marginHorizontal: 5,
+    marginVertical: 5,
+    borderRadius: 15,
+    backgroundColor: "#ededed",
+    paddingLeft: 5,
+    height: 70,
+  },
 });
