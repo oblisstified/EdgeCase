@@ -16,7 +16,7 @@ const SocialScreen = ({navigation}) => {
     return(
             <View style={{flex:0}}>
                 <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
-                <ScrollView style={{marginBottom: '10%',}}>
+                
                     <TouchableOpacity style={styles.displayInfo} onPress={() => navigation.navigate('ChallengesViewScreen')}>
                     <Image source={{uri: "https://images.pexels.com/photos/6345328/pexels-photo-6345328.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}} style = {{ width: '90%', height: 200 }}/>
                     <Text>Challenges & Achievements</Text>
@@ -31,8 +31,8 @@ const SocialScreen = ({navigation}) => {
                     <Image source={{uri: "https://images.pexels.com/photos/1000445/pexels-photo-1000445.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}}style = {{ width: '90%', height: 200 }}/>
                     <Text>Communities</Text>
                     </TouchableOpacity>
+                    
                     <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
-                </ScrollView>
             </View>
         
     );
