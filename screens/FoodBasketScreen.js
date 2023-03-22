@@ -70,7 +70,7 @@ const FoodBasketScreen = props => {
 
             <Button  testID="saveButton" title="save" onPress={saveBasket} />
             <Button testID="savePresetButton" title="Save Preset" onPress={savePreset} />
-            <TextInput placeholder="preset name" onChangeText={setDescription}/>
+            <TextInput testID="nameBar" placeholder="preset name" onChangeText={setDescription}/>
             {presetNameError && <Text style={{color:"red"}}>Preset needs a name to be saved</Text> }
             {presetSaved && <Text style={{color:"green"}}>Preset saved!</Text> }
 

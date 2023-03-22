@@ -18,8 +18,6 @@ const WritePost = ({ route, navigation }) => {
   let [postSaved, setPostSaved] = useState(false);
 
   console.log(route.params["communityId"])
-  const communityId = route.params["communityId"];
-
 
   async function onPressSavePost(){
     
@@ -48,6 +46,7 @@ const WritePost = ({ route, navigation }) => {
     <View style={styles.container}>
       <Text style={styles.label}>Title</Text>
       <TextInput
+        testID="titleInput"
         style={styles.input}
         value={title}
         onChangeText={setTitle}
@@ -55,15 +54,16 @@ const WritePost = ({ route, navigation }) => {
       />
       <Text style={styles.label}>Content</Text>
       <TextInput
+        testID="contentInput"
         style={[styles.input, styles.contentInput]}
         value={content}
         onChangeText={ setContent }
         placeholder="Enter post content"
         multiline
       />
-      <TouchableOpacity style={styles.saveButton} onPress={onPressSavePost}>
+      <TouchableOpacity testID="saveButton" style={styles.saveButton} onPress={onPressSavePost}>
         <Text style={styles.saveButtonText}>Save Post</Text>
-        { postSaved && <Text style={{color:"green"}}> Saved!!</Text>}
+        <View testID="postSaved">{ postSaved && <Text style={{color:"green"}}> Saved!!</Text>}</View>
       </TouchableOpacity>
     </View>
   );

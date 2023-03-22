@@ -109,7 +109,6 @@ const LogFoodScreen = ({ navigation }) => {
     saving = true;
     if (!isPreset) {
       if (basket.length == 0) return;
-
       success = saveMeal(basket, email, isPreset);
     } else {
       success = saveMeal(foodObject, email, isPreset);
@@ -179,6 +178,7 @@ const LogFoodScreen = ({ navigation }) => {
       {/* Search Options */}
       <Button testID="foodSearch" title="search" onPress={getMatches} />
       <Button
+        testID="searchPresetButton"
         title="search custom presets"
         onPress={() => {
           setBasket([]);
@@ -190,7 +190,7 @@ const LogFoodScreen = ({ navigation }) => {
         title="View Basket"
         onPress={() => nav.push("FoodBasketScreen", { currentBasket: basket })}
       />
-      <Text>{basket.length} items</Text>
+      <Text testID="basketSize">{basket.length} items</Text>
       {saved && <Text style={{ color: "green" }}>Successfully saved!</Text>}
 
       {/* list of matches */}
@@ -205,6 +205,7 @@ const LogFoodScreen = ({ navigation }) => {
               // these buttons are rendered in the FoodView component
               button={
                 <View
+                  
                   style={{
                     flexDirection: "row",
                     flexGrow: 2,
@@ -220,6 +221,7 @@ const LogFoodScreen = ({ navigation }) => {
                     }}
                   />
                   <Button
+                    testID={ match.item["Description"] }
                     title="Add"
                     onPress={() => {
                       setModalContent(match);
@@ -282,6 +284,7 @@ const LogFoodScreen = ({ navigation }) => {
           foodDetails={modalContent}
           hideButton={
             <Button
+              testID="hideModal"
               title="Hide Modal"
               onPress={() => {
                 setModalVisible(false);
