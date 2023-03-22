@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import 'react-native-gesture-handler';
-import { StyleSheet, Text, View, Button, TouchableOpacity,FlatList } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity,FlatList,SafeAreaView } from 'react-native';
 import { TextInput } from "react-native-gesture-handler";
 import { getAuth, signOut } from 'firebase/auth';
 import { collection, getDocs,updateDoc,doc,getDoc} from 'firebase/firestore/lite';
@@ -58,11 +58,38 @@ const AllUsersScreen = ({route, navigation}) => {
   return (
     <View style = {{flex:1}}  testID="AllUsersScreen">
        
-            <View>
-                <Text>hello {user.email}</Text>
-            </View>
-          
-            <View style = {{flex:0.7}}>
+
+        <SafeAreaView 
+        style={{
+          flex:0.15,
+          backgroundColor: "#00a46c",
+          height: "22%",
+          borderBottomLeftRadius: 20,
+          borderBottomRightRadius: 20,
+          paddingHorizontal: 20,
+        }}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            width: "100%",
+            marginLeft: 15,
+            marginTop: 15
+          }}
+        >
+          <View style={{ width: "80%" }}>
+            <Text style={{ fontSize: 28, color: "#FFF", fontWeight: "bold" }}>
+              Add Friends
+            </Text>
+            <Text style={{ fontSize: 20, color: "#FFF", fontWeight: "normal" }}>
+              Send a friend request ;)
+            </Text>
+          </View>
+
+        </View>
+      </SafeAreaView>
+            <View style = {{flex:0.7,paddingTop:40}}>
                 <FlatList
                         testID = "flatlist"
                         data={userList.filter(item => item.email.trim() != user.email)}
@@ -85,7 +112,7 @@ const AllUsersScreen = ({route, navigation}) => {
                         )}
                     />
             </View>
-            <View style={styles.ButtonContainer}>
+            {/* <View style={styles.ButtonContainer}>
               <TouchableOpacity onPress={() => navigation.replace("FriendRequestsScreen")}>
                 <View style = {styles.button}>
                   <Text> View Friend Requests</Text>
@@ -97,7 +124,7 @@ const AllUsersScreen = ({route, navigation}) => {
                 </View>
               </TouchableOpacity>
 
-            </View>
+            </View> */}
               
             <BottomBar />     
     </View>

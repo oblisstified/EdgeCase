@@ -25,6 +25,7 @@ import { useNavigation } from "@react-navigation/native";
 import { findFoodObjects, findPresetObjects } from "../utils/searcher";
 import { saveMeal } from "../utils/saver";
 import { LinearGradient } from "expo-linear-gradient";
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const LogFoodScreen = ({ navigation }) => {
   const nav = useNavigation();
@@ -169,16 +170,15 @@ const LogFoodScreen = ({ navigation }) => {
               width: 260,
             }}
           />
-          <Image
-            source={require("./images/search.png")}
-            style={{ height: 20, width: 20 }}
-          />
+          <AntDesign testID="foodSearch" name = "search1" size = {25}  onPress={getMatches}> 
+           
+          </AntDesign>
+
         </View>
       </LinearGradient>
 
       {/* Search Options */}
-      <Button testID="foodSearch" title="search" onPress={getMatches} />
-      <Button
+      <TouchableOpacity
         title="search custom presets"
         onPress={() => {
           setBasket([]);
@@ -186,7 +186,7 @@ const LogFoodScreen = ({ navigation }) => {
           getPresetMatches();
         }}
       />
-      <Button
+      <TouchableOpacity
         title="View Basket"
         onPress={() => nav.push("FoodBasketScreen", { currentBasket: basket })}
       />

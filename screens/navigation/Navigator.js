@@ -27,6 +27,7 @@ import MedalsScreen from '../MedalsScreen';
 import CommunityScreen from '../CommunityScreen';
 import CommunityFeed from '../CommunityFeed';
 import AnalyticsScreen from '../AnalyticsScreen';
+import WritePost from '../WritePost';
 
 
 
@@ -152,6 +153,7 @@ const HomeStackNavigator = () => {
       <Stack.Screen name="CommunityScreen" component={CommunityScreen} />
       <Stack.Screen name="CommunityFeed" component={CommunityFeed} />
       <Stack.Screen name="AnalyticsScreen" component={AnalyticsScreen} />
+      <Stack.Screen name="WritePost" component={WritePost} />
 
     </Stack.Navigator>
   );

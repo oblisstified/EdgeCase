@@ -84,8 +84,8 @@ const ProfileScreen = ({ route, navigation }) => {
         testID = "editProfile"
         onPress={() => navigation.replace("EditProfileScreen")}
       />
-      <View style={{ flex: 0.5 }} />
-      <BottomBar />
+     
+      
     </View>
   );
 };
