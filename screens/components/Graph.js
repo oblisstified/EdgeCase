@@ -1,18 +1,34 @@
 import { LineChart } from 'react-native-chart-kit';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 
-import { getDataArray } from '../../utils/analytics'
+import { getDataArray, getMacroObject } from '../../utils/analytics'
 import { getAuth } from 'firebase/auth'
 
 
 const BazierLineChart = () => {
 
   let [dataList, setDataList] = useState([])
+  let [macroObject, setMacroObject] = useState(null)
 
-  const email = getAuth().currentUser.email;
+  let email;
+  if(getAuth().currentUser)email = getAuth().currentUser.email;
+
+
+
+  useEffect(() => {
+
+    async function pullData(){
+      let object = await getMacroObject(email);
+
+      setMacroObject(object)
+    }
+    pullData()
+  }, []);
+
   const today = (new Date(Date.now())).toDateString();
   
+  // 
   getDataArray(email, today, 7, "Calories").then((info) => setDataList(info))
 
   let data = {

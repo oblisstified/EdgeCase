@@ -36,11 +36,11 @@ const Page2 = ({navigation}) => {
     <View>
       <Text>What is your height (in meters):</Text>
       <View style={styles.displayInfo}>
-      <TextInput style={styles.input} placeholder="Height" onChangeText={setHeight} keyboardType='numeric' maxLength={5}/>
+      <TextInput style={styles.input} placeholder="Height" onChangeText={setHeight} keyboardType='number-pad' maxLength={5}/>
       </View>
       <Text>What is your weight (in kilograms):</Text>
       <View style={styles.displayInfo}>
-      <TextInput style={styles.input} placeholder="Weight" onChangeText={setWeight} keyboardType='numeric' maxLength={5}/>
+      <TextInput style={styles.input} placeholder="Weight" onChangeText={setWeight} keyboardType='number-pad' maxLength={5}/>
       </View>
       <Button title="Prev" onPress={() => navigation.goBack() }/>
       <Button title="Next" onPress={saveDataandSwitch}/>

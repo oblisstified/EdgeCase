@@ -28,7 +28,7 @@ const CommunityFeed = ({route, navigation }) => {
   }, []);
       
   const onPressAddPost = () => {
-    navigation.navigate('WritePost', { communityId });
+    navigation.replace('WritePost', { communityId });
 };
 
 
