@@ -3,7 +3,6 @@ import firebase from 'firebase/app';
 import 'react-native-gesture-handler';
 import 'firebase/firestore';
 import { Animated, Image, StyleSheet, Text, View, FlatList,TouchableOpacity, ImageBackground } from 'react-native';
-import BottomBar from "./components/BottomBar";
 import { db } from "./../firebase";
 import { collection, getDocs, query, where } from 'firebase/firestore/lite';
 import { getAuth } from 'firebase/auth';
@@ -55,7 +54,6 @@ const CommunityFeed = ({route, navigation }) => {
               </View>)}
           />
     </View>
-    <BottomBar />
     </View>
   );
 }

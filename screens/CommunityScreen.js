@@ -4,7 +4,6 @@ import { Animated, Image, StyleSheet, Text, View, FlatList,TouchableOpacity, Ima
 import { db } from "../firebase";
 import { getAuth } from 'firebase/auth'
 import { collection, getDocs } from 'firebase/firestore/lite';
-import BottomBar from './components/BottomBar'
 import { ScrollView } from "react-native-gesture-handler";
 
 import { getPosts } from "../utils/addPost";

@@ -100,7 +100,7 @@ const OtherUserProfileScreen = ({route, navigation}) => {
 
             <View  style = {{flex:0.8}}testID = "scrollView">
                 <View  style={{ flex: 1,alignItems: "center" }}>
-                    <FontAwesome style={{padding:10}} name = "user-circle-o" size = {150} color={"#98fb98"} />
+                    <FontAwesome style={{padding:10}} name = "user-circle-o" size = {150}  color={"#00a46c"} />
                 </View>
                 <View style = {{flexDirection : 'row', justifyContent: 'space-between',padding:10, marginHorizontal: 100}}>
                     <View>
@@ -131,7 +131,7 @@ const OtherUserProfileScreen = ({route, navigation}) => {
                         <Text style={styles.time}>{post.item.post.date}</Text>
               </View>)}
           />
-            <BottomBar />
+        
         </View>
         
     )

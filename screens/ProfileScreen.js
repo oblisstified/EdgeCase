@@ -108,49 +108,7 @@ const ProfileScreen = ({ route, navigation }) => {
  
                 </View>
           
-      </View >
-
-      {/* <ScrollView style={{ maxHeight: "90%" }} testID = "scrollView">
-      <TouchableOpacity style={styles.button} onPress={() => navigation.replace("MedalsScreen")}>
-            <Icon name="medal" size={24} color="#000" />
-            <Text style={styles.buttonText}>View Medals</Text>
-      </TouchableOpacity>
-        <View style={styles.displayInfo} testID = "scrollViewChild">
-          <CustomText>Name:</CustomText>
-          <CustomText> {userData.name} </CustomText>
-        </View>
-        <View style={styles.displayInfo} testID = "scrollViewChild">
-          <CustomText>Age:</CustomText>
-          <CustomText> {userData.age} </CustomText>
-        </View>
-        <View style={styles.displayInfo}testID = "scrollViewChild">
-          <CustomText>Gender:</CustomText>
-          <CustomText> {userData.gender} </CustomText>
-        </View>
-        <View style={styles.displayInfo}testID = "scrollViewChild">
-          <CustomText>Height:</CustomText>
-          <CustomText> {userData.height} </CustomText>
-        </View>
-
-        <View style={styles.displayInfo}>
-          <CustomText>Weight:</CustomText>
-          <CustomText> {userData.weight}</CustomText>
-        </View>
-        <View style={styles.displayInfo}>
-          <CustomText>Activity:</CustomText>
-          <CustomText> {userData.activity}</CustomText>
-        </View>
-        <View style={styles.displayInfo}>
-          <CustomText>Goal:</CustomText>
-          <CustomText> {userData.goal}</CustomText>
-        </View>
-        <View style={styles.displayInfo}>
-          <CustomText>Calorie Goal:</CustomText>
-
-          <CustomText> {}</CustomText>
-        </View>
-      </ScrollView> */}
- 
+      </View > 
       <TouchableOpacity
          style={{
           backgroundColor: "#00a46c",
@@ -186,7 +144,7 @@ const ProfileScreen = ({ route, navigation }) => {
                         <Text style={styles.time}>{post.item.post.date}</Text>
               </View>)}
           />
-       <BottomBar />  
+   
    
     </View>
   );

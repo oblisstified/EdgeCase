@@ -19,12 +19,11 @@ jest.mock("@react-navigation/native", () => {
 
 it('Test components are rendered', () => {
     const { getByPlaceholderText, getByText, getByTestId,queryAllByTestId } =render(<OtherUserProfileScreen route={{ params: { email: 'test@example.com' } }} />);
-    expect(getByText(`Name:`)).toBeDefined();
-    expect(getByText(`Age:`)).toBeDefined();
-    expect(getByText(`Gender:`)).toBeDefined();
-    expect(getByText(`Height:`)).toBeDefined();
+    expect(getByText(`Name`)).toBeDefined();
+    expect(getByText(`Posts`)).toBeDefined();
+    expect(getByText(`Friends`)).toBeDefined();
 
-    expect(getByText( `test@example.com's profile`)).toBeDefined();
+
 
 
 

@@ -126,7 +126,7 @@ const AllUsersScreen = ({route, navigation}) => {
 
             </View>
               
-            <BottomBar />     
+           
     </View>
 )
 

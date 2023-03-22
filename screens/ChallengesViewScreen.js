@@ -171,7 +171,6 @@ const ChallengesViewScreen = ({navigation}) => {
                 <Button onPress={() => setCompleted(true)} title="Completed"/> 
             </View>
             {challenges && (<FlatList data={challenges} contentContainerStyle={{ paddingBottom: 150 }} renderItem = {renderChallenges}/>)}
-            <BottomBar navigation={navigation}/>        
         </View>
     )
 }

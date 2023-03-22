@@ -117,7 +117,7 @@ const FriendRequestsScreen = ({route, navigation}) => {
                         </View>
                     )}
                 />
-           
+          
           
         </View>
     )

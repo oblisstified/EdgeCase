@@ -145,7 +145,7 @@ const EditProfileScreen = ({ route, navigation }) => {
         </View>
      
       </TouchableOpacity> 
-      <BottomBar />
+   
      
     </View>
   );

@@ -259,7 +259,7 @@ const HomeScreen = ({ navigation }) => {
           style={{ height: 300 }}
         >
           <TouchableOpacity
-            onPress={() => navigation.navigate("AnalyticsScreen")}
+            onPress={() => navigation.navigate("LogFoodScreen")}
             style={[styles.touchableWindow, styles.shadowProp]}
           >
             <BazierLineChart />
