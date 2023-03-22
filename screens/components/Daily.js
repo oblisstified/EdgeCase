@@ -1,13 +1,14 @@
 import { ProgressChart } from 'react-native-chart-kit';
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, Dimensions } from 'react-native';
-
 import { getAuth } from 'firebase/auth';
-import { getDataArray, getUserProgress } from '../../utils/analytics';
+import { getDataArray, getUserProgress, getMacroObject, getTodaysCalories, getCalorieGoal  } from '../../utils/analytics';
 
 const MyProgressChart = () => {
 
   let [challengesCompleted, setChallengesCompleted] = useState(0)
+  let [caloriesEaten, setCaloriesEaten] = useState(0)
+  let [goalProgression, setGoalProgression] = useState(0)
 
   const screenWidth = Dimensions.get("window").width;
 
@@ -15,13 +16,14 @@ const MyProgressChart = () => {
   const today = (new Date(Date.now())).toDateString();
   
   getUserProgress(email).then((info) => setChallengesCompleted(info))
+  getTodaysCalories(email).then((info) => setCaloriesEaten(info))
+  getCalorieGoal(email).then((info) => setGoalProgression(info))
 
   let data = {
-    labels: ['Goal', 'Food', 'Challenges'],
-    data: [0.2, 0.3, challengesCompleted],
+    labels: ['Challenges', 'Food', 'Goal'],
+    data: [challengesCompleted, caloriesEaten, goalProgression ],
   };
 
-  
   
   return (
           

@@ -70,13 +70,15 @@ async function getCalorieGoal(email){
     const age = userDataObj.age;
     const gender = userDataObj.gender;
 
-    if(!goal | !height | !weight | !age | !gender) return 2500;
+    console.log("before")
+    if(!goal | !height | !weight | !age | !gender) return 2500 ;
+    console.log("after")
 
     let dailyCalories;
     if(gender=="M"){
-        dailyCalories = 665 + (9.6 * weight) + (1.8 * height) - (4.7 * age);
+        dailyCalories = 665 + (9.6 * weight) + (180 * height) - (4.7 * age);
     } else {
-        dailyCalories = 66 + (13.7 * weight) + (5 * height) - (6.8 * age);
+        dailyCalories = 66 + (13.7 * weight) + (500 * height) - (6.8 * age);
     }
 
     if(goal == "Gain Weight"){
@@ -225,4 +227,4 @@ async function getUserProgress(email){
 
 }
 
-export { getDataArray, getCalorieGoal, daysCalorieGoalMet, getSavedPresets, getMacroObject }
+export { getDataArray, getCalorieGoal, daysCalorieGoalMet, getSavedPresets, getMacroObject, getUserProgress, getTodaysCalories }

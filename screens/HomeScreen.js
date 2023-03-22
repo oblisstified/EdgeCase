@@ -5,6 +5,11 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import { getAuth, signOut } from "firebase/auth";
 import BazierLineChart from "./components/Graph";
+import MyProgressChart from "./components/Daily";
+import MyMacroChart from "./components/Macro";
+
+
+
 
 const HomeScreen = ({ navigation }) => {
   const user = getAuth();
@@ -270,7 +275,7 @@ const HomeScreen = ({ navigation }) => {
               }}
             >
               <Text style={{ fontWeight: "bold", textAlign: "center" }}>
-                Calories-Consumed Graph{"\n"}(per day)
+                Calorie Intake Tracker{"\n"}(per day)
               </Text>
             </View>
           </TouchableOpacity>
@@ -279,7 +284,7 @@ const HomeScreen = ({ navigation }) => {
             onPress={() => navigation.navigate("LogFoodScreen")}
             style={[styles.touchableWindow, styles.shadowProp]}
           >
-            <Image source={require("./images/analytics.png")} />
+            <MyProgressChart/>
             <View
               style={{
                 flexDirection: "row",
@@ -288,7 +293,7 @@ const HomeScreen = ({ navigation }) => {
               }}
             >
               <Text style={{ fontWeight: "bold", textAlign: "center" }}>
-                Weight Graph{"\n"}(per month)
+                The Road to Healthy Eating{"\n"}
               </Text>
             </View>
           </TouchableOpacity>
@@ -297,7 +302,7 @@ const HomeScreen = ({ navigation }) => {
             onPress={() => navigation.navigate("LogFoodScreen")}
             style={[styles.touchableWindow, styles.shadowProp]}
           >
-            <Image source={require("./images/analytics.png")} />
+            <MyMacroChart/>
             <View
               style={{
                 flexDirection: "row",
@@ -306,7 +311,7 @@ const HomeScreen = ({ navigation }) => {
               }}
             >
               <Text style={{ fontWeight: "bold", textAlign: "center" }}>
-                Etc. Etc. ...
+                Nutritional Information
               </Text>
             </View>
           </TouchableOpacity>
