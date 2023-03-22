@@ -319,7 +319,7 @@ const LogFoodScreen = () => {
           data={presetMatches}
           keyExtractor={(item) => JSON.stringify(item)}
           renderItem={(item) => (
-            <View style={styles.displayInfo}>
+            <View style={[styles.displayInfo, {flexDirection: "row"}]}>
               <View
                 style={{ flex: 3, alignSelf: "flex-start", marginLeft: 10 }}
               >
@@ -358,7 +358,7 @@ const LogFoodScreen = () => {
 
       {/* Popup for logging modal */}
       <Modal
-        style={styles.infoModal}
+        style={{}}
         animationType="slide"
         transparent={true}
         visible={modalVisible}
@@ -371,12 +371,32 @@ const LogFoodScreen = () => {
           testID="foodModal"
           foodDetails={modalContent}
           hideButton={
-            <Button
-              title="Hide Modal"
+            <TouchableOpacity
               onPress={() => {
                 setModalVisible(false);
               }}
-            />
+              style={[
+                styles.shadowProp,
+                {
+                  backgroundColor: "#00a46c",
+                  paddingHorizontal: 20,
+                  paddingVertical: 5,
+                  borderRadius: 15,
+                  marginRight: 15,
+                },
+              ]}
+            >
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  fontSize: 26,
+                  color: "#FFF",
+                  textAlign: "center",
+                }}
+              >
+                Hide
+              </Text>
+            </TouchableOpacity>
           }
           // this prop will be used as a callback to update the basket from the modal
           addToBasket={(f) => addToBasket(f)}
@@ -384,35 +404,69 @@ const LogFoodScreen = () => {
       </Modal>
 
       <Modal
+        style={{paddingTop:50}}
         animationType="slide"
-        transparent={false}
+        transparent={true}
         visible={infoModal}
         onRequestClose={() => {
           Alert.alert("Modal has been closed.");
           setInfoModal(!modalVisible);
         }}
       >
-        <Text>Values per 100g</Text>
-        <Text>
-          Name: {modalContent && modalContent.item["Description"]}
-          {modalContent && console.log(modalContent)}
-        </Text>
-        <Text>Calories: {modalContent && modalContent.item["Calories"]}</Text>
-        <Text>Protein: {modalContent && modalContent.item["Protein"]}</Text>
-        <Text>Sugar: {modalContent && modalContent.item["Sugar"]}</Text>
-        <Text>Fiber: {modalContent && modalContent.item["Fiber"]}</Text>
-        <Text>
-          Monounsaturated Fat:{" "}
-          {modalContent && modalContent.item["Monounsaturated Fat"]}
-        </Text>
-        <Text>
-          Polyunsaturated Fats":{" "}
-          {modalContent && modalContent.item["Polyunsaturated Fats"]}
-        </Text>
-        <Text>
-          Saturated Fat: {modalContent && modalContent.item["Saturated Fat"]}
-        </Text>
-        <Button title="hide" onPress={() => setInfoModal(false)} />
+          <View style={styles.infoModal}>
+            <View style={styles.displayInfo}>
+              <View>
+                <Text style={[styles.infoText, {textDecorationLine: 'underline'}]}>
+                  {modalContent && modalContent.item["Description"]
+                    .toLowerCase() // makes every letter lowercase
+                    .replace(/,/g, ", ") // replaces every "," with a ", "
+                    .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase())} (per 100g)
+                </Text>
+                <Text style={styles.infoText}>Calories: {modalContent && modalContent.item["Calories"]}</Text>
+                <Text style={styles.infoText}>Protein: {modalContent && modalContent.item["Protein"]}</Text>
+                <Text style={styles.infoText}>Sugar: {modalContent && modalContent.item["Sugar"]}</Text>
+                <Text style={styles.infoText}>Fiber: {modalContent && modalContent.item["Fiber"]}</Text>
+                <Text style={styles.infoText}>
+                  Monounsaturated Fat:{" "}
+                  {modalContent && modalContent.item["Monounsaturated Fat"]}
+                </Text>
+                <Text style={styles.infoText}>
+                  Polyunsaturated Fats:{" "}
+                  {modalContent && modalContent.item["Polyunsaturated Fats"]}
+                </Text>
+                <Text style={styles.infoText}>
+                  Saturated Fat: {modalContent && modalContent.item["Saturated Fat"]}
+                </Text>
+              </View>
+              <TouchableOpacity
+                testID="searchPresetButton"
+                onPress={() => {
+                  setInfoModal(false);
+                }}
+                style={[
+                  styles.shadowProp,
+                  {
+                    backgroundColor: "#00a46c",
+                    paddingHorizontal: 20,
+                    paddingVertical: 5,
+                    borderRadius: 15,
+                    marginRight: 15,
+                  },
+                ]}
+              >
+                <Text
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: 26,
+                    color: "#FFF",
+                    textAlign: "center",
+                  }}
+                >
+                Hide
+              </Text>
+            </TouchableOpacity>
+            </View>
+          </View>
       </Modal>
     </View>
   );
@@ -421,7 +475,10 @@ const LogFoodScreen = () => {
 export default LogFoodScreen;
 
 const styles = StyleSheet.create({
-  infoModal: {},
+  infoModal: {
+    flex:1,
+    marginTop: 200,
+  },
   shadowProp: {
     shadowColor: "#171717",
     shadowOffset: { width: -4, height: 4 },
@@ -446,13 +503,18 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   displayInfo: {
-    flex: 1,
-    flexDirection: "row",
+    flex: 1.2,
+    flexDirection: "column",
     marginHorizontal: 5,
     marginVertical: 5,
     borderRadius: 15,
     backgroundColor: "#ededed",
     paddingLeft: 5,
     height: 70,
+    justifyContent:"space-around",
   },
+  infoText: {
+    fontSize:20,
+    paddingLeft: 20
+  }
 });
