@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import 'react-native-gesture-handler';
-import { StyleSheet, Text, View, Button, TouchableOpacity,FlatList } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity,FlatList,SafeAreaView } from 'react-native';
 import BottomBar from "./components/BottomBar";
 import {Directions, TextInput } from "react-native-gesture-handler";
 import { getAuth } from 'firebase/auth'
@@ -29,10 +29,39 @@ const FriendsScreen = ({route, navigation}) => {
 
 
     return(
-        <View>
-        <View >
+        <View style = {{flex:1}}>
+             <SafeAreaView 
+        style={{
+          flex:0.15,
+          backgroundColor: "#00a46c",
+          height: "22%",
+          borderBottomLeftRadius: 20,
+          borderBottomRightRadius: 20,
+          paddingHorizontal: 20,
+        }}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            width: "100%",
+            marginLeft: 15,
+            marginTop: 15
+          }}
+        >
+          <View style={{ width: "80%" }}>
+            <Text style={{ fontSize: 28, color: "#FFF", fontWeight: "bold" }}>
+              View Friends
+            </Text>
+            <Text style={{ fontSize: 20, color: "#FFF", fontWeight: "normal" }}>
+              Here is a list of your friends
+            </Text>
+          </View>
+
+        </View>
+      </SafeAreaView>
+       
             <Text>You have {friendsList.length} friends</Text>
-            <Text>Friends:</Text>
            <FlatList
                
                 data={friendsList}
@@ -45,8 +74,9 @@ const FriendsScreen = ({route, navigation}) => {
                     </View>
                 )}
             />
-        </View>
-        <BottomBar /> 
+            <BottomBar />  
+       
+
         </View>
     )
 }

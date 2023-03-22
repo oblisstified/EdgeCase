@@ -47,7 +47,7 @@ const AllUsersScreen = ({route, navigation}) => {
   }
 
   function goToUserProfile(email){
-    navigation.replace("OtherUserProfileScreen", {email: email});
+    navigation.navigate("OtherUserProfileScreen", {email: email});
     
   }
 
@@ -83,7 +83,7 @@ const AllUsersScreen = ({route, navigation}) => {
               Add Friends
             </Text>
             <Text style={{ fontSize: 20, color: "#FFF", fontWeight: "normal" }}>
-              Send a friend request ;)
+              Send a friend request 
             </Text>
           </View>
 
@@ -112,19 +112,19 @@ const AllUsersScreen = ({route, navigation}) => {
                         )}
                     />
             </View>
-            {/* <View style={styles.ButtonContainer}>
-              <TouchableOpacity onPress={() => navigation.replace("FriendRequestsScreen")}>
+            <View style={styles.ButtonContainer}>
+              <TouchableOpacity onPress={() => navigation.navigate("FriendRequestsScreen")}>
                 <View style = {styles.button}>
-                  <Text> View Friend Requests</Text>
+                  <Text style = {styles.text}> View Friend Requests</Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => navigation.replace("FriendsScreen")}>
+              <TouchableOpacity onPress={() => navigation.navigate("FriendsScreen")}>
                 <View style = {styles.button}>
-                  <Text> View Friends </Text>
+                  <Text style = {styles.text}> View Friends </Text>
                 </View>
               </TouchableOpacity>
 
-            </View> */}
+            </View>
               
             <BottomBar />     
     </View>
@@ -154,12 +154,19 @@ const styles = StyleSheet.create({
       padding:25,
     },
     button:{
-      borderWidth:1,
-      padding:20,
-      borderRadius:30,
+      
+        backgroundColor: "#00a46c",
+        paddingHorizontal: 20,
+        paddingVertical: 5,
+        borderRadius: 15,
 
     
-      }
+      },
+      text: {
+        fontWeight: "bold",
+                  fontSize: 15,
+                  color: "#FFF",
+      },
 
  
 })

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "react-native-gesture-handler";
 import {
   SafeAreaView,
@@ -7,27 +7,21 @@ import {
   View,
   Button,
   Image,
-  ScrollView,
   Modal,
-  Touchable,
-  TouchableOpacity,
   DeviceEventEmitter,
+  TouchableOpacity,
 } from "react-native";
-import BottomBar from "./components/BottomBar";
-
 import { FlatList, TextInput } from "react-native-gesture-handler";
-
 import { getAuth } from "firebase/auth";
 import FoodView from "./components/FoodView";
 import FoodLogModal from "./components/FoodLogModal";
 import { useNavigation } from "@react-navigation/native";
-
 import { findFoodObjects, findPresetObjects } from "../utils/searcher";
 import { saveMeal } from "../utils/saver";
 import { LinearGradient } from "expo-linear-gradient";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const LogFoodScreen = ({ navigation }) => {
+const LogFoodScreen = () => {
   const nav = useNavigation();
   const auth = getAuth();
   const user = auth.currentUser;
@@ -48,12 +42,6 @@ const LogFoodScreen = ({ navigation }) => {
   // Remove basket on basket screen triggers and event here, persisting an item removal
   DeviceEventEmitter.addListener("event.removeItem", (eventData) => {
     setBasket(JSON.parse(eventData));
-  });
-
-  // Save button on basket screen triggers an event here telling the program to save the basket remotely
-  DeviceEventEmitter.addListener("event.saveBasket", (eventData) => {
-    setBasket(JSON.parse(eventData));
-    saveBasket();
   });
 
   function addToBasket(food) {
@@ -178,7 +166,9 @@ const LogFoodScreen = ({ navigation }) => {
       </LinearGradient>
 
       {/* Search Options */}
-      <TouchableOpacity
+      <Button
+
+
         title="search custom presets"
         onPress={() => {
           setBasket([]);
@@ -186,7 +176,7 @@ const LogFoodScreen = ({ navigation }) => {
           getPresetMatches();
         }}
       />
-      <TouchableOpacity
+      <Button
         title="View Basket"
         onPress={() => nav.push("FoodBasketScreen", { currentBasket: basket })}
       />

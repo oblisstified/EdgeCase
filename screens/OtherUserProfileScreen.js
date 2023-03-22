@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import 'react-native-gesture-handler';
-import { StyleSheet, Text, View, Button, ScrollView,FlatList} from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView,FlatList,SafeAreaView} from 'react-native';
 import BottomBar from "./components/BottomBar";
 import {TextInput } from "react-native-gesture-handler";
 import { getAuth } from 'firebase/auth'
@@ -65,11 +65,42 @@ const OtherUserProfileScreen = ({route, navigation}) => {
 
     return(
         <View style = {{flex:1}}>
+              <SafeAreaView 
+        style={{
+          flex:0.3,
+          backgroundColor: "#00a46c",
+          height: "22%",
+          borderBottomLeftRadius: 20,
+          borderBottomRightRadius: 20,
+          paddingHorizontal: 20,
+        }}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            width: "100%",
+            marginLeft: 15,
+            marginTop: 15
+          }}
+        >
+          <View style={{ width: "80%" }}>
+            <Text style={{ fontSize: 28, color: "#FFF", fontWeight: "bold" }}>
+            {userData.name == undefined ? "loading...": userData.name + "'s profile"}
+            </Text>
+            <Text style={{ fontSize: 20, color: "#FFF", fontWeight: "normal" }}>
+              check out their profile
+            </Text>
+          </View>
+
+        </View>
+      </SafeAreaView>
            
             {/* add some other features that people would need to know */}
-            <View  style = {{flex:0.5}}testID = "scrollView">
+
+            <View  style = {{flex:0.8}}testID = "scrollView">
                 <View  style={{ flex: 1,alignItems: "center" }}>
-                    <FontAwesome name = "user-circle-o" size = {150} color={"#98fb98"} />
+                    <FontAwesome style={{padding:10}} name = "user-circle-o" size = {150} color={"#98fb98"} />
                 </View>
                 <View style = {{flexDirection : 'row', justifyContent: 'space-between',padding:10, marginHorizontal: 100}}>
                     <View>
@@ -78,7 +109,7 @@ const OtherUserProfileScreen = ({route, navigation}) => {
                     </View>
                     <View>
                         <Text>Posts </Text>
-                        <Text>placeholder</Text>
+                        <Text>{postsList.length == undefined ? "loading..." : postsList.length}</Text>
                     </View>
                     <View>
                         <Text>Friends </Text>
@@ -87,39 +118,6 @@ const OtherUserProfileScreen = ({route, navigation}) => {
  
                 </View>
           
-
-                {/* <View style={styles.displayInfo} testID = "scrollViewChild">
-                <CustomText>Name:</CustomText>
-                <CustomText> {userData.name} </CustomText>
-                </View>
-                <View style={styles.displayInfo} testID = "scrollViewChild">
-                <CustomText>Age:</CustomText>
-                <CustomText> {userData.age} </CustomText>
-                </View>
-                <View style={styles.displayInfo}testID = "scrollViewChild">
-                <CustomText>Gender:</CustomText>
-                <CustomText> {userData.gender} </CustomText>
-                </View>
-                <View style={styles.displayInfo}testID = "scrollViewChild">
-                <CustomText>Height:</CustomText>
-                <CustomText> {userData.height} </CustomText>
-                </View>
-                <View style={styles.displayInfo}testID = "scrollViewChild">
-                <CustomText>PlaceHolder:</CustomText>
-                <CustomText> {}</CustomText>
-                </View>
-                <View style={styles.displayInfo}testID = "scrollViewChild">
-                <CustomText>PlaceHolder:</CustomText>
-                <CustomText> {}</CustomText>
-                </View>
-                <View style={styles.displayInfo}testID = "scrollViewChild">
-                <CustomText>PlaceHolder:</CustomText>
-                <CustomText> {}</CustomText>
-                </View>
-                <View style={styles.displayInfo}testID = "scrollViewChild">
-                <CustomText>PlaceHolder:</CustomText>
-                <CustomText> {}</CustomText>
-                </View> */}
       </View >
       <FlatList     style = {{flex:0.5}}
                     data={ postsList }

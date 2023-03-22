@@ -155,6 +155,7 @@ const HomeStackNavigator = () => {
       <Stack.Screen name="AnalyticsScreen" component={AnalyticsScreen} />
       <Stack.Screen name="WritePost" component={WritePost} />
 
+
     </Stack.Navigator>
   );
 };
