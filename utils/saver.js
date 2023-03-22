@@ -65,7 +65,7 @@ async function saveMeal(saveObject, email, isPreset){
         const userData = userSnapshot.data();
         let newMealList = await userData.mealList;
 
-        console.log("not dead yet")
+        if(newMealList==undefined) newMealList = []
 
 
         // add our object to the reference for mealList

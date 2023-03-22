@@ -4,10 +4,11 @@ import { collection, getDocs, updateDoc, doc,getDoc, setDoc } from 'firebase/fir
 
 async function getDataArray(email, currentDate /*start*/, range /*how many days back */, field){
     // Pull relevant references from firestore
-    let userRef = doc(db, 'users', email);
+    let userRef = await doc(db, 'users', email);
     const userSnapshot = await getDoc(userRef);
-    const userData = userSnapshot.data();
+    const userData = await userSnapshot.data();
     let mealData = await userData.mealList;
+
     if(mealData == undefined) mealData = []
 
     // initialise date bound variables
@@ -20,7 +21,6 @@ async function getDataArray(email, currentDate /*start*/, range /*how many days 
     for(let i = 0; i < range - 1; i++){
         indexedFoodObjectList.push([]);
     }
-
     if(mealData == undefined){
         mealData = []
     }
@@ -28,7 +28,7 @@ async function getDataArray(email, currentDate /*start*/, range /*how many days 
     // push food objects to their relevant day (indexed by days from lowerBound)
     for(let i = 0; i < mealData.length; i++){
         const thisDate = new Date(mealData[i]["metaData"]["date"])
-        if(lowerBound < thisDate && thisDate <= upperBound){
+        if(lowerBound <= thisDate && thisDate < upperBound){
             // the index is how many from the lowerbound we find this date
             let index = ((thisDate - lowerBound) / (1000 * 60 * 60 * 24));
             indexedFoodObjectList[index].push(mealData[i]["meal"])
@@ -88,6 +88,53 @@ async function getCalorieGoal(email){
     return dailyCalories
 }
 
+async function getMacroObject(email){
+    let userRef = doc(db, 'users', email);
+    const userSnapshot = await getDoc(userRef);
+    const userDataObj = await userSnapshot.data();
+
+    let macroObject = JSON.parse(`
+        {"Calories": 0,
+        "Carbohydrate": 0,
+        "Fiber": 0,
+        "Monounsaturated Fat": 0,
+        "Polyunsaturated Fats": 0,
+        "Protein": 0,
+        "Saturated Fat": 0,
+        "Sugar": 0}
+    `)
+
+    const mealList = userDataObj.mealList == undefined ? [] : userDataObj.mealList;
+
+    const todaysDate = (new Date(Date.now())).toDateString();
+    let todaysMeals=[];
+
+    for(let i = 0; i < mealList.length; i++){
+        const thisDateString = (new Date(mealList[i]["metaData"]["date"])).toDateString();
+        if(thisDateString == todaysDate){
+            todaysMeals.push(mealList[i]["meal"]);
+        }
+    }
+
+    //  for each meal
+    for(let i = 0; i < todaysMeals.length; i++){
+        // for each foodobject in each meal
+        for(let j = 0; j < todaysMeals[i].length; j++){
+            macroObject["Calories"] += todaysMeals[i][j]["foodObject"]["Calories"] * (todaysMeals[i][j]["weight"]/100)
+            macroObject["Carbohydrate"] += todaysMeals[i][j]["foodObject"]["Carbohydrate"] * (todaysMeals[i][j]["weight"]/100)
+            macroObject["Fiber"] += todaysMeals[i][j]["foodObject"]["Fiber"] * (todaysMeals[i][j]["weight"]/100)
+            macroObject["Monounsaturated Fat"] += todaysMeals[i][j]["foodObject"]["Monounsaturated Fat"] * (todaysMeals[i][j]["weight"]/100)
+            macroObject["Polyunsaturated Fats"] += todaysMeals[i][j]["foodObject"]["Polyunsaturated Fats"] * (todaysMeals[i][j]["weight"]/100)
+            macroObject["Protein"] += todaysMeals[i][j]["foodObject"]["Protein"] * (todaysMeals[i][j]["weight"]/100)
+            macroObject["Saturated Fat"] += todaysMeals[i][j]["foodObject"]["Saturated Fat"] * (todaysMeals[i][j]["weight"]/100)
+            macroObject["Sugar"] += todaysMeals[i][j]["foodObject"]["Sugar"] * (todaysMeals[i][j]["weight"]/100)
+        }
+    }
+
+    return macroObject
+}
+
+
 async function daysCalorieGoalMet(email, dateRange){
     const today = (new Date(Date.now())).toDateString();
     const calorieValues = await getDataArray(email, today, dateRange, "Calories");
@@ -104,6 +151,9 @@ async function daysCalorieGoalMet(email, dateRange){
     return sum;
 }
 
+
+
+
 async function getSavedPresets(email){
     let userRef = doc(db, 'users', email);
     const userSnapshot = await getDoc(userRef);
@@ -118,10 +168,6 @@ async function getTodaysCalories(email){
     const userSnapshot = await getDoc(userRef);
     const userData = userSnapshot.data();
 
-
-    
-
-
     const mealList = userData.mealList == undefined ? [] : userData.mealList;
 
     const todaysDate = (new Date(Date.now())).toDateString();
@@ -130,7 +176,7 @@ async function getTodaysCalories(email){
     for(let i = 0; i < mealList.length; i++){
         const thisDateString = (new Date(mealList[i]["metaData"]["date"])).toDateString();
         if(thisDateString == todaysDate){
-            todaysMeals.push(mealData[i]);
+            todaysMeals.push(meaList[i]);
         }
     }
 
@@ -179,4 +225,4 @@ async function getUserProgress(email){
 
 }
 
-export { getDataArray, getCalorieGoal, daysCalorieGoalMet, getSavedPresets }
+export { getDataArray, getCalorieGoal, daysCalorieGoalMet, getSavedPresets, getMacroObject }
