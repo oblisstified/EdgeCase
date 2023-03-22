@@ -28,7 +28,7 @@ const FoodLogModal = (props) => {
                 
                 <View>
                   <Text style={styles.card}>Input amount</Text>
-                  <TextInput inputMode="numeric" onChangeText={(t) => setAmountGrams(t)}/>
+                  <TextInput testID="amountInput" inputMode="numeric" onChangeText={(t) => setAmountGrams(t)}/>
                   <Button 
                     testID="addButton"
                     title="submit" 

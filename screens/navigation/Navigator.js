@@ -26,6 +26,7 @@ import Leaderboard from '../Leaderboard';
 import MedalsScreen from '../MedalsScreen';
 import CommunityScreen from '../CommunityScreen';
 import CommunityFeed from '../CommunityFeed';
+import WritePost from '../WritePost'
 
 const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
@@ -147,6 +148,7 @@ const HomeStackNavigator = () => {
       <Stack.Screen name="MedalsScreen" component={MedalsScreen} />
       <Stack.Screen name="CommunityScreen" component={CommunityScreen} />
       <Stack.Screen name="CommunityFeed" component={CommunityFeed} />
+      <Stack.Screen name="WritePost" component={WritePost} />
     </Stack.Navigator>
   );
 };

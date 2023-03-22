@@ -37,7 +37,6 @@ const OtherUserProfileScreen = ({route, navigation}) => {
             <Text>{userData.height}</Text>
             <Text>{userData.age}</Text>
             {/* add some other features that people would need to know */}
-            <BottomBar />
         </View>
     )
 }

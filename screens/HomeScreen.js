@@ -11,8 +11,8 @@ const HomeScreen = ({ navigation }) => {
   let [profile, setProfile] = useState(null);
 
   const handleSignOut = () => {
-    signOut(user);
-    navigation.replace("LogInScreen");
+    signOut(user).then(()=>navigation.replace("LogInScreen"));
+    
   };
 
   const renderProfile = (result) => {
@@ -143,7 +143,7 @@ const HomeScreen = ({ navigation }) => {
           style={{ height: 300 }}
         >
           <TouchableOpacity
-            onPress={() => navigation.navigate("LogFoodScreen")}
+            onPress={() => navigation.navigate("ChallengesViewScreen")}
             style={[styles.touchableWindow, styles.shadowProp]}
           >
             <Image source={require("./images/log-food.png")} />

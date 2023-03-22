@@ -42,7 +42,6 @@ const FriendsScreen = ({route, navigation}) => {
                 )}
             />
         </View>
-        <BottomBar /> 
         </View>
     )
 }

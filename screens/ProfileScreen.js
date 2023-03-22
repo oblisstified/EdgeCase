@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "react-native-gesture-handler";
 import { StyleSheet, Text, View, Button, ScrollView,TouchableOpacity } from "react-native";
-import BottomBar from "./components/BottomBar";
 import { TextInput } from "react-native-gesture-handler";
 import { getAuth } from "firebase/auth";
 import { db } from "../firebase";
@@ -35,7 +34,6 @@ const ProfileScreen = ({ route, navigation }) => {
   }
   
   return (
-    <View>
       <ScrollView style={{ maxHeight: "90%" }}>
       <TouchableOpacity style={styles.button} onPress={() => navigation.replace("MedalsScreen")}>
             <Icon name="medal" size={24} color="#000" />
@@ -73,14 +71,12 @@ const ProfileScreen = ({ route, navigation }) => {
           <CustomText>Calorie Goal:</CustomText>
           <CustomText> {}</CustomText>
         </View>
-      </ScrollView>
-      <Button
+        <Button
         title="Edit Profile"
         onPress={() => navigation.replace("EditProfileScreen")}
       />
-      <View style={{ flex: 0.5 }} />
-      <BottomBar />
-    </View>
+      </ScrollView>
+      
   );
 };
 

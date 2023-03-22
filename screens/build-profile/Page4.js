@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { getAuth } from "firebase/auth"
 import { TouchableOpacity } from "react-native";
 import { useRoute } from '@react-navigation/native';
-import { doc, setDoc} from 'firebase/firestore/lite';
+import { doc, setDoc } from 'firebase/firestore/lite';
 import { db } from "../../firebase"
 
 const Page4 = ({navigation}) => {
