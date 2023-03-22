@@ -8,9 +8,12 @@ import { db } from "../firebase";
 import {ref, set,onValue,child ,get} from  'firebase/database';
 import { collection, getDocs,updateDoc,doc,getDoc} from 'firebase/firestore/lite';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { useNavigation } from "@react-navigation/native";
 
 
 const FriendRequestsScreen = ({route, navigation}) => {
+    const nav = useNavigation();
+
     const user = getAuth().currentUser;
     const [friendRequestsList, setFriendRequestList] = useState([]);
     const [friendsList, setFriendsList] = useState([]);
@@ -59,28 +62,30 @@ const FriendRequestsScreen = ({route, navigation}) => {
 
     return(
         <View>
-           <FlatList
-                data={friendRequestsList}
-                keyExtractor={(item) => item.email}
-                renderItem={({ item }) => (
-                    <View style = {styles.userItem}>
-                        <Text>{item}</Text>
-                        <View style= {{flexDirection:"row"}}>
-                            <TouchableOpacity style = {styles.Button} onPress={() =>AcceptFriendRequest(item)}>
-                                    <View>
-                                        <AntDesign name = "check" size={20} color="green"/>
-                                    </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity style = {styles.Button}  onPress={() => RejectFriendRequest(item)}>
-                                    <View>
-                                        <AntDesign name = "close" size={20} color="red"/>
-                                    </View>
-                            </TouchableOpacity>
+            <View style={{flex:1}}>
+            <FlatList
+                    data={friendRequestsList}
+                    keyExtractor={(item) => item.email}
+                    renderItem={({ item }) => (
+                        <View style = {styles.userItem}>
+                            <Text>{item}</Text>
+                            <View style= {{flexDirection:"row"}}>
+                                <TouchableOpacity style = {styles.Button} onPress={() =>AcceptFriendRequest(item)}>
+                                        <View>
+                                            <AntDesign name = "check" size={20} color="green"/>
+                                        </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity style = {styles.Button}  onPress={() => RejectFriendRequest(item)}>
+                                        <View>
+                                            <AntDesign name = "close" size={20} color="red"/>
+                                        </View>
+                                </TouchableOpacity>
+                            </View>
                         </View>
-                    </View>
-                )}
-            />
-           <BottomBar />  
+                    )}
+                />
+            </View>
+            <View style={{flex:0.2}} />
         </View>
     )
 }

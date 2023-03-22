@@ -10,7 +10,9 @@ const BazierLineChart = () => {
 
   let [dataList, setDataList] = useState([])
 
-  const email = getAuth().currentUser.email;
+  let email;
+  if(getAuth().currentUser)email = getAuth().currentUser.email;
+
   const today = (new Date(Date.now())).toDateString();
   
   // 

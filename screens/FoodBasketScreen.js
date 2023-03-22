@@ -54,7 +54,7 @@ const FoodBasketScreen = props => {
             return;
         }
 
-        createPreset(food, description).then(() => setPresetSaved(true));
+        createPreset(food, description, user.email).then(() => {setPresetSaved(true); nav.pop()});
     }
 
     return (

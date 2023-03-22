@@ -92,9 +92,7 @@ const AllUsersScreen = ({route, navigation}) => {
                 </View>
               </TouchableOpacity>
 
-            </View>
-              
-            <BottomBar />     
+            </View>  
     </View>
 )
 

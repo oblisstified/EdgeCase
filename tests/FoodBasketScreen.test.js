@@ -91,7 +91,7 @@ it("test call to save presets", ()=>{
     fireEvent.press(saveButton);
 
     expect(createPreset).toHaveBeenCalledTimes(1);
-    expect(createPreset).toHaveBeenCalledWith(basketObject, "random preset name")
+    expect(createPreset).toHaveBeenCalledWith(basketObject, "random preset name", "sa@gmail.com")
 })
 
 

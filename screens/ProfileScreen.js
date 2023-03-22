@@ -79,7 +79,6 @@ const ProfileScreen = ({ route, navigation }) => {
         onPress={() => navigation.replace("EditProfileScreen")}
       />
       <View style={{ flex: 0.5 }} />
-      <BottomBar />
     </View>
   );
 };

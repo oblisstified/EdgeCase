@@ -11,8 +11,8 @@ const HomeScreen = ({ navigation }) => {
   let [profile, setProfile] = useState(null);
 
   const handleSignOut = () => {
-    signOut(user);
-    navigation.replace("LogInScreen");
+    signOut(user).then(()=>navigation.replace("LogInScreen"));
+    
   };
 
   const renderProfile = (result) => {

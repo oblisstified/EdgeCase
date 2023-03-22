@@ -91,7 +91,7 @@ const ChallengesViewScreen = ({navigation}) => {
             x = numSavedRecipes
         }
         else{
-            x = profile.friends.length;
+            x = profile == undefined ? 0 : profile.friends.length;
         }
         if(x>=goal){
             if(completed===true){
