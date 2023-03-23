@@ -61,7 +61,7 @@ async function createPost(saveObject){
 
 }
 
-async function getPosts(community){
+async function getPosts(community,friendsList){
     
     let thisCommunityPosts = []
     
@@ -71,10 +71,18 @@ async function getPosts(community){
         const postSnapshot = await getDoc(postRef);
         const data = postSnapshot.data();
         let allPosts = await data.posts;
-
-        for(let i = 0; i < allPosts.length; i++){
-            if(allPosts[i]["post"]["communityId"] == community){
-                thisCommunityPosts.push(allPosts[i]);
+        
+        if(community == "friends"){
+            for(let i = 0; i < allPosts.length; i++){
+                if(friendsList.includes(allPosts[i]["post"]["email"])){
+                    thisCommunityPosts.push(allPosts[i]);
+                }
+            }
+        }else{
+            for(let i = 0; i < allPosts.length; i++){
+                if(allPosts[i]["post"]["communityId"] == community){
+                    thisCommunityPosts.push(allPosts[i]);
+                }
             }
         }
 
@@ -83,6 +91,30 @@ async function getPosts(community){
     }
 
     return thisCommunityPosts;
+}
+
+async function getNumOfPosts(community){
+    
+    let numOfPosts = 0;
+    
+    try{
+        // pull relevant references
+        let postRef = doc(db, 'posts', "postList");
+        const postSnapshot = await getDoc(postRef);
+        const data = postSnapshot.data();
+        let allPosts = await data.posts;
+        
+        for(let i = 0; i < allPosts.length; i++){
+            if(allPosts[i]["post"]["communityId"] == community){
+                numOfPosts = numOfPosts+1;
+            }
+        }
+
+    } catch (e) {
+        console.log(e)
+    }
+
+    return numOfPosts;
 }
 
 

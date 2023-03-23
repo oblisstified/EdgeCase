@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import 'react-native-gesture-handler';
-import { Image, StyleSheet, Text, View, FlatList,TouchableOpacity,Modal,Button } from 'react-native';
+import { Image, StyleSheet, Text, View, FlatList,SafeAreaView,Modal,Button } from 'react-native';
 import { db } from "../firebase";
 import { getAuth } from 'firebase/auth'
 import { collection, getDocs, getDoc, doc, query,where } from 'firebase/firestore/lite';
@@ -36,7 +36,7 @@ const MedalsScreen = ({navigation}) => {
             <View>
                 <View style={styles.displayInfo}>
                     <Image source={{uri: medal}} style = {{ width: '30%', height: 150 }}/>
-                    <Text>{challenge}</Text>
+                    <Text style={{ fontSize: 20, color: "black", fontWeight: "bold" }}>{challenge}</Text>
                 </View>
             </View>
         )
@@ -47,14 +47,40 @@ const MedalsScreen = ({navigation}) => {
     };
 
     const separator = () => {
-        return (<View style={{height: 5, width: '100%', backgroundColor: '#C8C8C8'}}/>)
+        return (<View style={{height: 5, width: '100%', backgroundColor: '#e6e6e6'}}/>)
     };
 
     return(
-        <View>
-            <View style={{alignItems: "center",marginVertical: '5%',}}>
-                <Text>These are your medals</Text>
-            </View>
+        <View style={styles.container}>
+            <SafeAreaView 
+        style={{
+          backgroundColor: "#00a46c",
+          height: "20%",
+          borderBottomLeftRadius: 20,
+          borderBottomRightRadius: 20,
+          paddingHorizontal: 20,
+        }}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            width: "100%",
+            marginLeft: 15,
+            marginTop: 15
+          }}
+        >
+          <View style={{ width: "80%" }}>
+            <Text style={{ fontSize: 28, color: "#FFF", fontWeight: "bold" }}>
+                These are your medals
+            </Text>
+            <Text style={{ fontSize: 20, color: "#FFF", fontWeight: "normal" }}>
+                Complete more challenges to unlock more medals
+            </Text>
+          </View>
+
+        </View>
+      </SafeAreaView>
             {completedChallenges && (<FlatList data={completedChallenges} ItemSeparatorComponent={separator} renderItem = {renderMedals}/>)}
         </View>
     )
@@ -62,48 +88,35 @@ const MedalsScreen = ({navigation}) => {
 
 export default MedalsScreen
 
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: "column", //column direction
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingTop: 25,
-        backgroundColor: '#ecf0f1',
-        padding: 8,
+        backgroundColor: '#ffffff',
     },
-    progressBar: {
-        height: 20,
-        flexDirection: "row",
-        width: '100%',
-        backgroundColor: 'white',
-        borderColor: '#000',
-        borderWidth: 2,
-        borderRadius: 5
+    header: {
+        alignItems: "center",
+        marginVertical: '5%',
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#00a46c',
     },
     displayInfo : {
-        flexDirection: "row", 
+        flexDirection: "row",
         alignItems: "center",
         marginHorizontal: '5%',
         marginVertical: '5%',
         borderWidth: 2,
-        borderColor: "purple"
+        borderColor: "#00a46c",
+        borderRadius: 8,
+        padding: 8,
     },
-    button:{
-        backgroundColor:"#8cc5fa",
-        alignItems: "center",
-        justifyContent: "space-between",
-        borderRadius:20,
-        padding:15,
-        marginVertical:5,
-        borderWidth:1,
-      },
-      text: {
+    text: {
         fontSize: 16,
         lineHeight: 21,
         fontWeight: 'bold',
         letterSpacing: 0.25,
-        color: 'white',
-      },
-})
+        color: 'black',
+    },
+});

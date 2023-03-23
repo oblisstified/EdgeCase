@@ -109,28 +109,22 @@ const ProfileScreen = ({ route, navigation }) => {
                 </View>
           
       </View > 
-      <TouchableOpacity
-         style={{
-          backgroundColor: "#00a46c",
-          paddingHorizontal: 20,
-          paddingVertical: 5,
-          borderRadius: 15,
-          alignItems: "center"
-        }}
+    <View style={styles.buttonGroup}>
+    <TouchableOpacity
+         style={styles.button}
         testID = "editProfile"
-        onPress={() => navigation.replace("EditProfileScreen")
+        onPress={() => navigation.navigate("EditProfileScreen")
       }>
          <Text
-      style={{
-        fontWeight: "bold",
-        fontSize: 15,
-        color: "#FFF",
-     
-      }}
+      style={styles.buttonText}
     >
-      Edit profile
+      Edit Profile
     </Text>
     </TouchableOpacity>
+                <TouchableOpacity  onPress={() => navigation.navigate("MedalsScreen")} style={styles.button}>
+                    <Text style={styles.buttonText}>View Achievements</Text>
+                </TouchableOpacity>
+            </View>
       
         <FlatList     style = {{flex:0.5}}
                     data={ postsList }
@@ -165,18 +159,25 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     borderColor: "purple",
   },
-  button: {
-    flex: 1,
+  buttonGroup: {
+    flexDirection: "row",
+    justifyContent: 'center',
+    marginBottom: 20,
+    marginTop: 20,
+},
+button: {
+    backgroundColor: '#00a46c',
     alignItems: "center",
-    justifyContent: "center",
-    paddingBottom: 8, 
-    paddingTop: 15,
-  },
-  buttonText: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#000",
-  },
+    borderRadius: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginHorizontal: 5,
+},
+buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'white',
+},
   textStyle :{
     color:"white",
 
