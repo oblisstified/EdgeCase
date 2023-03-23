@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import { getAuth, signOut } from "firebase/auth";
+
 import BazierLineChart from "./components/Graph";
 import MyProgressChart from "./components/Daily";
 import MyMacroChart from "./components/Macro";
@@ -284,7 +285,7 @@ const HomeScreen = ({ navigation }) => {
             onPress={() => navigation.navigate("LogFoodScreen")}
             style={[styles.touchableWindow, styles.shadowProp]}
           >
-            <MyProgressChart/>
+            
             <View
               style={{
                 flexDirection: "row",
@@ -292,6 +293,7 @@ const HomeScreen = ({ navigation }) => {
                 paddingHorizontal: 10,
               }}
             >
+              
               <Text style={{ fontWeight: "bold", textAlign: "center" }}>
                 The Road to Healthy Eating{"\n"}
               </Text>
