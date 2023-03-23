@@ -23,9 +23,9 @@ const FoodView = (props) => {
 
   return (
     <View style={styles.displayInfo}>
-      <View style={{ flex: 3, alignSelf: "flex-start" }}>
+      <View style={{ flex: 3, alignSelf: "flex-start", marginLeft: 10 }}>
         <View>
-          <Text style={styles.header}>{firstWord}</Text>
+          <Text numberOfLines={1} style={styles.header}>{firstWord}</Text>
         </View>
         <View>
           <Text style={styles.details}>
@@ -42,21 +42,26 @@ export default FoodView;
 
 const styles = StyleSheet.create({
   header: {
+    fontSize: 14,
     paddingTop: 5,
     marginHorizontal: 5,
+    marginTop: 12,
   },
   details: {
-    fontSize: 8,
-    opacity: 0.8,
+    fontSize: 12,
+    opacity: 0.6,
     marginHorizontal: 5,
     paddingBottom: 5,
+    marginTop: 5,
   },
   displayInfo: {
     flex: 1,
     flexDirection: "row",
-    marginHorizontal: 2,
-    marginVertical: 2,
-    borderWidth: 2,
+    marginHorizontal: 5,
+    marginVertical: 5,
     borderRadius: 15,
+    backgroundColor: "#ededed",
+    paddingLeft: 5,
+    height: 70,
   },
 });

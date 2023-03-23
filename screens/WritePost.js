@@ -11,6 +11,8 @@ const WritePost = ({ route, navigation }) => {
 
   const user = getAuth().currentUser;
   const nav = useNavigation();
+  const communityId = route.params["communityId"];
+  const numOfPosts = route.params["numOfPosts"];
 
   let [title, setTitle] = useState('');
   let [content, setContent] = useState('');
@@ -18,6 +20,7 @@ const WritePost = ({ route, navigation }) => {
   let [postSaved, setPostSaved] = useState(false);
 
   console.log(route.params["communityId"])
+  console.log(route.params["numOfPosts"])
 
   async function onPressSavePost(){
     
@@ -32,7 +35,8 @@ const WritePost = ({ route, navigation }) => {
         "communityId": "${communityId}",
         "content": "${content}",
         "title": "${title}",
-        "likes": "0"
+        "likes": 0,
+        "id": "${communityId}-${numOfPosts}"
       }`
 
     let success = await createPost(JSON.parse(saveObject));
