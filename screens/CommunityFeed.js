@@ -4,32 +4,102 @@ import 'react-native-gesture-handler';
 import 'firebase/firestore';
 import { Animated, Image, StyleSheet, Text, View, FlatList,TouchableOpacity, ImageBackground } from 'react-native';
 import { db } from "./../firebase";
-import { collection, getDocs, query, where } from 'firebase/firestore/lite';
+import { collection, getDoc, updateDoc, doc } from 'firebase/firestore/lite';
 import { getAuth } from 'firebase/auth';
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 
-import { getPosts } from '../utils/addPost';
+
+import { getPosts, getNumOfPosts } from '../utils/addPost';
 
 
 const CommunityFeed = ({route, navigation }) => {
 
   const [posts, setPosts] = useState([]);
+  const [likedPosts, setLikedPosts] = useState([]);
+  const [numOfPosts, setNumOfPosts] = useState(0);
 
   const communityId = route.params.communityId;
   const user = getAuth().currentUser;
 
   useEffect(() => {
     async function getData () {
-      let communityPosts = await getPosts(communityId);
+      const userSnapshot = await getDoc(doc(db, 'users', user.email));
+      setLikedPosts(userSnapshot.data().likedPosts);
+
+      const friendsList = userSnapshot.data().friends
+      let communityPosts = await getPosts(communityId,friendsList);
       setPosts(communityPosts);
+      setNumOfPosts(getNumOfPosts(communityId));
     }
 
     getData();
   }, []);
       
   const onPressAddPost = () => {
-    navigation.replace('WritePost', { communityId });
+    navigation.replace('WritePost', { communityId, numOfPosts });
 };
+
+async function toggleLike(associatedPost){
+  var updatedLikedPosts = [];
+  var likes;
+
+
+  if(likedPosts.includes(associatedPost.id)){
+    updatedLikedPosts = likedPosts.filter(request => request !== associatedPost.id);
+    likes = associatedPost.likes - 1;
+  }
+  else{
+    updatedLikedPosts = [...likedPosts, associatedPost.id];
+    likes = associatedPost.likes + 1;
+  }
+  
+  try{
+      const userRef = doc(db, "users", user.email);
+      await updateDoc(userRef, { likedPosts: updatedLikedPosts});
+
+      // pull relevant references
+      let postRef = doc(db, 'posts', "postList");
+      const postSnapshot = await getDoc(postRef);
+      const data = postSnapshot.data();
+      let allPosts = await data.posts;
+      const updatedPosts = allPosts.map(post => {
+        if(post.post.id === associatedPost.id){
+          return {post: { ...(post.post), likes: likes }};
+        }
+        return post;
+      })
+
+      await updateDoc(postRef, {posts : updatedPosts});
+      let communityPosts = await getPosts(communityId);
+      setPosts(communityPosts);
+      setLikedPosts(updatedLikedPosts)
+      
+  } catch (e) {
+      console.log(e)
+  }
+};
+
+function ToggleLike(props) {
+  const liked = props.liked;
+  const associatedPost = props.associatedPost;
+  if (liked) {
+    return(
+      <TouchableOpacity style={styles.likeButton} onPress={() => toggleLike(associatedPost)}>
+        <Text style={styles.likeButtonText}>{associatedPost.likes}</Text>
+        <Icon name="hand-heart" size={24} color="#000" />
+        <Text style={styles.likeButtonText}>Unlike</Text>
+      </TouchableOpacity>
+    );
+  }
+  return(
+    <TouchableOpacity style={styles.likeButton} onPress={() => toggleLike(associatedPost)}>
+      <Text style={styles.likeButtonText}>{associatedPost.likes}</Text>
+      <Icon name="hand-heart-outline" size={24} color="#000" />
+      <Text style={styles.likeButtonText}>Like</Text>
+    </TouchableOpacity>
+  );
+}
 
 
   return (
@@ -44,13 +114,14 @@ const CommunityFeed = ({route, navigation }) => {
           <FlatList
             data={ posts }
             keyExtractor={(post) => post.content}
+            contentContainerStyle={{ paddingBottom: 150 }}
             renderItem={(post) =>
               (<View key={post.id} style={styles.post}>
-                {console.log(JSON.stringify(post.item.post))}
                 <Text style={styles.username}>{post.item.post.email}</Text>
                 <Text style={styles.postHeading}>{post.item.post.title}</Text>
                 <Text style={styles.content}>{post.item.post.content}</Text>
                 <Text style={styles.time}>{post.item.post.date}</Text>
+                <ToggleLike liked={likedPosts.includes(post.item.post.id)} associatedPost={post.item.post}/>
               </View>)}
           />
     </View>
@@ -123,5 +194,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  likeButton: {
+    flexDirection: 'row',
+    alignItems: "center",
+    paddingBottom: 8,
+    paddingTop: 8, 
+  },
+  likeButtonText: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#000",
   },
 })
