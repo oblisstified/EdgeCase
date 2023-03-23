@@ -36,7 +36,7 @@ const WritePost = ({ route, navigation }) => {
         "content": "${content}",
         "title": "${title}",
         "likes": 0,
-        "id": "${communityId}-${numOfPosts+1}"
+        "id": "${communityId}-${numOfPosts}"
       }`
 
     let success = await createPost(JSON.parse(saveObject));
