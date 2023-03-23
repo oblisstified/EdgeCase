@@ -25,14 +25,28 @@ const MyMacroChart = () => {
   const data = [
       {
         name: 'Fat',
-        population: (!macroObject) ? 0 : macroObject["Fat"],
+        population: (!macroObject) ? 0 : macroObject["Saturated Fat"],
+        color: '#6D9886',
+        legendFontColor: '#7F7F7F',
+        legendFontSize: 15,
+      },
+      {
+        name: 'Fat',
+        population: (!macroObject) ? 0 : macroObject["Polyunsaturated Fats"],
+        color: '#0E8388',
+        legendFontColor: '#7F7F7F',
+        legendFontSize: 15,
+      },
+      {
+        name: 'Fat',
+        population: (!macroObject) ? 0 : macroObject["Monounsaturated Fat"],
         color: '#097969',
         legendFontColor: '#7F7F7F',
         legendFontSize: 15,
       },
       {
-        name: 'Carbohydrates',
-        population: (!macroObject ) ? 0 : macroObject["Carbohydrates"],
+        name: 'Carbohydrate',
+        population: (!macroObject ) ? 0 : macroObject["Carbohydrate"],
         color: '#338e59',
         legendFontColor: '#7F7F7F',
         legendFontSize: 15,

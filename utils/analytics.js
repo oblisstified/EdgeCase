@@ -98,7 +98,7 @@ async function getMacroObject(email){
     let macroObject = JSON.parse(`
         {"Calories": 0,
         "Carbohydrate": 0,
-        "Fiber": 0,
+        "Fibre": 0,
         "Monounsaturated Fat": 0,
         "Polyunsaturated Fats": 0,
         "Protein": 0,
