@@ -25,7 +25,7 @@ const Page4 = ({navigation}) => {
       weight:responseJson.weight, activity:responseJson.activity, goal:goal, redeemed:[], likedPosts:[]
     });
 
-    navigation.replace("HomeScreen")
+    navigation.navigate("HomeScreen")
     navigation.reset({
       index: 0,
       routes: [{ name: 'HomeScreen' }],
