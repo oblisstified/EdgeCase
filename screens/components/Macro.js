@@ -25,7 +25,7 @@ const MyMacroChart = () => {
   const data = [
       {
         name: 'Fat',
-        population: (!macroObject ) ? 0 : macroObject["Saturated Fat"],
+        population: (!macroObject) ? 0 : macroObject["Saturated Fat"],
         color: '#6D9886',
         legendFontColor: '#7F7F7F',
         legendFontSize: 15,
