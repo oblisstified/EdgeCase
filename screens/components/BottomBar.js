@@ -14,23 +14,23 @@ const BottomBar = () =>{
 
     return (
         <View style={styles.bottombar}>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.replace("LogFoodScreen")}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("LogFoodScreen")}>
             <Icon name="food" size={24} color="#000" />
             <Text style={styles.buttonText}>Log</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.replace("ProfileScreen")}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("ProfileScreen")}>
             <Icon name="account-circle" size={24} color="#000" />
             <Text style={styles.buttonText}>Profile</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.replace("HomeScreen")}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("HomeScreen")}>
             <Icon name="home" size={24} color="#000" />
             <Text style={styles.buttonText}>Home</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.replace("AllUsersScreen")}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("AllUsersScreen")}>
             <Icon name="account-group" size={24} color="#000" />
             <Text style={styles.buttonText}>Friends</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.replace("SocialScreen")}>
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("SocialScreen")}>
             <Icon name="message-text" size={24} color="#000" />
             <Text style={styles.buttonText}>Social</Text>
           </TouchableOpacity>

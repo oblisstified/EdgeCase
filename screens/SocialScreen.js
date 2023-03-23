@@ -22,7 +22,7 @@ const SocialScreen = ({navigation}) => {
                     <Text>Challenges & Achievements</Text>
                     </TouchableOpacity>
                     <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
-                    <TouchableOpacity style={styles.displayInfo} onPress={() => navigation.replace("FriendsScreen")}>
+                    <TouchableOpacity style={styles.displayInfo} onPress={() => navigation.navigate("FriendsScreen")}>
                     <Image source={{uri: "https://images.pexels.com/photos/3822356/pexels-photo-3822356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}}style = {{ width: '90%', height: 200 }}/>
                     <Text>View Friends</Text>
                     </TouchableOpacity>

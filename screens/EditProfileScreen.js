@@ -55,10 +55,12 @@ const EditProfileScreen = ({ route, navigation }) => {
   async function handleSaveChanges() {
     try {
       const userRef = doc(db, "users", user.email);
-      await updateDoc(userRef, { name: name });
-      await updateDoc(userRef, { gender: gender });
-      await updateDoc(userRef, { age: age });
-      await updateDoc(userRef, { height: height });
+      if( name != ""){await updateDoc(userRef, { name: name });}
+      if(age != ""){await updateDoc(userRef, { age: age });}
+      if(gender != ""){await updateDoc(userRef, { gender: gender });}
+      if( height != ""){await updateDoc(userRef, { height: height });}
+      
+    
     } catch (error) {
       console.error(error);
     }
@@ -107,20 +109,20 @@ const EditProfileScreen = ({ route, navigation }) => {
           onChangeText={setName}
         />
         <TextInput
-         value =  {userData.gender == undefined ? "": userData.gender }
+        
           style={styles.userItem}
           placeholder="Gender"
           onChangeText={setGender}
         />
   
         <TextInput
-        value =  {userData.age == undefined ? "": userData.age }
+       
           style={styles.userItem}
           placeholder="Age"
           onChangeText={setAge}
         />
         <TextInput
-        value =  {userData.height == undefined ? "": userData.height }
+       
           style={styles.userItem}
           placeholder="Height"
           onChangeText={setHeight}

@@ -38,7 +38,7 @@ const WritePost = ({ route, navigation }) => {
     let success = await createPost(JSON.parse(saveObject));
 
     setPostSaved(success);
-    nav.replace("CommunityFeed", {communityId})
+    nav.navigate("CommunityFeed", {communityId})
   }
 
 

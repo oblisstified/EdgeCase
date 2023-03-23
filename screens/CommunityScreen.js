@@ -50,7 +50,7 @@ const CommunityScreen = ({navigation}) => {
 
     const renderCommunityFeed = (communityId) => {
 
-        navigation.replace('CommunityFeed', {communityId: communityId});
+        navigation.navigate('CommunityFeed', {communityId: communityId});
         console.log(communityId);
     };
 

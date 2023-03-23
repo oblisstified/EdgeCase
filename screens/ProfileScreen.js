@@ -118,7 +118,7 @@ const ProfileScreen = ({ route, navigation }) => {
           alignItems: "center"
         }}
         testID = "editProfile"
-        onPress={() => navigation.replace("EditProfileScreen")
+        onPress={() => navigation.navigate("EditProfileScreen")
       }>
          <Text
       style={{
