@@ -133,7 +133,7 @@ async function getMacroObject(email){
         }
     }
 
-    return macroObject
+    return JSON.stringify(macroObject)
 }
 
 

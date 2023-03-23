@@ -285,7 +285,7 @@ const HomeScreen = ({ navigation }) => {
             onPress={() => navigation.navigate("LogFoodScreen")}
             style={[styles.touchableWindow, styles.shadowProp]}
           >
-            
+            <MyProgressChart/>
             <View
               style={{
                 flexDirection: "row",
