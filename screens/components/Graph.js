@@ -6,7 +6,7 @@ import { getDataArray, getMacroObject } from '../../utils/analytics'
 import { getAuth } from 'firebase/auth'
 
 
-const BazierLineChart = () => {
+const BazierLineChart = ({route,field}) => {
 
   let [dataList, setDataList] = useState([])
   let [macroObject, setMacroObject] = useState(null)
@@ -27,9 +27,28 @@ const BazierLineChart = () => {
   }, []);
 
   const today = (new Date(Date.now())).toDateString();
+  if(field == undefined){
+    field = "Calories";
+  }
+
+ function getUnits(field){
+  const unitsMap = new Map();
+
+  unitsMap.set("Calories", "kcal");
+  unitsMap.set("Protein",  "g");
+  unitsMap.set("Sugar", "g");
+  unitsMap.set("Carbohydrate", "g");
+ 
+  return unitsMap.get(field);
+ }
+
+ 
   
+  
+
   // 
   getDataArray(email, today, 7, "Calories").then((info) => setDataList(info))
+
 
   let data = {
     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -54,12 +73,12 @@ const BazierLineChart = () => {
         data={data}
         width={350}
         height={220}
-        yAxisSuffix="kcal"
+        yAxisSuffix={getUnits(field)}
         chartConfig={{
           backgroundColor: 'white',
           backgroundGradientFrom: 'white',
           backgroundGradientTo: 'white',
-          decimalPlaces: 0,
+          decimalPlaces: 2,
           color: () => '#00a46c',
           labelColor: () => '#999999',
           style: {

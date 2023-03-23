@@ -21,6 +21,7 @@ const HomeScreen = ({ navigation }) => {
     
   };
 
+
   const renderProfile = (result) => {
     setProfile(JSON.parse(result));
   };
