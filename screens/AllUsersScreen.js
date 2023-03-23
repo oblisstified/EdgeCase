@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import 'react-native-gesture-handler';
-import { StyleSheet, Text, View, Button, TouchableOpacity,FlatList } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity,FlatList,SafeAreaView } from 'react-native';
 import { TextInput } from "react-native-gesture-handler";
 import { getAuth, signOut } from 'firebase/auth';
 import { collection, getDocs,updateDoc,doc,getDoc} from 'firebase/firestore/lite';
@@ -16,12 +16,14 @@ const AllUsersScreen = ({route, navigation}) => {
     const user = getAuth().currentUser;
     const [userList, setUserList] = useState([]);
 
+
     useEffect(() => {
       async function getData () {
         const usersCol = collection(db, 'users'); //user collection
         const userSnapshot = await getDocs(usersCol); //gets all docs from the collection
         const userList = userSnapshot.docs.map(doc => doc.data());
         setUserList(userList);
+        testFunction();
       }
   
       getData();
@@ -45,25 +47,55 @@ const AllUsersScreen = ({route, navigation}) => {
   }
 
   function goToUserProfile(email){
-    navigation.replace("OtherUserProfileScreen", {email: email});
+    navigation.navigate("OtherUserProfileScreen", {email: email});
     
   }
+
+ 
 
 
  
   return (
-    <View style = {{flex:1}} >
+    <View style = {{flex:1}}  testID="AllUsersScreen">
        
-            <View>
-                <Text>hello {user.email}</Text>
-            </View>
-          
-            <View style = {{flex:0.7}}>
+
+        <SafeAreaView 
+        style={{
+          flex:0.15,
+          backgroundColor: "#00a46c",
+          height: "22%",
+          borderBottomLeftRadius: 20,
+          borderBottomRightRadius: 20,
+          paddingHorizontal: 20,
+        }}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            width: "100%",
+            marginLeft: 15,
+            marginTop: 15
+          }}
+        >
+          <View style={{ width: "80%" }}>
+            <Text style={{ fontSize: 28, color: "#FFF", fontWeight: "bold" }}>
+              Add Friends
+            </Text>
+            <Text style={{ fontSize: 20, color: "#FFF", fontWeight: "normal" }}>
+              Send a friend request 
+            </Text>
+          </View>
+
+        </View>
+      </SafeAreaView>
+            <View style = {{flex:0.7,paddingTop:40}}>
                 <FlatList
+                        testID = "flatlist"
                         data={userList.filter(item => item.email.trim() != user.email)}
                         keyExtractor={(item) => item.email}
                         renderItem={({ item }) => (
-                            <View style={styles.userItem}>
+                            <View style={styles.userItem} testID="emailbutton">
                             <TouchableOpacity onPress={ () => goToUserProfile(item.email)}>
                                 <View>
                                     <EvilIcons name = "user"/>
@@ -71,9 +103,9 @@ const AllUsersScreen = ({route, navigation}) => {
                             </TouchableOpacity>
                             <Text>{item.email}</Text>
 
-                            <TouchableOpacity onPress={() => FriendRequestMade(item.email)}>
+                            <TouchableOpacity   onPress={() => FriendRequestMade(item.email)}>
                                 <View>
-                                <Text style={styles.customText}> Add Friend </Text>
+                                <Text >Add friend</Text>
                                 </View>
                             </TouchableOpacity>
                             </View>
@@ -81,18 +113,20 @@ const AllUsersScreen = ({route, navigation}) => {
                     />
             </View>
             <View style={styles.ButtonContainer}>
-              <TouchableOpacity onPress={() => navigation.replace("FriendRequestsScreen")}>
+              <TouchableOpacity onPress={() => navigation.navigate("FriendRequestsScreen")}>
                 <View style = {styles.button}>
-                  <Text> View Friend Requests</Text>
+                  <Text style = {styles.text}> View Friend Requests</Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => navigation.replace("FriendsScreen")}>
+              <TouchableOpacity onPress={() => navigation.navigate("FriendsScreen")}>
                 <View style = {styles.button}>
-                  <Text> View Friends </Text>
+                  <Text style = {styles.text}> View Friends </Text>
                 </View>
               </TouchableOpacity>
 
-            </View>  
+            </View>
+              
+           
     </View>
 )
 
@@ -120,12 +154,19 @@ const styles = StyleSheet.create({
       padding:25,
     },
     button:{
-      borderWidth:1,
-      padding:20,
-      borderRadius:30,
+      
+        backgroundColor: "#00a46c",
+        paddingHorizontal: 20,
+        paddingVertical: 5,
+        borderRadius: 15,
 
     
-      }
+      },
+      text: {
+        fontWeight: "bold",
+                  fontSize: 15,
+                  color: "#FFF",
+      },
 
  
 })

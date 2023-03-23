@@ -3,7 +3,6 @@ import 'react-native-gesture-handler';
 import { Image, StyleSheet, Text, View, FlatList, TouchableOpacity, Alert } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 import { getAuth } from 'firebase/auth'
-import BottomBar from './components/BottomBar'
 import { Dimensions } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 const {width} = Dimensions.get('window'); 
@@ -17,7 +16,6 @@ const SocialScreen = ({navigation}) => {
     return(
             <View style={{flex:0}}>
                 <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
-                {/* {communitiesData && (<FlatList data={communitiesData} ItemSeparatorComponent={separator} renderItem = {renderCommunities}/>)} */}
                 <ScrollView style={{marginBottom: '10%',}}>
                     <TouchableOpacity style={styles.displayInfo} onPress={() => navigation.navigate('ChallengesViewScreen')}>
                     <Image source={{uri: "https://images.pexels.com/photos/6345328/pexels-photo-6345328.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"}} style = {{ width: '90%', height: 200 }}/>

@@ -69,6 +69,10 @@ async function saveMeal(saveObject, email, isPreset){
 
 
         // add our object to the reference for mealList
+        if (newMealList == undefined){
+            newMealList = [];
+        }
+        
         newMealList.push({
             meal : saveObject,
             metaData : metaDataObject

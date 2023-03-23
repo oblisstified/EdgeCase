@@ -3,7 +3,6 @@ import firebase from 'firebase/app';
 import 'react-native-gesture-handler';
 import 'firebase/firestore';
 import { Animated, Image, StyleSheet, Text, View, FlatList,TouchableOpacity, ImageBackground } from 'react-native';
-import BottomBar from "./components/BottomBar";
 import { db } from "./../firebase";
 import { collection, getDocs, query, where } from 'firebase/firestore/lite';
 import { getAuth } from 'firebase/auth';
@@ -49,13 +48,12 @@ const CommunityFeed = ({route, navigation }) => {
               (<View key={post.id} style={styles.post}>
                 {console.log(JSON.stringify(post.item.post))}
                 <Text style={styles.username}>{post.item.post.email}</Text>
-                <Text style={styles.heading}>{post.item.post.title}</Text>
+                <Text style={styles.postHeading}>{post.item.post.title}</Text>
                 <Text style={styles.content}>{post.item.post.content}</Text>
                 <Text style={styles.time}>{post.item.post.date}</Text>
               </View>)}
           />
     </View>
-    <BottomBar />
     </View>
   );
 }
@@ -65,48 +63,63 @@ export default CommunityFeed;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
+    paddingHorizontal: 10,
+    paddingVertical: 20,
   },
   heading: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginVertical: 20,
-    paddingHorizontal: 10,
+    marginTop: 35,
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+    color: "#00a46c",
   },
   post: {
-    flexDirection: 'column',
+    backgroundColor: "#fff",
     padding: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    marginBottom: 10,
+    borderRadius: 10,
+    marginBottom: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+
+    elevation: 4,
   },
   username: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 5,
+    color: "#00a46c",
   },
   postTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
-    },
+    color: "#333",
+  },
   content: {
-    fontSize: 14,
+    fontSize: 16,
     marginBottom: 10,
+    color: "#333",
   },
   time: {
     fontSize: 12,
-    color: '#999',
+    color: "#999",
   },
   addButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: "#00a46c",
     padding: 10,
-    borderRadius: 5,
-    margin: 10,
+    borderRadius: 10,
+    marginVertical: 20,
+    alignSelf: "center",
   },
   addButtonText: {
-    color: '#FFF',
+    color: "#fff",
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
