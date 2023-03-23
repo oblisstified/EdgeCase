@@ -30,7 +30,7 @@ const CommunityFeed = ({route, navigation }) => {
       const friendsList = userSnapshot.data().friends
       let communityPosts = await getPosts(communityId,friendsList);
       setPosts(communityPosts);
-      setNumOfPosts(getNumOfPosts(communityId));
+      setNumOfPosts(await getNumOfPosts(communityId));
     }
 
     getData();

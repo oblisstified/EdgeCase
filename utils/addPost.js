@@ -95,7 +95,7 @@ async function getPosts(community,friendsList){
 
 async function getNumOfPosts(community){
     
-    let numOfPosts = 0;
+    var numOfPosts = 0;
     
     try{
         // pull relevant references
@@ -106,7 +106,7 @@ async function getNumOfPosts(community){
         
         for(let i = 0; i < allPosts.length; i++){
             if(allPosts[i]["post"]["communityId"] == community){
-                numOfPosts = numOfPosts+1;
+                numOfPosts++;
             }
         }
 
@@ -121,4 +121,4 @@ async function getNumOfPosts(community){
 
 
 
-export { createPost, getPosts }
+export { createPost, getPosts, getNumOfPosts }
