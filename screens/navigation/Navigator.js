@@ -1,9 +1,13 @@
 import React from "react";
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Image } from "react-native";
+
 import HomeScreen from '../HomeScreen';
 import LogInScreen from '../LogInScreen';
+import SignUpScreen from '../SignUpScreen'
+import IntroScreen from '../IntroScreen'
 import ProfileScreen from '../ProfileScreen';
 import LogFoodScreen from '../LogFoodScreen';
 import EditProfileScreen from '../EditProfileScreen';
@@ -124,7 +128,10 @@ const screenOptionStyle = {
 const HomeStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={screenOptionStyle}>
+      <Stack.Screen name="IntroScreen" component={IntroScreen} />
       <Stack.Screen name="LogInScreen" component={LogInScreen} />
+      <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
+
       <Stack.Screen name="HomeScreen" component={BottomTabNavigator} />
       <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
       <Stack.Screen name="LogFoodScreen" component={LogFoodScreen} />

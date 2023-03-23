@@ -1,36 +1,29 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput, Button, KeyboardAvoidingView } from 'react-native';
 
-import HomeScreen from "./HomeScreen";
-
-import IntroScreen from "./IntroScreen";
-
+import LogInScreen from "./LogInScreen";
 import Page1 from "./build-profile/Page1";
 import { auth } from '../firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword} from "firebase/auth";
 import { Platform,TouchableOpacity } from "react-native";
 import Entypo from 'react-native-vector-icons/Entypo';
-import { Dimensions } from "react-native";
 
 import { doc, setDoc} from 'firebase/firestore/lite';
 import { db } from "../firebase";
-import SignUpScreen from "./SignUpScreen";
 
-const {width,height} = Dimensions.get('window'); 
-
-
-
-
-const LogInScreen = ({navigation}) => {
+const SignUpScreen = ({navigation}) => {
 
     let [validEmail, setValidEmail] = useState(true);
-    let [validPassword, setValidPassword] = useState(true)
+    let [validPassword, setValidPassword] = useState(true);
+    //let [validConfirmPassword, SetConfirmPassword] = useState(true);
 
     let [email, setEmail] = useState('');
     let [password, setPassword] = useState('');
+    //let [confirmPassword, SetConfirmPassword] = useState('');
+
     const [isHidden, setHidden] = useState(true);
     const [eye,setEye] = useState("eye");
-  
+
     function changeHidden(){
         setHidden(!isHidden); 
     }
@@ -39,7 +32,6 @@ const LogInScreen = ({navigation}) => {
         let eyeArray = ["eye", "eye-with-line"];
         setEye(eyeArray[(eyeArray.indexOf(eye)+1)%2]);
     }
-
 
     const runValidators = () => {
         let validEmail = email.toLowerCase().match(
@@ -50,10 +42,14 @@ const LogInScreen = ({navigation}) => {
         // regex for: minimum 8 characters, one letter and one number
         let validPassword = password.match("^(?=.*[A-Za-z])(?=.*\d).{8,}$");
         setValidPassword(!!validPassword)
+        
+        // confirm password
+        //let validConfirmPassword = password.match(confirmPassword);
+        //SetConfirmPassword(!!validConfirmPassword)
 
         return (validEmail && validPassword);
     }
-    
+
     const handleSignUp = () => {
 
         // Returns if validation finds an error
@@ -70,29 +66,15 @@ const LogInScreen = ({navigation}) => {
         .catch(error => alert(error.message))
         
     }
-
-    const handleLogIn = () => {
-        console.log("passed validators not")
-        if(!runValidators()) return;
-
-        console.log("passed validators")
-        
-        // does not allow sign up attempt with invalid credentials
-        signInWithEmailAndPassword(auth, email, password)
-        .then(userCredentials => {
-            navigation.replace("HomeScreen")  
-        })
-        .catch(error => alert(error.message))
-    }
     
-    return(
+    return (
         <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             style={styles.container}>
 
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.text_header}>Welcome!</Text>
+                    <Text style={styles.text_header}>Register Now!</Text>
                 </View>
 
                 <View style={styles.footer}>
@@ -123,21 +105,36 @@ const LogInScreen = ({navigation}) => {
                         <TouchableOpacity style={styles.eye} onPress={changeHidden} onPressIn={changeEye}>
                             <Entypo name= {eye} />
                         </TouchableOpacity>
+                    </View> 
+
+                    <Text style={[styles.text_footer, {
+                        marginTop:35
+                    }]}>Confirm Password</Text>
+                    <View style={styles.action}>
+                        <TextInput 
+                            placeholder="Your Password"
+                            secureTextEntry={isHidden}
+                            style={styles.textInput}
+                            autoCapitalize="none"
+                            onChangeText={(text) => setPassword(text)}
+                        />
+                        <Text testID="invalidPassword">{!validPassword && <Text style={styles.showisvalid}>Passwords don't match</Text>}</Text>
+                        <TouchableOpacity style={styles.eye} onPress={changeHidden} onPressIn={changeEye}>
+                            <Entypo name= {eye} />
+                        </TouchableOpacity>
+                    </View> 
+
+                    <View style={styles.textPrivate}>
+                        <Text style={styles.color_textPrivate}>
+                            By signing up you agree to our
+                        </Text>
+                        <Text style={[styles.color_textPrivate, {fontWeight: 'bold'}]}>{" "}Terms of service</Text>
+                        <Text style={styles.color_textPrivate}>{" "}and</Text>
+                        <Text style={[styles.color_textPrivate, {fontWeight: 'bold'}]}>{" "}Privacy policy</Text>
                     </View>
 
                     <TouchableOpacity 
-                        onPress={handleLogIn} 
-                        style={[styles.signIn, {
-                            borderColor: '#009387',
-                            borderWidth: 1,
-                            marginTop: 15 }]}
-                    >
-                        <Text style={[styles.textSign, {color: '#009387'}]}> Log In</Text>
-                    </TouchableOpacity> 
-
-
-                    <TouchableOpacity 
-                        onPress={()=>navigation.navigate(SignUpScreen)}    //{handleSignUp}   ()=>navigation.navigate(SignUpScreen)
+                        onPress={handleSignUp}   
                         style={[styles.signIn, {
                             borderColor: '#009387',
                             borderWidth: 1,
@@ -146,15 +143,28 @@ const LogInScreen = ({navigation}) => {
                         <Text style={[styles.textSign, {color: '#009387'}]}>Sign Up</Text>
                     </TouchableOpacity>  
 
+                    <TouchableOpacity
+                        onPress={() => navigation.goBack()}
+                        style={[styles.signIn, {
+                            borderColor: '#009387',
+                            borderWidth: 1,
+                            marginTop: 15
+                        }]}
+                    >
+                    <Text style={[styles.textSign, {
+                        color: '#009387'
+                    }]}>Back</Text>
+                    </TouchableOpacity>
+
                 </View>
 
             </View>
         </KeyboardAvoidingView>
-    )
-}
+        
+    );
+};
 
-export default LogInScreen;
-
+export default SignUpScreen;
 
 const styles = StyleSheet.create({
     container: {
@@ -186,7 +196,6 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
         marginTop: 5,
         borderWidth:1,
-        width: width,
         padding:10,
         margin:15,
         borderRadius:20,
@@ -239,5 +248,13 @@ const styles = StyleSheet.create({
     textSign: {
         fontSize: 18,
         fontWeight: 'bold'
+    },
+    textPrivate: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        marginTop: 20
+    },
+    color_textPrivate: {
+        color: 'grey'
     }
 });

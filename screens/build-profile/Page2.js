@@ -31,36 +31,74 @@ const Page2 = ({navigation}) => {
     navigation.navigate("Page3",{json})
 }
 
+return (
+  <View style={styles.container}>
+    <View style={styles.header}>
+      <Text style={styles.title}>Further Details</Text>
+    </View>
 
-  return (
-    <View>
-      <Text>What is your height (in meters):</Text>
+    <View style={styles.footer}>
+      <Text style={styles.text_footer}>What is your height (in meters):</Text>
       <View style={styles.displayInfo}>
-      <TextInput style={styles.input} placeholder="Height" onChangeText={setHeight} keyboardType='number-pad' maxLength={5}/>
+      <TextInput style={styles.TextInput} placeholder="Height" onChangeText={setHeight} keyboardType='numberic' maxLength={4}/>
       </View>
-      <Text>What is your weight (in kilograms):</Text>
+      <Text style={styles.text_footer}>What is your weight (in kilograms):</Text>
       <View style={styles.displayInfo}>
-      <TextInput style={styles.input} placeholder="Weight" onChangeText={setWeight} keyboardType='number-pad' maxLength={5}/>
+      <TextInput style={styles.TextInput} placeholder="Weight" onChangeText={setWeight} keyboardType='numeric' maxLength={3}/>
       </View>
       <Button title="Prev" onPress={() => navigation.goBack() }/>
       <Button title="Next" onPress={saveDataandSwitch}/>
     </View>
-  );
+  </View >
+);
 }
 
 export default Page2
 
 const styles = StyleSheet.create({
-  displayInfo : {
-      flex:1,
-      flexDirection: "row",
-      justifyContent: "center",
-      alignItems: "center",
-      marginHorizontal: 30,
-      marginVertical: 30,
-      minHeight: 50,
-      borderWidth: 2,
-      borderRadius: 15,
-      borderColor: "purple"
-  }
+  container: {
+    flex: 1, 
+    backgroundColor: '#009387'
+  },
+  header: {
+      flex: 1,
+      justifyContent: 'flex-end',
+      paddingHorizontal: 20,
+      paddingBottom: 50
+  },
+  footer: {
+      flex: 3,
+      backgroundColor: '#fff',
+      borderTopLeftRadius: 30,
+      borderTopRightRadius: 30,
+      paddingVertical: 20,
+      paddingHorizontal: 30
+  },
+  text_footer: {
+    color: 'grey',
+    marginTop:5,
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  title: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold'
+  },
+  displayInfo: {
+    fontSize: 27,
+    marginVertical: 30,
+    minHeight: 50,
+    borderRadius: 15,
+  },
+  textinput: {
+    fontSize: 20,
+    paddingVertical: 5,
+    marginTop: 5,
+    borderWidth:1,
+    padding:10,
+    margin:15,
+    borderRadius:20,
+    paddingVertical:10,
+}
 })

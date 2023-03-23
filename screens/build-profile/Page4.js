@@ -43,21 +43,35 @@ const select = (id) => {
 }
 
   return (
-    <View>
-    <Text>What is your fitness goal:</Text>
-    <TouchableOpacity onPress={() => select(1)} style= {selected === 1? styles.selectedBtn : styles.button}>
-      <View>
-      <Text style={styles.customText}>Lose Weight</Text>
+    <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.title}>Final Details</Text>
+        </View>
+
+        <View style={styles.footer}>
+          <View>
+            <Text style={styles.text_footer}>What is your fitness goal:</Text>
+            
+            <TouchableOpacity 
+                        onPress={() => select(1)} 
+                        style={selected === 1? styles.selectedBtn : styles.touchableStyle}
+                    >
+              <Text style={[styles.textSign, {color: '#009387'}]}>Loose Weight</Text>
+            </TouchableOpacity> 
+            
+            <TouchableOpacity 
+                        onPress={() => select(2)} 
+                        style={selected === 2? styles.selectedBtn : styles.touchableStyle}
+                    >
+              <Text style={[styles.textSign, {color: '#009387'}]}>Gain Weight</Text>
+            </TouchableOpacity>
+
+            <Button title="Prev" onPress={() => navigation.goBack() }/>
+            <Button title="Next" onPress={saveDataandSwitch}/>
+
+          </View>
+        </View>
       </View>
-    </TouchableOpacity>
-    <TouchableOpacity onPress={() => select(2)} style= {selected === 2? styles.selectedBtn : styles.button}>
-      <View>
-        <Text style={styles.customText}> Gain Weight</Text>
-      </View>
-    </TouchableOpacity>
-    <Button title="Prev" onPress={() => navigation.goBack() }/>
-    <Button title="Submit" onPress={saveDataandSwitch}/>
-    </View>
   );
 }
 
@@ -74,16 +88,76 @@ const styles = StyleSheet.create({
     borderWidth:1,
   },
   selectedBtn:{
-    backgroundColor:"#5591c9",
-    alignItems: "center",
-    justifyContent: "space-between",
-    borderRadius:20,
-    padding:15,
-    marginVertical:15,
-    borderWidth:1,
+    width: '100%',
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    borderColor: '#009387',
+    borderWidth: 1,
+    marginTop: 15,
+    backgroundColor:"#cefffb",
   },
   customText:{
     color:"white",   
   },
-  headerBackTitleVisible: false
+  container: {
+    flex: 1, 
+    backgroundColor: '#009387'
+  },
+  header: {
+      flex: 1,
+      justifyContent: 'flex-end',
+      paddingHorizontal: 20,
+      paddingBottom: 50
+  },
+  footer: {
+      flex: 3,
+      backgroundColor: '#fff',
+      borderTopLeftRadius: 30,
+      borderTopRightRadius: 30,
+      paddingVertical: 20,
+      paddingHorizontal: 30
+  },
+  text_footer: {
+    color: 'grey',
+    marginTop:5,
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  title: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold'
+  },
+  displayInfo: {
+    fontSize: 27,
+    marginVertical: 30,
+    minHeight: 50,
+    borderRadius: 15,
+  },
+  textSign: {
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+  textinput: {
+    fontSize: 20,
+    paddingVertical: 5,
+    marginTop: 5,
+    borderWidth:1,
+    padding:10,
+    margin:15,
+    borderRadius:20,
+    paddingVertical:10,
+},
+  touchableStyle: {
+    width: '100%',
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    borderColor: '#009387',
+    borderWidth: 1,
+    marginTop: 15
+  }
 })

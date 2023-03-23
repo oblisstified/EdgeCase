@@ -25,37 +25,76 @@ const Page1 = ({navigation}) => {
 }
 
   return (
-    <View>
-      <Text>What is your name:</Text>
-      <View style={styles.displayInfo}>
-      <TextInput style={styles.input} placeholder="Name" onChangeText={setName}/>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Tell me more...</Text>
       </View>
-      <Text>What is your age:</Text>
-      <View style={styles.displayInfo}>
-      <TextInput style={styles.input} placeholder="Age" onChangeText={setAge} keyboardType='numeric' maxLength={3} />
+
+      <View style={styles.footer}>
+        <Text style={styles.text_footer}>What is your name:</Text>
+        <View style={styles.displayInfo}>
+        <TextInput style={styles.TextInput} placeholder="Name" onChangeText={setName}/>
+        </View>
+        <Text style={styles.text_footer}>What is your age:</Text>
+        <View style={styles.displayInfo}>
+        <TextInput style={styles.TextInput} placeholder="Age" onChangeText={setAge} keyboardType='numeric' maxLength={3} />
+        </View>
+        <Text style={styles.text_footer}>What is your gender:</Text>
+        <View style={styles.displayInfo}>
+        <TextInput style={styles.TextInput} placeholder="Gender" onChangeText={setGender}/>
+        </View>
+        <Button title="Next" onPress={saveDataandSwitch}/>
       </View>
-      <Text>What is your gender:</Text>
-      <View style={styles.displayInfo}>
-      <TextInput style={styles.input} placeholder="Gender" onChangeText={setGender}/>
-      </View>
-      <Button title="Next" onPress={saveDataandSwitch}/>
-    </View>
+    </View >
   );
 }
 
 export default Page1
 
 const styles = StyleSheet.create({
-  displayInfo : {
-      flex:1,
-      flexDirection: "row",
-      justifyContent: "center",
-      alignItems: "center",
-      marginHorizontal: 30,
-      marginVertical: 30,
-      minHeight: 50,
-      borderWidth: 2,
-      borderRadius: 15,
-      borderColor: "purple"
-  }
+  container: {
+    flex: 1, 
+    backgroundColor: '#009387'
+  },
+  header: {
+      flex: 1,
+      justifyContent: 'flex-end',
+      paddingHorizontal: 20,
+      paddingBottom: 50
+  },
+  footer: {
+      flex: 3,
+      backgroundColor: '#fff',
+      borderTopLeftRadius: 30,
+      borderTopRightRadius: 30,
+      paddingVertical: 20,
+      paddingHorizontal: 30
+  },
+  text_footer: {
+    color: 'grey',
+    marginTop:5,
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  title: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold'
+  },
+  displayInfo: {
+    fontSize: 27,
+    marginVertical: 30,
+    minHeight: 50,
+    borderRadius: 15,
+  },
+  textinput: {
+    fontSize: 20,
+    paddingVertical: 5,
+    marginTop: 5,
+    borderWidth:1,
+    padding:10,
+    margin:15,
+    borderRadius:20,
+    paddingVertical:10,
+}
 })
