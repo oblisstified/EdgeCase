@@ -22,9 +22,9 @@ const Page3 = ({navigation}) => {
     `{ 
       "name": "${responseJson.name}", 
       "gender": "${responseJson.gender}", 
-      "age": "${responseJson.age}", 
-      "height": "${responseJson.height}",
-      "weight": "${responseJson.weight}",
+      "age": ${responseJson.age}, 
+      "height": ${responseJson.height},
+      "weight": ${responseJson.weight},
       "activity": "${activity}"
     }`;
 

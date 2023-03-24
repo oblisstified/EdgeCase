@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import 'react-native-gesture-handler';
-import { StyleSheet, Text, View, Button, TouchableOpacity,FlatList } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity,FlatList,SafeAreaView } from 'react-native';
 import BottomBar from "./components/BottomBar";
 import {Directions, TextInput } from "react-native-gesture-handler";
 import { getAuth } from 'firebase/auth'
@@ -28,7 +28,7 @@ const FriendRequestsScreen = ({route, navigation}) => {
       }
   
       getData();
-    }, []);
+    }, []); 
 
     async function AcceptFriendRequest(email){
         try {
@@ -61,8 +61,40 @@ const FriendRequestsScreen = ({route, navigation}) => {
 
 
     return(
-        <View>
-            <View style={{flex:1}}>
+        <View style = {{flex:1}}>
+             <SafeAreaView 
+        style={{
+          flex:0.15,
+          backgroundColor: "#00a46c",
+          height: "22%",
+          borderBottomLeftRadius: 20,
+          borderBottomRightRadius: 20,
+          paddingHorizontal: 20,
+        }}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            width: "100%",
+            marginLeft: 15,
+            marginTop: 15
+          }}
+        >
+          <View style={{ width: "80%" }}>
+            <Text style={{ fontSize: 28, color: "#FFF", fontWeight: "bold" }}>
+              View Friend Requests
+            </Text>
+            <Text style={{ fontSize: 20, color: "#FFF", fontWeight: "normal" }}>
+              accept or decline friend requests
+            </Text>
+          </View>
+
+        </View>
+      </SafeAreaView>
+
+
+            <Text>You have {friendRequestsList.length} friend requests</Text>
             <FlatList
                     data={friendRequestsList}
                     keyExtractor={(item) => item.email}
@@ -81,11 +113,12 @@ const FriendRequestsScreen = ({route, navigation}) => {
                                         </View>
                                 </TouchableOpacity>
                             </View>
+
                         </View>
                     )}
                 />
-            </View>
-            <View style={{flex:0.2}} />
+          
+          
         </View>
     )
 }
