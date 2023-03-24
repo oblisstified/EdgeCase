@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import 'react-native-gesture-handler';
-import { Animated, Image, StyleSheet, Text, View, FlatList,TouchableOpacity, ImageBackground, Button } from 'react-native';
+import { Animated, Image, StyleSheet, Text, View, FlatList,TouchableOpacity, SafeAreaView, ImageBackground, Button } from 'react-native';
 import { db } from "../firebase";
 import { getAuth } from 'firebase/auth'
 import { collection, getDocs } from 'firebase/firestore/lite';
@@ -51,10 +51,6 @@ const CommunityScreen = ({navigation}) => {
           );
         };
 
-    const separator = () => {
-        return <View style={{ height: 10, width: '100%', backgroundColor: '#C8C8C8' }} />;
-    };
-
     const renderCommunityFeed = (communityId) => {
 
         navigation.navigate('CommunityFeed', {communityId: communityId});
@@ -76,13 +72,38 @@ const CommunityScreen = ({navigation}) => {
       };
 
     return(
-        <View>
-            <Text style={styles.heading}>Community Page</Text>
-            <TouchableOpacity onPress={handleDesc}><Text style={styles.description}>Show description</Text></TouchableOpacity>
-
+        <View style={styles.container}>
+            <SafeAreaView 
+        style={{
+          backgroundColor: "#00a46c",
+          height: "20%",
+          borderBottomLeftRadius: 20,
+          borderBottomRightRadius: 20,
+          paddingHorizontal: 20,
+        }}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            width: "100%",
+            marginLeft: 15,
+            marginTop: 15
+          }}
+        >
+        <View style={{ width: "80%" }}>
+        <Text style={{ fontSize: 28, color: "#FFF", fontWeight: "bold" }}>Community Page</Text>
+        <Text style={{ fontSize: 20, color: "#FFF", fontWeight: "normal" }}>
+            Explore different communities
+            </Text>
+        <TouchableOpacity onPress={handleDesc}><Text style={{ fontSize: 20, color: "#FFF", fontWeight: "normal" }}>Show description</Text></TouchableOpacity>
+        </View>
+      
+      </View>
+      </SafeAreaView>
+            
         <View style={{flex:0}}>
-            <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
-            {communities && (<FlatList  keyExtractor={(item) => {item.communityId}} data={communities} ItemSeparatorComponent={separator} renderItem = {renderCommunities}/>)}
+            {communities && (<FlatList  keyExtractor={(item) => {item.communityId}} data={communities} contentContainerStyle={{ paddingBottom: 150 }} renderItem = {renderCommunities}/>)}
         </View>
         </View>
 
@@ -95,11 +116,8 @@ export default CommunityScreen
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: "#fff",
-      padding: 16,
-      alignItems: "center",
-      justifyContent: "center",
+        flex: 1,
+        backgroundColor: '#ffffff',
     },
     heading: {
       fontSize: 24,
