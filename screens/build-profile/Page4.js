@@ -22,7 +22,8 @@ const Page4 = ({navigation}) => {
     setDoc(doc(db,'users',user.currentUser.email),{
       email:user.currentUser.email, name: responseJson.name, age:responseJson.age, 
       friends:[], friendRequests:[], gender:responseJson.gender, height:responseJson.height, 
-      weight:responseJson.weight, activity:responseJson.activity, goal:goal, redeemed:[], likedPosts:[]
+      weight:responseJson.weight, activity:responseJson.activity, goal:goal, redeemed:[], 
+      likedPosts:[], numSavedRecipes: 0, timesCalGoalHit: 0, numPostsMade: 0
     });
 
     navigation.replace("HomeScreen")

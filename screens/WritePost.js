@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, TextInput, View, Text, TouchableOpacity } from 'react-native';
 import { db } from "../firebase";
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore/lite';
+import { doc, getDoc, updateDoc } from 'firebase/firestore/lite';
 import { getAuth } from 'firebase/auth';
 import { useNavigation } from "@react-navigation/native";
 
@@ -40,6 +40,9 @@ const WritePost = ({ route, navigation }) => {
       }`
 
     let success = await createPost(JSON.parse(saveObject));
+    const userRef = doc(db, "users", user.email);
+    const userSnapshot = await getDoc(userRef);
+    await updateDoc(userRef, { numPostsMade: (userSnapshot.data().numPostsMade)+1});
 
     setPostSaved(success);
     nav.replace("CommunityFeed", {communityId})
