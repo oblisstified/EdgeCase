@@ -20,7 +20,7 @@ const MyProgressChart = () => {
   getCalorieGoal(email).then((info) => setGoalProgression(info))
 
   let data = {
-    labels: ['Challenges', 'Food', 'Goal'],
+    labels: ['Challenge', 'Food', 'Goal'],
     data: [challengesCompleted, caloriesEaten, caloriesEaten/goalProgression ],
   };
 
@@ -30,7 +30,7 @@ const MyProgressChart = () => {
     <View style={StyleSheet.MainContainer}>
   <ProgressChart
     data={data}
-    width={screenWidth}
+    width={screenWidth - 10}
     height={220}
     chartConfig={{
       backgroundGradientFrom: '#FFFFFF',

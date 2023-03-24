@@ -24,28 +24,28 @@ const MyMacroChart = () => {
 
   const data = [
       {
-        name: 'Fat',
+        name: 'Sat Fats',
         population: (!macroObject) ? 0 : macroObject["Saturated Fat"],
         color: '#6D9886',
         legendFontColor: '#7F7F7F',
         legendFontSize: 15,
       },
       {
-        name: 'Fat',
+        name: 'Poly Fats',
         population: (!macroObject) ? 0 : macroObject["Polyunsaturated Fats"],
         color: '#0E8388',
         legendFontColor: '#7F7F7F',
         legendFontSize: 15,
       },
       {
-        name: 'Fat',
+        name: 'Mono Fats',
         population: (!macroObject) ? 0 : macroObject["Monounsaturated Fat"],
         color: '#097969',
         legendFontColor: '#7F7F7F',
         legendFontSize: 15,
       },
       {
-        name: 'Carbohydrate',
+        name: 'Carbohydrates',
         population: (!macroObject ) ? 0 : macroObject["Carbohydrate"],
         color: '#338e59',
         legendFontColor: '#7F7F7F',
@@ -81,9 +81,10 @@ const MyMacroChart = () => {
     <View style={StyleSheet.MainContainer}>
       <PieChart
           data={data}
-          width={screenWidth}
+          width={350}
           height={220}
           chartConfig={{
+          decimalPlaces: 2,
           backgroundGradientFrom: '#FFFFFF',
           backgroundGradientTo: '#FFFFFF',
           color: (opacity = 1) => `rgba(0, 164, 108, ${opacity})`,

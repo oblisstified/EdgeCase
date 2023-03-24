@@ -78,7 +78,7 @@ const HomeScreen = ({ navigation }) => {
           left: 0,
           right: 0,
           height: 80,
-          marginTop: -41,
+          marginTop: -15,
         }}
       />
 
@@ -156,7 +156,7 @@ const HomeScreen = ({ navigation }) => {
             </Text>
             <View
               style={{
-                height: 4,
+                height: 20,
                 backgroundColor: "#ble5d3",
                 width: 115,
                 marginTop: -5,
@@ -164,8 +164,6 @@ const HomeScreen = ({ navigation }) => {
             ></View>
           </View>
         </View>
-        
-          
             <BazierLineChart />
             <View
               style={{
@@ -173,6 +171,7 @@ const HomeScreen = ({ navigation }) => {
                 justifyContent: "center",
                 paddingTop: 10,
                 paddingHorizontal: 10,
+                position: 'absolute',
               }}
             >
             </View>
@@ -199,17 +198,14 @@ const HomeScreen = ({ navigation }) => {
             </Text>
             <View
               style={{
-                height: 4,
-                backgroundColor: "#ble5d3",
+                height: 8,
+                backgroundColor: "transparent",
                 width: 115,
                 marginTop: -5,
               }}
             ></View>
           </View>
         </View>
-
-        
-          
             <MyMacroChart/>
             <View
               style={{
