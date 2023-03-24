@@ -14,6 +14,8 @@ Ahmed Kafi
 
 Khouloude Laktb Bradhi
 
+William Barenga
+
 # Description
 
 An app designed to bring a social aspect to calorie counting. Sign up to recieve a personalised calorie plan, and begin Logging your meals straight away. See your friends posts, and statistics about your eating based on your food logging activity.
