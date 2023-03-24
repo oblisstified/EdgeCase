@@ -131,7 +131,7 @@ const HomeScreen = ({ navigation }) => {
                 paddingHorizontal: 10,
               }}
             >
-            </View>
+        </View>
           
         
 
@@ -174,53 +174,8 @@ const HomeScreen = ({ navigation }) => {
                 position: 'absolute',
               }}
             >
-            </View>
-          
-
-        {/* Macro-related content */}
-        <View
-          style={{
-            flexDirection: "row",
-            paddingHorizontal: 20,
-            width: "100%",
-            alignItems: "center",
-          }}
-        >
-          <View style={{ width: "50%" }}>
-            <Text
-              style={{
-                fontWeight: "bold",
-                fontSize: 20,
-                color: "#585a61",
-              }}
-            >
-              Nutritions 
-            </Text>
-            <View
-              style={{
-                height: 8,
-                backgroundColor: "transparent",
-                width: 115,
-                marginTop: -5,
-              }}
-            ></View>
-          </View>
-        </View>
-           
-            <View
-              style={{
-                flexDirection: "row",
-                paddingTop: 10,
-                paddingHorizontal: 10,
-              }}
-            >
-              <Text style={{ fontWeight: "bold", textAlign: "center" }}>
-                
-              </Text>
-            </View>
-          
+            </View>          
         </ScrollView>
-      
     </View>
   );
 };

@@ -186,7 +186,7 @@ const LogFoodScreen = () => {
               width: 260,
             }}
           />
-          <AntDesign name = "search1" size = {25}  onPress={getMatches}> 
+          <AntDesign name="search1" size = {25}  onPress={getMatches}> 
            
           </AntDesign>
 

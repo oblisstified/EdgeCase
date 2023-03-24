@@ -18,7 +18,7 @@ const MyProgressChart = () => {
 
   let data = {
     labels: ['Goal', 'Food', 'Challenges'],
-    data: [0.2, 0.3, challengesCompleted],
+    data: [0.0, 0.0, challengesCompleted],
   };
 
   

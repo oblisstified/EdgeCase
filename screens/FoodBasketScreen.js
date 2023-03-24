@@ -103,7 +103,7 @@ const FoodBasketScreen = props => {
             <TouchableOpacity
                     testID="saveButton"
                     onPress={() => {
-                        onPress={saveBasket}
+                        saveBasket
                     }}
                     style={[
                       styles.shadowProp,
@@ -160,6 +160,7 @@ const FoodBasketScreen = props => {
             <TextInput testID="nameBar" placeholder="preset name" onChangeText={setDescription}/>
             {presetNameError && <Text style={{color:"red"}}>Preset needs a name to be saved</Text> }
             {presetSaved && <Text style={{color:"green"}}>Preset saved!</Text> }
+            {mealSaved && <Text style={{color:"green"}}>Meal saved!</Text> }
 
             </View>
         </SafeAreaView>
