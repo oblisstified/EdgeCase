@@ -37,7 +37,7 @@ const CommunityFeed = ({route, navigation }) => {
   }, []);
       
   const onPressAddPost = () => {
-    navigation.replace('WritePost', { communityId, numOfPosts });
+    navigation.navigate('WritePost', { communityId });
 };
 
 async function toggleLike(associatedPost){

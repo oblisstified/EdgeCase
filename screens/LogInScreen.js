@@ -60,7 +60,7 @@ const LogInScreen = ({navigation}) => {
         .then(userCredentials => {
             user = userCredentials.user;
             console.log(user.email)
-            navigation.replace("Page1")
+            navigation.navigate("Page1")
         })
         .catch(error => alert(error.message))
         
@@ -75,7 +75,7 @@ const LogInScreen = ({navigation}) => {
         // does not allow sign up attempt with invalid credentials
         signInWithEmailAndPassword(auth, email, password)
         .then(userCredentials => {
-            navigation.replace("HomeScreen")
+            navigation.navigate("HomeScreen")
         })
         .catch(error => alert(error.message))
     }
