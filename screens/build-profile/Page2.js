@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity} from 'react-native';
 import { TextInput } from "react-native-gesture-handler";
 import { getAuth } from "firebase/auth"
 import { useRoute } from '@react-navigation/native';
@@ -46,8 +46,16 @@ return (
       <View style={styles.displayInfo}>
       <TextInput style={styles.TextInput} placeholder="Weight" onChangeText={setWeight} keyboardType='numeric' maxLength={3}/>
       </View>
-      <Button title="Prev" onPress={() => navigation.goBack() }/>
-      <Button title="Next" onPress={saveDataandSwitch}/>
+
+      <View>
+        <TouchableOpacity onPress={saveDataandSwitch} style={styles.touchableStyle}>
+              <Text style={[styles.textSign, {color: '#00a46c'}]}>Next</Text>
+        </TouchableOpacity> 
+        <TouchableOpacity onPress={()=>navigation.goBack()} style={styles.touchableStyle}>
+              <Text style={[styles.textSign, {color: '#00a46c'}]}>Prev</Text>
+        </TouchableOpacity> 
+      </View>
+
     </View>
   </View >
 );
@@ -58,7 +66,7 @@ export default Page2
 const styles = StyleSheet.create({
   container: {
     flex: 1, 
-    backgroundColor: '#009387'
+    backgroundColor: '#00a46c'
   },
   header: {
       flex: 1,
@@ -100,5 +108,30 @@ const styles = StyleSheet.create({
     margin:15,
     borderRadius:20,
     paddingVertical:10,
-}
+},
+touchableStyle: {
+  width: '100%',
+  height: 50,
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: 10,
+  borderColor: '#009387',
+  borderWidth: 1,
+  marginTop: 15
+},
+textSign: {
+  fontSize: 18,
+  fontWeight: 'bold'
+},
+selectedBtn:{
+  width: '100%',
+  height: 50,
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: 10,
+  borderColor: '#009387',
+  borderWidth: 1,
+  marginTop: 15,
+  backgroundColor:"#cefffb",
+},
 })

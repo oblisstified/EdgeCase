@@ -2,9 +2,6 @@ import React from "react";
 import {View, Text, Dimensions, TouchableOpacity, Image, Button, StyleSheet } from 'react-native';
 import LogInScreen from "./LogInScreen";
 
-// import * as Animatable from 'react-native-animatable';
-//import LinearGradient from 'react-native-linear-gradient';
-// import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SignUpScreen from "./SignUpScreen";
 
 const IntroScreen = ({navigation}) => {
@@ -12,27 +9,23 @@ const IntroScreen = ({navigation}) => {
         <View style={styles.container}>
 
             <View style={styles.header}> 
-                <Image              //Animatable.Image
-                    // animation="bounceIn"
-                    // duraton="1500"
-                source={require('../assets/favicon.png')}
+                <Image              
+                source={require('../assets/mealtime.png')}
                 style={styles.logo}
                 resizeMode="stretch"
                 />
             </View>
 
-            <View        //Animatable.View
-                style={styles.footer}
-                // animation="fadeInUpBig"
-            > 
-                <Text style={styles.title}>Stay healthy by tracking your foods!</Text>
-                <Text style={styles.text}>Sign in with account</Text>
+            <View style={styles.footer}> 
+                <Text style={styles.title}>Welcome to MealTime!</Text>
+                <Text style={styles.text}>Stay healthy by tracking your foods!</Text>
 
-                <View style={styles.button}>
-                <TouchableOpacity style={styles.button} onPress={()=>navigation.navigate(LogInScreen)}> 
-                    <Text style={styles.textSign}>Get Started</Text>
+                <TouchableOpacity 
+                    onPress={()=>navigation.navigate(LogInScreen)}  
+                    style={[styles.signIn, {borderColor: '#00a46c', borderWidth: 1, marginTop: 15 }]}>
+                    <Text style={[styles.textSign, {color: '#00a46c'}]}>Get Started</Text>
                 </TouchableOpacity>
-                </View>
+
 
             </View>      
 
@@ -48,7 +41,7 @@ const height_logo = height * 0.28;
 const styles = StyleSheet.create({
     container: {
       flex: 1, 
-      backgroundColor: '#009387'
+      backgroundColor: '#00a46c'
     },
     header: {
         flex: 2,
@@ -73,22 +66,24 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     text: {
+        fontSize: 16,
         color: 'grey',
-        marginTop:5
+        marginTop: 5,
+        marginBottom: 15
     },
     button: {
         alignItems: 'flex-end',
         marginTop: 30
     },
     signIn: {
-        width: 150,
-        height: 40,
+        width: '100%',
+        height: 50,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 50,
-        flexDirection: 'row'
+        borderRadius: 10,
     },
     textSign: {
+        fontSize: 18,
         color: 'black',
         fontWeight: 'bold'
     }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import 'react-native-gesture-handler';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity} from 'react-native';
 import { TextInput } from "react-native-gesture-handler";
 import { getAuth } from "firebase/auth"
 
@@ -43,7 +43,9 @@ const Page1 = ({navigation}) => {
         <View style={styles.displayInfo}>
         <TextInput style={styles.TextInput} placeholder="Gender" onChangeText={setGender}/>
         </View>
-        <Button title="Next" onPress={saveDataandSwitch}/>
+        <TouchableOpacity onPress={saveDataandSwitch} style={styles.touchableStyle}>
+              <Text style={[styles.textSign, {color: '#00a46c'}]}>Next</Text>
+        </TouchableOpacity> 
       </View>
     </View >
   );
@@ -54,7 +56,7 @@ export default Page1
 const styles = StyleSheet.create({
   container: {
     flex: 1, 
-    backgroundColor: '#009387'
+    backgroundColor: '#00a46c'
   },
   header: {
       flex: 1,
@@ -87,6 +89,21 @@ const styles = StyleSheet.create({
     minHeight: 50,
     borderRadius: 15,
   },
+  textSign: {
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+  selectedBtn:{
+    width: '100%',
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    borderColor: '#009387',
+    borderWidth: 1,
+    marginTop: 15,
+    backgroundColor:"#cefffb",
+  },
   textinput: {
     fontSize: 20,
     paddingVertical: 5,
@@ -96,5 +113,15 @@ const styles = StyleSheet.create({
     margin:15,
     borderRadius:20,
     paddingVertical:10,
+},
+touchableStyle: {
+  width: '100%',
+  height: 50,
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: 10,
+  borderColor: '#009387',
+  borderWidth: 1,
+  marginTop: 15
 }
 })

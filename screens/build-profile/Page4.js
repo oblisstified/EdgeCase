@@ -56,18 +56,25 @@ const select = (id) => {
                         onPress={() => select(1)} 
                         style={selected === 1? styles.selectedBtn : styles.touchableStyle}
                     >
-              <Text style={[styles.textSign, {color: '#009387'}]}>Loose Weight</Text>
+              <Text style={[styles.textSign, {color: '#00a46c'}]}>Loose Weight</Text>
             </TouchableOpacity> 
             
             <TouchableOpacity 
                         onPress={() => select(2)} 
                         style={selected === 2? styles.selectedBtn : styles.touchableStyle}
                     >
-              <Text style={[styles.textSign, {color: '#009387'}]}>Gain Weight</Text>
+              <Text style={[styles.textSign, {color: '#00a46c'}]}>Gain Weight</Text>
             </TouchableOpacity>
 
-            <Button title="Prev" onPress={() => navigation.goBack() }/>
-            <Button title="Next" onPress={saveDataandSwitch}/>
+            <View>
+              <TouchableOpacity onPress={saveDataandSwitch} style={styles.touchableStyle}>
+                  <Text style={[styles.textSign, {color: '#00a46c'}]}>Next</Text>
+              </TouchableOpacity> 
+              <TouchableOpacity onPress={()=>navigation.goBack()} style={styles.touchableStyle}>
+                  <Text style={[styles.textSign, {color: '#00a46c'}]}>Prev</Text>
+              </TouchableOpacity> 
+            </View>
+            
 
           </View>
         </View>
@@ -103,7 +110,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1, 
-    backgroundColor: '#009387'
+    backgroundColor: '#00a46c'
   },
   header: {
       flex: 1,

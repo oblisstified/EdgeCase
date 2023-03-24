@@ -128,22 +128,22 @@ const LogInScreen = ({navigation}) => {
                     <TouchableOpacity 
                         onPress={handleLogIn} 
                         style={[styles.signIn, {
-                            borderColor: '#009387',
+                            borderColor: '#00a46c',
                             borderWidth: 1,
                             marginTop: 15 }]}
                     >
-                        <Text style={[styles.textSign, {color: '#009387'}]}> Log In</Text>
+                        <Text style={[styles.textSign, {color: '#00a46c'}]}> Log In</Text>
                     </TouchableOpacity> 
 
 
                     <TouchableOpacity 
-                        onPress={()=>navigation.navigate(SignUpScreen)}    //{handleSignUp}   ()=>navigation.navigate(SignUpScreen)
+                        onPress={()=>navigation.navigate(SignUpScreen)}  
                         style={[styles.signIn, {
-                            borderColor: '#009387',
+                            borderColor: '#00a46c',
                             borderWidth: 1,
                             marginTop: 15 }]}
                     >
-                        <Text style={[styles.textSign, {color: '#009387'}]}>Sign Up</Text>
+                        <Text style={[styles.textSign, {color: '#00a46c'}]}>Sign Up</Text>
                     </TouchableOpacity>  
 
                 </View>
@@ -159,7 +159,7 @@ export default LogInScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1, 
-        backgroundColor: '#009387'
+        backgroundColor: '#00a46c'
     },
     header: {
         flex: 1,

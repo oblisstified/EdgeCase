@@ -58,25 +58,31 @@ const select = (id) => {
                         onPress={() => select(1)} 
                         style={selected === 1? styles.selectedBtn : styles.touchableStyle}
                     >
-              <Text style={[styles.textSign, {color: '#009387'}]}>0 - 1 days a week of exercise</Text>
+              <Text style={[styles.textSign, {color: '#00a46c'}]}>0 - 1 days a week of exercise</Text>
             </TouchableOpacity> 
             
             <TouchableOpacity 
                         onPress={() => select(2)} 
                         style={selected === 2? styles.selectedBtn : styles.touchableStyle}
                     >
-              <Text style={[styles.textSign, {color: '#009387'}]}>2 - 3 days a week of exercise</Text>
+              <Text style={[styles.textSign, {color: '#00a46c'}]}>2 - 3 days a week of exercise</Text>
             </TouchableOpacity> 
 
             <TouchableOpacity 
                         onPress={() => select(3)} 
                         style={selected === 3? styles.selectedBtn : styles.touchableStyle}
                     >
-              <Text style={[styles.textSign, {color: '#009387'}]}>4+ days a week of exercise</Text>
+              <Text style={[styles.textSign, {color: '#00a46c'}]}>4+ days a week of exercise</Text>
             </TouchableOpacity> 
-
-            <Button title="Prev" onPress={() => navigation.goBack() }/>
-            <Button title="Next" onPress={saveDataandSwitch}/>
+            
+            <View>
+              <TouchableOpacity onPress={saveDataandSwitch} style={styles.touchableStyle}>
+                  <Text style={[styles.textSign, {color: '#00a46c'}]}>Next</Text>
+              </TouchableOpacity> 
+              <TouchableOpacity onPress={()=>navigation.goBack()} style={styles.touchableStyle}>
+                  <Text style={[styles.textSign, {color: '#00a46c'}]}>Prev</Text>
+              </TouchableOpacity> 
+            </View>
 
           </View>
         </View>
@@ -112,7 +118,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1, 
-    backgroundColor: '#009387'
+    backgroundColor: '#00a46c'
   },
   header: {
       flex: 1,

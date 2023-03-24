@@ -74,7 +74,7 @@ const SignUpScreen = ({navigation}) => {
 
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.text_header}>Register Now!</Text>
+                    <Text style={styles.text_header}>Register Here</Text>
                 </View>
 
                 <View style={styles.footer}>
@@ -136,23 +136,23 @@ const SignUpScreen = ({navigation}) => {
                     <TouchableOpacity 
                         onPress={handleSignUp}   
                         style={[styles.signIn, {
-                            borderColor: '#009387',
+                            borderColor: '#00a46c',
                             borderWidth: 1,
                             marginTop: 15 }]}
                     >
-                        <Text style={[styles.textSign, {color: '#009387'}]}>Sign Up</Text>
+                        <Text style={[styles.textSign, {color: '#00a46c'}]}>Sign Up</Text>
                     </TouchableOpacity>  
 
                     <TouchableOpacity
                         onPress={() => navigation.goBack()}
                         style={[styles.signIn, {
-                            borderColor: '#009387',
+                            borderColor: '#00a46c',
                             borderWidth: 1,
                             marginTop: 15
                         }]}
                     >
                     <Text style={[styles.textSign, {
-                        color: '#009387'
+                        color: '#00a46c'
                     }]}>Back</Text>
                     </TouchableOpacity>
 
@@ -169,7 +169,7 @@ export default SignUpScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1, 
-        backgroundColor: '#009387'
+        backgroundColor: '#00a46c'
     },
     header: {
         flex: 1,
