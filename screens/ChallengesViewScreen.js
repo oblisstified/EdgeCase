@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import 'react-native-gesture-handler';
-import { Animated, StyleSheet, Text, View, FlatList,TouchableOpacity,Modal,Button } from 'react-native';
+import { Animated, StyleSheet, Text, View, FlatList,TouchableOpacity,SafeAreaView,Button } from 'react-native';
 
 import { db } from "../firebase";
 import { getAuth } from 'firebase/auth'
@@ -62,10 +62,11 @@ const ChallengesViewScreen = ({navigation}) => {
         getData();
         }, []);
 
-    const renderFriendsProgress = (type,challenge) => {
+    const renderFriendsProgress = (type,challenge,goal) => {
         let challengeInfo = `{
             "type":"${type}",
-            "challenge": "${challenge}"
+            "challenge": "${challenge}",
+            "goal": "${goal}"
         }`;
         navigation.navigate("Leaderboard",{challengeInfo})
     };
@@ -99,35 +100,33 @@ const ChallengesViewScreen = ({navigation}) => {
                     return(
                         <View>
                             <View style={styles.displayInfo}>
-                                <Text>{challenge}</Text>
+                                <Text style={{fontSize: 18,fontWeight: 'bold',color: 'black',marginBottom: 10}}>{challenge}</Text>
                                 <View style={styles.progressBar}>
-                                    <Animated.View style={([StyleSheet.absoluteFill], {backgroundColor: "#8BED4F", width: `100%`, alignItems: 'center',})}><Text style={{fontSize: 16,fontWeight: 'bold',letterSpacing: 2,color: 'white',}}>COMPLETED</Text></Animated.View>
+                                    <Animated.View style={([StyleSheet.absoluteFill], {backgroundColor: "#00a46c", width: `100%`, alignItems: 'center',})}><Text style={{fontSize: 16,fontWeight: 'bold',letterSpacing: 2,color: 'white',}}>COMPLETED</Text></Animated.View>
                                 </View>
-                                <TouchableOpacity onPress={() => renderFriendsProgress(type,challenge)} style= {styles.button}>
+                                <TouchableOpacity onPress={() => renderFriendsProgress(type,challenge,goal)} style= {styles.button}>
                                     <Text style={styles.text}>View Friends Progress</Text>
                                 </TouchableOpacity>
                             </View>
-                            <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
                         </View>
                     )
                 }else{
                     return(
                         <View>
                             <View style={styles.displayInfo}>
-                                <Text>{challenge}</Text>
+                                <Text style={{fontSize: 18,fontWeight: 'bold',color: 'black',marginBottom: 10}}>{challenge}</Text>
                                 <View style={styles.progressBar}>
-                                    <Animated.View style={([StyleSheet.absoluteFill], {backgroundColor: "#8BED4F", width: `100%`, alignItems: 'center',})}><Text style={{fontSize: 16,fontWeight: 'bold',letterSpacing: 2,color: 'white',}}>COMPLETED</Text></Animated.View>
+                                    <Animated.View style={([StyleSheet.absoluteFill], {backgroundColor: "#00a46c", width: `100%`, alignItems: 'center',})}><Text style={{fontSize: 16,fontWeight: 'bold',letterSpacing: 2,color: 'white',}}>COMPLETED</Text></Animated.View>
                                 </View>
                                 <View style={{flexDirection: "row", justifyContent: 'center'}}>
                                     <TouchableOpacity onPress={() => redeem(id)} style= {styles.button}>
                                         <Text style={styles.text}>Redeem Medal</Text>
                                     </TouchableOpacity>
-                                    <TouchableOpacity onPress={() => renderFriendsProgress(type,challenge)} style= {styles.button}>
+                                    <TouchableOpacity onPress={() => renderFriendsProgress(type,challenge,goal)} style= {styles.button}>
                                         <Text style={styles.text}>View Friends Progress</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
-                            <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
                         </View>
                     )
                 }
@@ -139,16 +138,15 @@ const ChallengesViewScreen = ({navigation}) => {
                 return(
                     <View>
                         <View style={styles.displayInfo}>
-                            <Text>{challenge}</Text>
+                            <Text style={{fontSize: 18,fontWeight: 'bold',color: 'black',marginBottom: 10}}>{challenge}</Text>
                             <View style={styles.progressBar}>
-                                <Animated.View style={([StyleSheet.absoluteFill], {backgroundColor: "#8BED4F", width: `${(x/goal)*100}%`})}/>
+                                <Animated.View style={([StyleSheet.absoluteFill], {backgroundColor: "#00a46c", width: `${(x/goal)*100}%`})}/>
                             </View>
-                            <Text>{x}/{goal}</Text>
-                            <TouchableOpacity onPress={() => renderFriendsProgress(type,challenge)} style= {styles.button}>
+                            <Text style={styles.headerText}>{x} / {goal}</Text>
+                            <TouchableOpacity onPress={() => renderFriendsProgress(type,challenge,goal)} style= {styles.button}>
                                 <Text style={styles.text}>View Friends Progress</Text>
                             </TouchableOpacity>
                         </View>
-                        <View style={{height: 20, width: '100%', backgroundColor: '#C8C8C8'}}/>
                     </View>
                 )
             }
@@ -161,14 +159,43 @@ const ChallengesViewScreen = ({navigation}) => {
     };
 
     return(
-        <View>
-            <View style={{alignItems: "center",marginVertical: '5%',}}>
-                <Text>These are your challenges</Text>
-                <Text>Daily Calorie Goal { dailyCalorieGoal.toString()}</Text>
-            </View>
-            <View style={{flexDirection: "row", justifyContent: 'center'}}>
-                <Button onPress={() => setCompleted(false)} title="Active"/>
-                <Button onPress={() => setCompleted(true)} title="Completed"/> 
+        <View style={styles.container}>
+            <SafeAreaView 
+        style={{
+          backgroundColor: "#00a46c",
+          height: "22%",
+          borderBottomLeftRadius: 20,
+          borderBottomRightRadius: 20,
+          paddingHorizontal: 20,
+        }}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            width: "100%",
+            marginLeft: 15,
+            marginTop: 15
+          }}
+        >
+          <View style={{ width: "80%" }}>
+            <Text style={{ fontSize: 28, color: "#FFF", fontWeight: "bold" }}>
+            These are your challenges
+            </Text>
+            <Text style={{ fontSize: 20, color: "#FFF", fontWeight: "normal" }}>
+            Daily Calorie Goal: { dailyCalorieGoal.toString()}
+            </Text>
+          </View>
+
+        </View>
+      </SafeAreaView>
+            <View style={styles.buttonGroup}>
+                <TouchableOpacity onPress={() => setCompleted(false)} style={[styles.button, !completed && styles.buttonSelected]}>
+                    <Text style={styles.buttonText}>Active</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setCompleted(true)} style={[styles.button, completed && styles.buttonSelected]}>
+                    <Text style={styles.buttonText}>Completed</Text>
+                </TouchableOpacity>
             </View>
             {challenges && (<FlatList data={challenges} contentContainerStyle={{ paddingBottom: 150 }} renderItem = {renderChallenges}/>)}
         </View>
@@ -181,44 +208,65 @@ export default ChallengesViewScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: "column", //column direction
+        backgroundColor: '#ffffff',
+    },
+    header: {
+        alignItems: "center",
+        marginVertical: '5%',
+    },
+    headerText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#00a46c',
+        marginBottom: 10,
+    },
+    buttonGroup: {
+        flexDirection: "row",
         justifyContent: 'center',
-        alignItems: 'center',
-        paddingTop: 25,
-        backgroundColor: '#ecf0f1',
-        padding: 8,
+        marginBottom: 20,
+        marginTop: 20,
+    },
+    button: {
+        backgroundColor: '#00a46c',
+        alignItems: "center",
+        borderRadius: 20,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        marginHorizontal: 5,
+    },
+    buttonText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'white',
+    },
+    buttonSelected: {
+        backgroundColor: '#007d4a',
+    },
+    displayInfo: {
+        justifyContent: "center",
+        alignItems: "center",
+        marginHorizontal: '5%',
+        marginVertical: '5%',
+        padding: 20,
+        borderRadius: 10,
+        backgroundColor: '#f0f0f0',
     },
     progressBar: {
         height: 20,
         flexDirection: "row",
         width: '100%',
         backgroundColor: 'white',
-        borderColor: '#000',
+        borderColor: '#00a46c',
         borderWidth: 2,
-        borderRadius: 5
+        borderRadius: 5,
+        marginTop: 10,
+        marginBottom: 10,
     },
-    displayInfo : {
-        justifyContent: "center",
-        alignItems: "center",
-        marginHorizontal: '5%',
-        marginVertical: '5%',
-        borderWidth: 2,
-        borderColor: "purple"
-    },
-    button:{
-        backgroundColor:"#8cc5fa",
-        alignItems: "center",
-        justifyContent: "space-between",
-        borderRadius:20,
-        padding:15,
-        marginVertical:5,
-        borderWidth:1,
-      },
-      text: {
+    challengeText: {
         fontSize: 16,
-        lineHeight: 21,
         fontWeight: 'bold',
-        letterSpacing: 0.25,
-        color: 'white',
-      },
-})
+        color: '#333333',
+    },
+});
+
+
