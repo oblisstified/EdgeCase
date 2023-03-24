@@ -378,7 +378,7 @@ const HomeScreen = ({ navigation }) => {
           style={{ height: 300 }}
         >
           <TouchableOpacity
-            onPress={() => navigation.navigate("LogFoodScreen")}
+            onPress={() => navigation.navigate("MedalsScreen")}
             style={[styles.touchableWindow, styles.shadowProp]}
           >
             <Image source={require("./images/prize.png")} />
@@ -390,13 +390,13 @@ const HomeScreen = ({ navigation }) => {
               }}
             >
               <Text style={{ fontWeight: "bold", textAlign: "center" }}>
-                Number of Medals
+                View Achievements
               </Text>
             </View>
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("LogFoodScreen")}
+            onPress={() => navigation.navigate("ChallengesViewScreen")}
             style={[styles.touchableWindow, styles.shadowProp]}
           >
             <Image source={require("./images/prize.png")} />
@@ -408,25 +408,7 @@ const HomeScreen = ({ navigation }) => {
               }}
             >
               <Text style={{ fontWeight: "bold", textAlign: "center" }}>
-                Next Achievable Medal
-              </Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate("LogFoodScreen")}
-            style={[styles.touchableWindow, styles.shadowProp]}
-          >
-            <Image source={require("./images/prize.png")} />
-            <View
-              style={{
-                flexDirection: "row",
-                paddingTop: 10,
-                paddingHorizontal: 10,
-              }}
-            >
-              <Text style={{ fontWeight: "bold", textAlign: "center" }}>
-                Etc. Etc. ...
+                Active Challenges
               </Text>
             </View>
           </TouchableOpacity>
