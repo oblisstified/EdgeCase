@@ -18,7 +18,7 @@ const Page1 = ({navigation}) => {
     `{
         "name": "${name}", 
         "gender": "${gender}", 
-        "age": "${age}"
+        "age": ${age}
     }`;
 
     navigation.navigate('Page2',{jsonProfile})

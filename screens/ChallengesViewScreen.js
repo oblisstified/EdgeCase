@@ -20,6 +20,7 @@ const ChallengesViewScreen = ({navigation}) => {
     const [redeemedChallenges,setRedeemedChallenges] = useState([]);
     const [timesCalGoalHit, setTimeCalGoalhit] = useState(0);
     const [numSavedRecipes, setNumSavedRecipes] = useState(0);
+    const [numPostsMade, setNumPostsMade] = useState(0);
 
     let calories = -1;
     let goalHit = -1;
@@ -38,6 +39,7 @@ const ChallengesViewScreen = ({navigation}) => {
             setProfile(userData);
             setChallenges(challengesData);
             setRedeemedChallenges(userData.redeemed);
+            setNumPostsMade(userData.numPostsMade)
 
             // ugly pattern to prevent spurious reads
             if(calories == -1){
@@ -57,6 +59,7 @@ const ChallengesViewScreen = ({navigation}) => {
                 numRecipes = await getSavedPresets(user.email)
             }
             setNumSavedRecipes(numRecipes)
+
 
         }
         getData();
@@ -90,6 +93,12 @@ const ChallengesViewScreen = ({navigation}) => {
         }
         else if(type.includes("recipe")){
             x = numSavedRecipes
+        }
+        else if(type.includes("post")){
+            x = numPostsMade
+        }
+        else if(type.includes("like")){
+            x = profile.likedPosts.length
         }
         else{
             x = profile == undefined ? 0 : profile.friends.length;
