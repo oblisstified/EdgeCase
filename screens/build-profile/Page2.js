@@ -23,9 +23,9 @@ const Page2 = ({navigation}) => {
     `{ 
       "name": "${responseJson.name}", 
       "gender": "${responseJson.gender}", 
-      "age": "${responseJson.age}", 
-      "height": "${height}",
-      "weight": "${weight}"
+      "age": ${responseJson.age}, 
+      "height": ${height},
+      "weight": ${weight}
     }`;
 
     navigation.navigate("Page3",{json})
