@@ -4,14 +4,20 @@ import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import { getAuth, signOut } from "firebase/auth";
+
 import BazierLineChart from "./components/Graph";
+import MyProgressChart from "./components/Daily";
+import MyMacroChart from "./components/Macro";
+
+
+
 
 const HomeScreen = ({ navigation }) => {
   const user = getAuth();
   let [profile, setProfile] = useState(null);
 
   const handleSignOut = () => {
-    signOut(user).then(()=>navigation.navigate("LogInScreen"));
+    signOut(user).then(()=>navigation.replace("LogInScreen"));
     
   };
 
@@ -72,7 +78,7 @@ const HomeScreen = ({ navigation }) => {
           left: 0,
           right: 0,
           height: 80,
-          marginTop: -41,
+          marginTop: -15,
         }}
       />
 
@@ -95,7 +101,7 @@ const HomeScreen = ({ navigation }) => {
                 color: "#585a61",
               }}
             >
-              Calories
+              Goal
             </Text>
             <View
               style={{
@@ -105,26 +111,6 @@ const HomeScreen = ({ navigation }) => {
                 marginTop: -5,
               }}
             ></View>
-          </View>
-          <View style={{ width: "50%", alignItems: "flex-end" }}>
-            <View
-              style={{
-                backgroundColor: "#00a46c",
-                paddingHorizontal: 20,
-                paddingVertical: 5,
-                borderRadius: 15,
-              }}
-            >
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  fontSize: 15,
-                  color: "#FFF",
-                }}
-              >
-                info
-              </Text>
-            </View>
             <View
               style={{
                 height: 4,
@@ -134,20 +120,10 @@ const HomeScreen = ({ navigation }) => {
               }}
             ></View>
           </View>
-        </View>
 
-        {/* Calorie windows */}
-        {/* Each TouchableOpacity represents a window of data displayed */}
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={{ height: 300 }}
-        >
-          <TouchableOpacity
-            onPress={() => navigation.navigate("ChallengesViewScreen")}
-            style={[styles.touchableWindow, styles.shadowProp]}
-          >
-            <Image source={require("./images/log-food.png")} />
+          
+        </View>    
+            <MyProgressChart/>
             <View
               style={{
                 flexDirection: "row",
@@ -155,46 +131,11 @@ const HomeScreen = ({ navigation }) => {
                 paddingHorizontal: 10,
               }}
             >
-              <Text style={{ fontWeight: "bold" }}>
-                Calories Consumed / Goal
-              </Text>
             </View>
-          </TouchableOpacity>
+          
+        
 
-          <TouchableOpacity
-            onPress={() => navigation.navigate("LogFoodScreen")}
-            style={[styles.touchableWindow, styles.shadowProp]}
-          >
-            <Image source={require("./images/log-food.png")} />
-            <View
-              style={{
-                flexDirection: "row",
-                paddingTop: 10,
-                paddingHorizontal: 10,
-              }}
-            >
-              <Text style={{ fontWeight: "bold" }}>Last Meal ...?</Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate("LogFoodScreen")}
-            style={[styles.touchableWindow, styles.shadowProp]}
-          >
-            <Image source={require("./images/log-food.png")} />
-            <View
-              style={{
-                flexDirection: "row",
-                paddingTop: 10,
-                paddingHorizontal: 10,
-              }}
-            >
-              <Text style={{ fontWeight: "bold" }}>Etc. Etc. ...</Text>
-            </View>
-          </TouchableOpacity>
-        </ScrollView>
-
-        {/* Analytics(progress)-related content */}
+        {/* Calorie Intake (progress)-related content */}
         <View
           style={{
             flexDirection: "row",
@@ -211,39 +152,11 @@ const HomeScreen = ({ navigation }) => {
                 color: "#585a61",
               }}
             >
-              Progress
+              Calorie Intake 
             </Text>
             <View
               style={{
-                height: 4,
-                backgroundColor: "#ble5d3",
-                width: 115,
-                marginTop: -5,
-              }}
-            ></View>
-          </View>
-          <View style={{ width: "50%", alignItems: "flex-end" }}>
-            <View
-              style={{
-                backgroundColor: "#00a46c",
-                paddingHorizontal: 20,
-                paddingVertical: 5,
-                borderRadius: 15,
-              }}
-            >
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  fontSize: 15,
-                  color: "#FFF",
-                }}
-              >
-                info
-              </Text>
-            </View>
-            <View
-              style={{
-                height: 4,
+                height: 20,
                 backgroundColor: "#ble5d3",
                 width: 115,
                 marginTop: -5,
@@ -251,69 +164,20 @@ const HomeScreen = ({ navigation }) => {
             ></View>
           </View>
         </View>
-
-        {/* Analytics (progress) windows */}
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={{ height: 300 }}
-        >
-          <TouchableOpacity
-            onPress={() => navigation.navigate("LogFoodScreen")}
-            style={[styles.touchableWindow, styles.shadowProp]}
-          >
             <BazierLineChart />
             <View
               style={{
                 flexDirection: "row",
+                justifyContent: "center",
                 paddingTop: 10,
                 paddingHorizontal: 10,
+                position: 'absolute',
               }}
             >
-              <Text style={{ fontWeight: "bold", textAlign: "center" }}>
-                Calories-Consumed Graph{"\n"}(per day)
-              </Text>
             </View>
-          </TouchableOpacity>
+          
 
-          <TouchableOpacity
-            onPress={() => navigation.navigate("LogFoodScreen")}
-            style={[styles.touchableWindow, styles.shadowProp]}
-          >
-            <Image source={require("./images/analytics.png")} />
-            <View
-              style={{
-                flexDirection: "row",
-                paddingTop: 10,
-                paddingHorizontal: 10,
-              }}
-            >
-              <Text style={{ fontWeight: "bold", textAlign: "center" }}>
-                Weight Graph{"\n"}(per month)
-              </Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate("LogFoodScreen")}
-            style={[styles.touchableWindow, styles.shadowProp]}
-          >
-            <Image source={require("./images/analytics.png")} />
-            <View
-              style={{
-                flexDirection: "row",
-                paddingTop: 10,
-                paddingHorizontal: 10,
-              }}
-            >
-              <Text style={{ fontWeight: "bold", textAlign: "center" }}>
-                Etc. Etc. ...
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </ScrollView>
-
-        {/* Achievements-related content */}
+        {/* Macro-related content */}
         <View
           style={{
             flexDirection: "row",
@@ -330,58 +194,19 @@ const HomeScreen = ({ navigation }) => {
                 color: "#585a61",
               }}
             >
-              Achievements
+              Nutritions 
             </Text>
             <View
               style={{
-                height: 4,
-                backgroundColor: "#ble5d3",
-                width: 115,
-                marginTop: -5,
-              }}
-            ></View>
-          </View>
-          <View style={{ width: "50%", alignItems: "flex-end" }}>
-            <View
-              style={{
-                backgroundColor: "#00a46c",
-                paddingHorizontal: 20,
-                paddingVertical: 5,
-                borderRadius: 15,
-              }}
-            >
-              <Text
-                style={{
-                  fontWeight: "bold",
-                  fontSize: 15,
-                  color: "#FFF",
-                }}
-              >
-                info
-              </Text>
-            </View>
-            <View
-              style={{
-                height: 4,
-                backgroundColor: "#ble5d3",
+                height: 8,
+                backgroundColor: "transparent",
                 width: 115,
                 marginTop: -5,
               }}
             ></View>
           </View>
         </View>
-
-        {/* Achievements windows */}
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={{ height: 300 }}
-        >
-          <TouchableOpacity
-            onPress={() => navigation.navigate("MedalsScreen")}
-            style={[styles.touchableWindow, styles.shadowProp]}
-          >
-            <Image source={require("./images/prize.png")} />
+           
             <View
               style={{
                 flexDirection: "row",
@@ -390,30 +215,12 @@ const HomeScreen = ({ navigation }) => {
               }}
             >
               <Text style={{ fontWeight: "bold", textAlign: "center" }}>
-                View Achievements
+                
               </Text>
             </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate("ChallengesViewScreen")}
-            style={[styles.touchableWindow, styles.shadowProp]}
-          >
-            <Image source={require("./images/prize.png")} />
-            <View
-              style={{
-                flexDirection: "row",
-                paddingTop: 10,
-                paddingHorizontal: 10,
-              }}
-            >
-              <Text style={{ fontWeight: "bold", textAlign: "center" }}>
-                Active Challenges
-              </Text>
-            </View>
-          </TouchableOpacity>
+          
         </ScrollView>
-      </ScrollView>
+      
     </View>
   );
 };

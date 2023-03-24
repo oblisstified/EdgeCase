@@ -102,6 +102,7 @@ const EditProfileScreen = ({ route, navigation }) => {
       </SafeAreaView>
   
       <View style={styles.formContainer}>
+        
         <TextInput
           value =  {name}
           style={styles.userItem}

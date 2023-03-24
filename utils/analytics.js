@@ -92,6 +92,7 @@ async function getMacroObject(email){
     let userRef = doc(db, 'users', email);
     const userSnapshot = await getDoc(userRef);
     const userDataObj = await userSnapshot.data();
+   
 
     let macroObject = JSON.parse(`
         {"Calories": 0,
@@ -103,6 +104,7 @@ async function getMacroObject(email){
         "Saturated Fat": 0,
         "Sugar": 0}
     `)
+   
 
     const mealList = userDataObj.mealList == undefined ? [] : userDataObj.mealList;
 
@@ -120,18 +122,18 @@ async function getMacroObject(email){
     for(let i = 0; i < todaysMeals.length; i++){
         // for each foodobject in each meal
         for(let j = 0; j < todaysMeals[i].length; j++){
-            macroObject["Calories"] += todaysMeals[i][j]["foodObject"]["Calories"] * (todaysMeals[i][j]["weight"]/100)
-            macroObject["Carbohydrate"] += todaysMeals[i][j]["foodObject"]["Carbohydrate"] * (todaysMeals[i][j]["weight"]/100)
-            macroObject["Fiber"] += todaysMeals[i][j]["foodObject"]["Fiber"] * (todaysMeals[i][j]["weight"]/100)
-            macroObject["Monounsaturated Fat"] += todaysMeals[i][j]["foodObject"]["Monounsaturated Fat"] * (todaysMeals[i][j]["weight"]/100)
-            macroObject["Polyunsaturated Fats"] += todaysMeals[i][j]["foodObject"]["Polyunsaturated Fats"] * (todaysMeals[i][j]["weight"]/100)
-            macroObject["Protein"] += todaysMeals[i][j]["foodObject"]["Protein"] * (todaysMeals[i][j]["weight"]/100)
-            macroObject["Saturated Fat"] += todaysMeals[i][j]["foodObject"]["Saturated Fat"] * (todaysMeals[i][j]["weight"]/100)
-            macroObject["Sugar"] += todaysMeals[i][j]["foodObject"]["Sugar"] * (todaysMeals[i][j]["weight"]/100)
+            macroObject["Calories"] += Math.round(todaysMeals[i][j]["foodObject"]["Calories"] * (todaysMeals[i][j]["weight"]/100))
+            macroObject["Carbohydrate"] += Math.round(todaysMeals[i][j]["foodObject"]["Carbohydrate"] * (todaysMeals[i][j]["weight"]/100))
+            macroObject["Fiber"] +=  Math.round(todaysMeals[i][j]["foodObject"]["Fiber"] * (todaysMeals[i][j]["weight"]/100))
+            macroObject["Monounsaturated Fat"] +=  Math.round(todaysMeals[i][j]["foodObject"]["Monounsaturated Fat"] * (todaysMeals[i][j]["weight"]/100))
+            macroObject["Polyunsaturated Fats"] +=  Math.round(todaysMeals[i][j]["foodObject"]["Polyunsaturated Fats"] * (todaysMeals[i][j]["weight"]/100))
+            macroObject["Protein"] +=  Math.round(todaysMeals[i][j]["foodObject"]["Protein"] * (todaysMeals[i][j]["weight"]/100))
+            macroObject["Saturated Fat"] +=  Math.round(todaysMeals[i][j]["foodObject"]["Saturated Fat"] * (todaysMeals[i][j]["weight"]/100))
+            macroObject["Sugar"] +=  Math.round(todaysMeals[i][j]["foodObject"]["Sugar"] * (todaysMeals[i][j]["weight"]/100))
         }
     }
 
-    return macroObject
+    return JSON.stringify(macroObject);
 }
 
 
@@ -225,4 +227,4 @@ async function getUserProgress(email){
 
 }
 
-export { getDataArray, getCalorieGoal, daysCalorieGoalMet, getSavedPresets, getMacroObject }
+export { getDataArray, getCalorieGoal, daysCalorieGoalMet, getSavedPresets, getMacroObject,getUserProgress,getTodaysCalories }
