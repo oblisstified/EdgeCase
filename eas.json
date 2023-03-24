@@ -6,11 +6,11 @@
           "promptToConfigurePushNotifications": false
     },
     "build": {
-        "preview": {
-          "ios": {
-            "simulator": true
-          }
-        },
-        "production": {}
+      "production": {
+        "android": {
+          "buildType": "apk",
+          "credentialsSource": "local"
+        }
+      }
     }
 }
